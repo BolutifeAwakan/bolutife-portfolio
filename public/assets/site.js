@@ -119,7 +119,8 @@
     const lb = document.getElementById("lightbox");
     const stage = lb.querySelector(".lightbox__stage");
     const text = lb.querySelector(".lightbox__text");
-    const btns = [...shotsGrid.querySelectorAll(".shot__open")];
+    let btns = [...shotsGrid.querySelectorAll(".shot")].filter((s) => !s.hidden).map((s) => s.querySelector(".shot__open"));
+    const allBtns = [...shotsGrid.querySelectorAll(".shot__open")];
     let cur = 0, lastFocus = null;
     const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
     const show = (i) => {
@@ -133,7 +134,19 @@
     };
     const open = (i) => { lastFocus = document.activeElement; show(i); lb.hidden = false; root.classList.add("lb-open"); lb.querySelector(".lightbox__close").focus(); };
     const close = () => { lb.hidden = true; stage.innerHTML = ""; root.classList.remove("lb-open"); if (lastFocus) lastFocus.focus(); };
-    btns.forEach((b, i) => b.addEventListener("click", () => open(i)));
+    allBtns.forEach((b) => b.addEventListener("click", () => open(btns.indexOf(b))));
+
+    // Category filters: switch without reloading, keep the URL shareable
+    const filters = [...document.querySelectorAll(".pg__filter")];
+    filters.forEach((f) => f.addEventListener("click", (e) => {
+      e.preventDefault();
+      const cat = f.dataset.cat;
+      filters.forEach((x) => x.toggleAttribute("aria-current", x === f));
+      shotsGrid.querySelectorAll(".shot").forEach((s) => { s.hidden = cat !== "all" && s.dataset.cat !== cat; if (!s.hidden) s.classList.add("in"); });
+      btns = [...shotsGrid.querySelectorAll(".shot")].filter((s) => !s.hidden).map((s) => s.querySelector(".shot__open"));
+      history.replaceState(null, "", f.getAttribute("href"));
+      layout();
+    }));
     lb.querySelector(".lightbox__close").addEventListener("click", close);
     lb.querySelector(".lightbox__prev").addEventListener("click", () => show(cur - 1));
     lb.querySelector(".lightbox__next").addEventListener("click", () => show(cur + 1));
