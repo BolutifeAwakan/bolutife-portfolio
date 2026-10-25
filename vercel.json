@@ -1,9 +1,20 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/((?!assets/|api/).*)", "destination": "/api/render?__path=/$1" }
+    {
+      "source": "/((?!assets/|api/|favicon\\.ico|apple-touch-icon\\.png).*)",
+      "destination": "/api/render?__path=/$1"
+    }
   ],
   "headers": [
-    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }] }
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    }
   ]
 }
