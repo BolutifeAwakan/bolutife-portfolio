@@ -17,6 +17,11 @@ Every page is rendered by `api/render.js` from the content in Sanity (project `4
 4. Add **story sections**: a small heading, the text (leave an empty line between paragraphs), and the images. Set each image to Full width or Half width; two half-width images sit side by side.
 5. Hit **Publish**.
 
+## Award hover images and the loader
+
+- **Awards:** each award has a "Hover image". It shows in a small card that follows the cursor on the home page.
+- **Loader:** the intro animation on the home page. Edit the three lines of text and the two images under **Loader**, or untick "Show the loader" to turn it off. Each visitor sees it once, then not again for 7 days.
+
 ## Deploy
 
 Import this repo in Vercel. Framework preset: Other. Leave build and output settings empty. Vercel serves `public/` and the `api/` function.
