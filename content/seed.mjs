@@ -70,7 +70,7 @@ export default {
     headshotsUrl: "",
     pressKitUrl: "",
 
-    email: "hello@bolutifeawakan.xyz",
+    email: "hello@bolutifeawakan.com",
     locations: ["Lagos, Nigeria", "London, UK"],
     socials: [
       { label: "YouTube", url: "https://www.youtube.com/@BolutifeAwakan" },

@@ -531,3 +531,56 @@ html.lb-open { overflow: hidden; }
 .pg__filters + .shots { margin-top: 48px; }
 .shot[hidden] { display: none; }
 @media (max-width: 809px) { .pg__filters { margin-top: 48px; gap: 8px 24px; } .pg__filters + .shots { margin-top: 32px; } }
+
+/* ---------- notes: typographic card + article page (matched to the Framer note pages) ---------- */
+.card__type { display: grid; place-items: center; aspect-ratio: 448 / 236; background: var(--surface); padding: 24px; text-align: center; transition: transform .8s cubic-bezier(.2, .8, .2, 1); }
+.card__type span { font-family: var(--serif); font-size: 34px; line-height: 1.05; max-width: 14ch; }
+.card:hover .card__type { transform: scale(1.03); }
+.note__head { padding-top: 182px; }
+.note__title { font-size: 32px; line-height: 1.4; font-weight: 400; }
+.note__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 20px; }
+.note__meta .tags { margin-top: 0; }
+.note__meta .tags li { font-size: 16px; line-height: 1.4; padding: 2px 8px; }
+.note__meta > span { font-size: 16px; }
+.note__cover { margin-top: 75px; overflow: hidden; }
+.note__cover img { width: 100%; height: auto; aspect-ratio: 1392 / 567; object-fit: cover; }
+.note__quote { margin-top: 99px; padding: 0 24px; font-size: 28px; line-height: 1.4; }
+.note__head + .note__quote { margin-top: 72px; }
+.note__body { margin-top: 100px; }
+.note-sec { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gap); }
+.note-sec + .note-sec, .note__pull + .note-sec, .note__img + .note-sec { margin-top: 80px; }
+.note-sec h2 { font-size: 16px; line-height: 1.6; font-weight: 400; padding: 0 24px; }
+.note-sec > div { grid-column: span 2; max-width: 920px; }
+.note-sec p { font-size: 18px; line-height: 1.6; letter-spacing: .01em; }
+.note-sec p + p { margin-top: 40px; }
+.note__pull { margin: 104px 0 24px; max-width: 1292px; font-size: 38px; line-height: 1.2; }
+.note__img { margin: 80px 0 56px; overflow: hidden; }
+.note__img img { width: 100%; height: auto; }
+.note__pager { display: flex; justify-content: space-between; align-items: end; margin-top: 306px; }
+.note__pg { font-family: var(--serif); font-size: var(--title); line-height: 1.11; transition: opacity .2s; }
+.note__pg:hover { opacity: .6; }
+.page-note .footer { padding-top: 100px; }
+@media (max-width: 1199px) {
+  .note__head { padding-top: 120px; }
+  .note-sec { grid-template-columns: 220px minmax(0, 1fr); }
+  .note-sec h2 { padding: 0 24px 0 0; }
+  .note-sec > div { grid-column: auto; }
+  .note__pull { font-size: 32px; }
+  .note__pager { margin-top: 200px; }
+}
+@media (max-width: 809px) {
+  .note__head { padding-top: 48px; }
+  .note__title { font-size: 28px; }
+  .note__cover { margin-top: 32px; }
+  .note__quote { margin-top: 48px; padding: 0; font-size: 22px; }
+  .note__body { margin-top: 48px; }
+  .note-sec { grid-template-columns: 1fr; row-gap: 12px; }
+  .note-sec h2 { padding: 0; color: var(--muted); }
+  .note-sec h2:empty { display: none; }
+  .note-sec p { font-size: 17px; }
+  .note-sec p + p { margin-top: 24px; }
+  .note-sec + .note-sec, .note__pull + .note-sec, .note__img + .note-sec { margin-top: 48px; }
+  .note__pull { margin: 56px 0 8px; font-size: 26px; }
+  .note__pager { margin-top: 120px; }
+  .card__type span { font-size: 28px; }
+}
