@@ -87,13 +87,18 @@
   const menuBtn = document.querySelector(".nav__menu");
   const menu = document.getElementById("menu");
   const setMenu = (open) => {
-    menu.hidden = !open;
+    menu.classList.toggle("is-open", open);
+    document.documentElement.classList.toggle("menu-open", open);
+    menu.setAttribute("aria-hidden", String(!open));
+    if (open) menu.removeAttribute("inert"); else menu.setAttribute("inert", "");
     menuBtn.setAttribute("aria-expanded", String(open));
     menuBtn.textContent = open ? "Close" : "Menu";
     document.body.style.overflow = open ? "hidden" : "";
   };
-  menuBtn && menuBtn.addEventListener("click", () => setMenu(menu.hidden));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu && !menu.hidden) setMenu(false); });
+  const isOpen = () => menu && menu.classList.contains("is-open");
+  menuBtn && menuBtn.addEventListener("click", () => setMenu(!isOpen()));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && isOpen()) setMenu(false); });
+  addEventListener("resize", () => { if (isOpen() && innerWidth > 809) setMenu(false); });
 
   // Playground: masonry layout + full-screen viewer
   const shotsGrid = document.querySelector(".shots");

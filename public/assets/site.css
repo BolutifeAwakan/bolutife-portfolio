@@ -89,10 +89,25 @@ button, input, textarea { font: inherit; color: inherit; }
 :root[data-theme="dark"] .icon-moon { display: block; }
 .nav__menu { display: none; background: none; border: 0; font-size: 20px; cursor: pointer; padding: 0 0 0 20px; }
 
-.menu { position: fixed; inset: var(--nav) 0 0; z-index: 39; background: var(--bg); padding: 24px var(--m); }
-.menu nav { display: grid; }
-.menu a { font-family: var(--serif); font-size: 60px; line-height: 1.11; padding: 6px 0; border-bottom: 1px solid var(--line); }
-.menu[hidden] { display: none; }
+/* mobile menu: the header drops down into a dark panel, revealing the links as it grows (like the Framer original) */
+.menu { display: none; }
+@media (max-width: 809px) {
+  .menu {
+    display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 39;
+    height: var(--nav); max-height: 100dvh; overflow: hidden;
+    background: #171717; opacity: 0; visibility: hidden; pointer-events: none;
+    transition: height .6s cubic-bezier(.3, .7, .2, 1), opacity .6s cubic-bezier(.3, .7, .2, 1), visibility 0s linear .6s;
+  }
+  .menu.is-open { height: 812px; opacity: 1; visibility: visible; pointer-events: auto; transition: height .6s cubic-bezier(.3, .7, .2, 1), opacity .6s cubic-bezier(.3, .7, .2, 1), visibility 0s; }
+  .menu nav { display: grid; justify-items: center; row-gap: 12.5px; padding-top: 154px; }
+  .menu a { font-family: var(--serif); font-size: 60px; line-height: 78px; color: #ebeae5; }
+  .menu__legal { display: grid; justify-items: center; margin-top: 41px; font-size: 16px; line-height: 30px; color: #747474; }
+  .menu nav, .menu__legal { transition: opacity .1s linear; }
+  .menu:not(.is-open) nav, .menu:not(.is-open) .menu__legal { opacity: 0; }
+  .nav { transition: background-color .3s ease, color .3s ease; }
+  .menu-open .nav { background: transparent; color: #ebeae5; }
+  .menu-open .nav .theme { color: #ebeae5; }
+}
 
 @media (max-width: 809px) {
   .nav { grid-template-columns: 1fr auto; }
