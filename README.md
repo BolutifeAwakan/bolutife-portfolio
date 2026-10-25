@@ -44,3 +44,15 @@ Shots and small explorations, shown as a gallery at /playground.
 5. Hit **Publish**. The Playground link appears in the menu as soon as there's at least one shot.
 
 The page title and intro are under **Playground page**.
+
+## Image grade for notes
+
+Every note image uses the same grade, based on Bolutife's CapCut look (Baked, warmth pulled back): warm but true skin, cream whites, softer highlights, gently lifted blacks.
+
+For an Unsplash photo, add this to the end of its `images.unsplash.com/photo-…` link before uploading:
+
+```
+?w=2400&q=85&fm=jpg&sat=-15&con=-10&high=-25&shad=18&blend=E8A060&balph=20&bm=softlight
+```
+
+For your own photos, apply the Baked filter with warmth pulled back before uploading.
