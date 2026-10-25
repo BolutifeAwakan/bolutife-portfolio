@@ -467,12 +467,12 @@ html.is-loading { overflow: hidden; }
   /* speaking */
   .section > .cols.sp__intro { margin-top: 53px; }
   .sp__intro p { max-width: 889px; }
-  .sp__image { margin-top: 152px; }
+  .sp__image { margin-top: 174px; }
   .section--page > .cols + .sp__image + .cols { margin-top: 48px; }
-  .page-speaking section[aria-label="Past events"] { padding-top: 88px; }
+  .page-speaking section[aria-label="Past events"] { padding-top: 110px; }
   /* space before the footer, per page */
   .page-home main { padding-bottom: 59px; }
-  .page-about main { padding-bottom: 76px; }
+  .page-about main { padding-bottom: 93px; }
   .page-speaking main { padding-bottom: 72px; }
   .page-work main { padding-bottom: 45px; }
   .page-case main { padding-bottom: 48px; }
