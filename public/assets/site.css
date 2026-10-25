@@ -47,7 +47,7 @@ body {
   overflow-x: hidden;
   transition: background-color .3s ease, color .3s ease;
 }
-img, video { display: block; max-width: 100%; }
+img, video { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, h4, h5, h6, p, figure, blockquote, ul { margin: 0; padding: 0; }
 ul { list-style: none; }
@@ -183,8 +183,8 @@ main { padding: 0 var(--m); }
 .wrow__text .muted { margin-top: 24px; }
 .wrow__text .alink { margin-top: 48px; }
 .wrow__img { display: block; overflow: hidden; }
-.wrow__img img { width: 100%; aspect-ratio: 684 / 457; object-fit: cover; transition: transform .8s cubic-bezier(.2, .8, .2, 1); }
-.wrow:hover .wrow__img img { transform: scale(1.03); }
+.wrow__img img, .wrow__img video { width: 100%; height: auto; aspect-ratio: 684 / 457; object-fit: cover; transition: transform .8s cubic-bezier(.2, .8, .2, 1); }
+.wrow:hover .wrow__img img, .wrow:hover .wrow__img video { transform: scale(1.03); }
 @media (max-width: 809px) {
   .wrow { grid-template-columns: 1fr; padding: 24px 0 32px; }
   .wrow__text .muted { margin-top: 16px; }
@@ -373,3 +373,57 @@ main { padding: 0 var(--m); }
 .contact__form input, .contact__form textarea { padding: 24px 12px; }
 @media (max-width: 1199px) { .contact { grid-template-columns: 1fr 1.6fr; } }
 @media (max-width: 809px) { .contact { grid-template-columns: 1fr; row-gap: 48px; } }
+
+/* ---------- work rows: fixed image width like the original ---------- */
+@media (min-width: 1200px) { .wrow { grid-template-columns: minmax(0, 1fr) 684px; } }
+
+/* ---------- awards hover card ---------- */
+.table--awards .trow[data-hover] { cursor: default; }
+.acursor { position: fixed; left: 0; top: 0; z-index: 900; width: 266px; height: 188px; background: #fff; pointer-events: none; opacity: 0; transform: translate3d(-9999px, -9999px, 0); transition: opacity .2s ease; will-change: transform; }
+.acursor.on { opacity: 1; }
+.acursor img { width: 100%; height: 100%; object-fit: cover; }
+@media (hover: none), (pointer: coarse) { .acursor { display: none; } }
+
+/* ---------- loader (home page, first visit) ---------- */
+.loader { display: none; }
+html.is-loading { overflow: hidden; }
+.is-loading .loader { display: block; position: fixed; inset: 0; z-index: 1000; overflow: hidden; background-color: var(--bg); transition: background-color .8s linear; }
+.loader__bg { position: absolute; left: 0; right: 0; top: 0; height: 100%; background: #09090b; transition: height .8s linear; }
+.loader__name { position: absolute; z-index: 3; width: 148px; height: 130px; margin: 0; transition: opacity .8s linear; }
+.loader__name span, .loader__name em { position: absolute; left: 0; white-space: pre; letter-spacing: -0.05em; line-height: 1.2; }
+.loader__name span { font-family: "Barlow Condensed", var(--sans); font-weight: 500; font-size: 49px; text-transform: uppercase; color: rgba(255, 255, 255, .65); }
+.loader__name span:nth-child(1) { top: 0; }
+.loader__name span:nth-child(2) { top: 39px; }
+.loader__name em { top: 71px; font-family: var(--serif); font-style: italic; font-size: 46px; color: #fff; }
+.loader__name--center { left: calc(50% - 74px); top: calc(50% - 65px); }
+.loader__name--corner { left: 87px; bottom: 98px; opacity: 0; }
+.loader__frame { visibility: hidden; position: absolute; z-index: 3; left: 50%; width: 218px; margin-left: -109px; bottom: calc(50% - 141px); height: 1px; overflow: hidden; opacity: 0; transition: height .8s linear, opacity .8s linear; }
+.loader__back { position: absolute; max-width: none; left: 27px; top: -60px; width: 241px; height: 312px; object-fit: cover; transition: left .8s linear, top .8s linear, width .8s linear, height .8s linear; }
+.loader__pwrap { position: absolute; inset: 0; }
+.loader__face { position: absolute; max-width: none; left: 50%; top: 0; width: 360px; height: 350px; margin-left: -180px; object-fit: contain; opacity: 0; transform: translateY(300px); }
+/* step 2: name moves to the corner, the frame gets ready */
+.loader.s2 .loader__name { transition-timing-function: cubic-bezier(.12, .23, .5, 1); }
+.loader.s2 .loader__name--center { opacity: 0; }
+.loader.s2 .loader__name--corner { opacity: 1; }
+.loader.s2 .loader__back { left: 68px; top: -550px; width: 380px; height: 492px; transition-timing-function: cubic-bezier(.12, .23, .5, 1); }
+/* step 3: the frame opens upwards, the first image slides in */
+.loader.s3 .loader__name { transition-timing-function: linear; }
+.loader.s3 .loader__frame { visibility: visible; height: 282px; opacity: 1; }
+.loader.s3 .loader__back { left: -11.5px; top: -15px; width: 241px; height: 312px; transition-timing-function: linear; }
+/* step 4: the portrait pops up over it */
+.loader.s4 .loader__frame { bottom: auto; top: calc(50% - 141px); }
+.loader.s4 .loader__face { opacity: 1; transform: none; transition: transform .45s cubic-bezier(.3, 1.35, .6, 1); }
+/* step 5: the frame closes to a line */
+.loader.s5 .loader__frame { height: 4px; }
+.loader.s5 .loader__back { display: none; }
+.loader.s5 .loader__face { opacity: 0; transition: opacity .8s linear; }
+/* step 6: the curtain lifts */
+.loader.s6 { background-color: transparent; }
+.loader.s6 .loader__bg { height: 0; }
+.loader.s6 .loader__name--corner { opacity: 0; }
+.loader.s6 .loader__frame { display: none; }
+@media (max-width: 809px) { .loader__name--corner { left: calc(50% - 74px); } }
+@media (min-width: 810px) and (max-width: 1199px) {
+  .wrow { grid-template-columns: minmax(0, 1fr) 385px; align-items: center; padding: 24px 0 40px; }
+  .wrow__text { max-width: 316px; }
+}

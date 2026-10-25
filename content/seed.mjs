@@ -97,10 +97,18 @@ export default {
     },
   ],
 
+  loader: {
+    enabled: true,
+    line1: "Bolutife",
+    line2: "Awakan",
+    line3: "of London",
+    backdrop: "https://cdn.sanity.io/images/4t9br1cb/production/aa31ca423dcb22c24a4c5cdf71a972734c1504ad-327x423.png",
+    portrait: "https://cdn.sanity.io/images/4t9br1cb/production/4e35ed5e21ac3ceed0c0f3f852b8305524b5d982-218x282.png",
+  },
   awards: [
-    { year: "2025", title: "Top 0.8% of Freelance Designers Worldwide", org: "Team & Tonic" },
-    { year: "2024", title: "Cloudde Tech Honourary Award", org: "Cloudde" },
-    { year: "2023", title: "Brand Designer of the Year", org: "No Code Tech Summit" },
+    { year: "2025", title: "Top 0.8% of Freelance Designers Worldwide", org: "Team & Tonic", hoverImage: "https://cdn.sanity.io/images/4t9br1cb/production/bcf208522c4bf169934c3cc785bac2fb1bfc7565-840x594.png" },
+    { year: "2024", title: "Cloudde Tech Honourary Award", org: "Cloudde", hoverImage: "https://cdn.sanity.io/images/4t9br1cb/production/abf04f94dc8bdfed04d54f563d0553e5811faf10-840x594.png" },
+    { year: "2023", title: "Brand Designer of the Year", org: "No Code Tech Summit", hoverImage: "https://cdn.sanity.io/images/4t9br1cb/production/10e4dbcaeaa5fd5daec8790224319332b078eba0-840x594.png" },
   ],
 
   testimonials: [
