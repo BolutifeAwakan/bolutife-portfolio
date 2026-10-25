@@ -97,6 +97,11 @@ export default {
     },
   ],
 
+  playground: {
+    title: "Playground",
+    intro: "Shots, experiments and small explorations. The things I make between the big projects, just to see what happens.",
+  },
+  shots: [],
   loader: {
     enabled: true,
     line1: "Bolutife",

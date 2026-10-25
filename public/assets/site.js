@@ -95,6 +95,52 @@
   menuBtn && menuBtn.addEventListener("click", () => setMenu(menu.hidden));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu && !menu.hidden) setMenu(false); });
 
+  // Playground: masonry layout + full-screen viewer
+  const shotsGrid = document.querySelector(".shots");
+  if (shotsGrid) {
+    const layout = () => {
+      if (getComputedStyle(shotsGrid).gridTemplateColumns.split(" ").length < 2) { shotsGrid.classList.remove("is-masonry"); shotsGrid.querySelectorAll(".shot").forEach((s) => (s.style.gridRowEnd = "")); return; }
+      shotsGrid.classList.add("is-masonry");
+      shotsGrid.querySelectorAll(".shot").forEach((s) => {
+        s.style.gridRowEnd = "";
+        s.style.gridRowEnd = `span ${Math.ceil(s.getBoundingClientRect().height / 4)}`;
+      });
+    };
+    layout();
+    shotsGrid.querySelectorAll("img").forEach((i) => { if (!i.complete) i.addEventListener("load", layout, { once: true }); });
+    shotsGrid.querySelectorAll("video").forEach((v) => v.addEventListener("loadedmetadata", layout, { once: true }));
+    let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(layout, 120); });
+
+    const lb = document.getElementById("lightbox");
+    const stage = lb.querySelector(".lightbox__stage");
+    const text = lb.querySelector(".lightbox__text");
+    const btns = [...shotsGrid.querySelectorAll(".shot__open")];
+    let cur = 0, lastFocus = null;
+    const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+    const show = (i) => {
+      cur = (i + btns.length) % btns.length;
+      const b = btns[cur].dataset;
+      stage.innerHTML = b.video === "1"
+        ? `<video src="${esc(b.full)}" autoplay muted loop playsinline controls></video>`
+        : `<img src="${esc(b.full)}" alt="${esc(b.title || "")}">`;
+      text.innerHTML = (b.title ? `<p>${esc(b.title)}</p>` : "") + (b.caption ? `<p class="muted">${esc(b.caption)}</p>` : "") + (b.link ? `<p><a href="${esc(b.link)}" target="_blank" rel="noopener">View original</a></p>` : "");
+      lb.querySelector(".lightbox__nav").style.visibility = btns.length > 1 ? "visible" : "hidden";
+    };
+    const open = (i) => { lastFocus = document.activeElement; show(i); lb.hidden = false; root.classList.add("lb-open"); lb.querySelector(".lightbox__close").focus(); };
+    const close = () => { lb.hidden = true; stage.innerHTML = ""; root.classList.remove("lb-open"); if (lastFocus) lastFocus.focus(); };
+    btns.forEach((b, i) => b.addEventListener("click", () => open(i)));
+    lb.querySelector(".lightbox__close").addEventListener("click", close);
+    lb.querySelector(".lightbox__prev").addEventListener("click", () => show(cur - 1));
+    lb.querySelector(".lightbox__next").addEventListener("click", () => show(cur + 1));
+    stage.addEventListener("click", (e) => { if (e.target === stage) close(); });
+    document.addEventListener("keydown", (e) => {
+      if (lb.hidden) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(cur - 1);
+      if (e.key === "ArrowRight") show(cur + 1);
+    });
+  }
+
   // Forms open an email draft (or the newsletter sign-up page, if one is set)
   document.querySelectorAll("form[data-mailto]").forEach((form) => {
     form.addEventListener("submit", (e) => {

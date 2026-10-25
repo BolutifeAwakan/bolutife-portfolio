@@ -32,3 +32,14 @@ Import this repo in Vercel. Framework preset: Other. Leave build and output sett
 node dev.mjs
 ```
 Open http://localhost:3000.
+
+## Playground
+
+Shots and small explorations, shown as a gallery at /playground.
+
+1. Open the editor → **Playground shot** → create a new one.
+2. Add an image or GIF (or a video), and optionally a title, caption, tags and a link to where it lives.
+3. Tick "Make it wide" for landscape pieces that should span two columns.
+4. Hit **Publish**. The Playground link appears in the menu as soon as there's at least one shot.
+
+The page title and intro are under **Playground page**.
