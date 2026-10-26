@@ -17,11 +17,14 @@ Both were rebuilt on 26 October 2026 after feedback that the first versions read
 
 ### Added 26 October: C. The Book
 
-The brand-book idea as a real object rather than a brand manual. The home page is a green cloth-bound book with a gold-foil BA, lying on a dark table under a lamp. Scrolling opens it and turns its pages; visitors can also drag a page, tap a page edge, use the arrow keys or the Back and Turn buttons. Each spread is a chapter of Bolutife: a photograph on the left, the chapter on the right (Who I am, The work, How I lead, What I'm building, On stage, Field notes, On the side, Work with me), each with a link to its full page. Pages have paper grain, spine shading, a page block that thins as you read, and a shadow as they turn. The lamp follows the cursor and the book leans slightly toward it. Page sound (synthesised paper) is off until the visitor turns it on.
+The brand-book idea as a real object you handle, not a brand manual, and in black, white and grey only (photographs in black and white; the work shows its colour only when you reach for it).
 
-Chapter pages are the same paper laid flat on the table, with a running head, the chapter number, and a link back into the book at that chapter. On phones the book shows one page at a time and turns with a normal vertical scroll. With reduced motion, pages flip without animation; without JavaScript, the pages simply sit one after another. Only the pages in view can take keyboard focus.
-
-Things to watch: the home page is long to scroll (one screen per page turn), and the turning relies on 3D transforms, so test on older phones.
+- **The object:** a black cloth-bound book with a blind-embossed BA, lying on a grey table under a lamp that follows the cursor. Paper has grain and curves into the spine; the page block thins on one side and grows on the other as you read.
+- **Handling it:** the cover swings open on its hinge. Pages fold from the corner you hold, like paper: hover near a corner and it lifts, grab and drag and the page bends over showing its back and casting a shadow on the page beneath, let go to finish the turn or let it fall back. A tap on a page turns it; arrow keys, a sideways trackpad swipe, and Back and Turn buttons work too. Contents entries and the cover-line doors riffle through the pages to their chapter. Page sound (synthesised paper and the cover's thud) is off until turned on. No scroll-jacking: the page scrolls normally.
+- **The content follows the positioning strategy:** a title page with the cover line ("Making design count in the brands I build, the teams I lead, and the leaders I grow", each phrase a door), the Currently facts and three intents (Work with me, Book a talk, Explore the book); then contents and eight chapters: What I believe, Who I am (Make, Lead, Build the conditions), The work (with proof: brands and teams, recognitions), What I'm building (each venture in its own name), On stage ("Hope, then a first step." with the four tracks) and Field notes, How I lead, On the side, and Work with me (four ways to work together).
+- **Phones:** one page at a time, folding under the finger.
+- **Chapter pages:** the same paper laid flat, with a running head and "Back to the book", which reopens it at that chapter.
+- **Accessibility:** only the pages in view take focus; reduced motion turns pages without animation; without JavaScript the pages sit one after another.
 
 ## Same content, same journeys (Built)
 

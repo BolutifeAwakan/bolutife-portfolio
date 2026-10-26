@@ -8,7 +8,7 @@ The site now holds four designs that share one set of content:
 - **The current site** (`legacy`): what bolutifeawakan.com shows today.
 - **A. The Living Brand Book** (`book`): the site as your brand guidelines, in full-screen plates.
 - **B. The Personal Editorial** (`editorial`): dark, photo-led, huge condensed type, with Mason Wong as the reference.
-- **C. The Book** (`realbook`): the home page is a real book you open and turn (scroll, drag, tap or arrow keys), each spread a chapter of you; chapter pages are the same paper laid flat. Page sound is off until a visitor turns it on.
+- **C. The Book** (`realbook`): the home page is a black-and-white book you handle: the cover opens on its hinge and pages fold from the corner you hold. Its chapters follow the positioning strategy; chapter pages are the same paper laid flat. Page sound is off until a visitor turns it on.
 
 Nothing changes for visitors until you switch it on (see "Run the A/B test").
 
