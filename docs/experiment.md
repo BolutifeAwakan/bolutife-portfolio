@@ -49,11 +49,13 @@ email is stored.
 | `work_click` | A link to `/work` or a case study is followed |
 | `case_view` | A case study page is viewed |
 | `about_view`, `ventures_view`, `speaking_view`, `writing_view` | Those pages are viewed (writing includes articles) |
-| `venture_click` | A link out to Design Lever or the book's site is followed |
+| `venture_click` | A link out to a venture's own site is followed |
 | `contact_cta` | Any contact or "work with me" link, or the email address, is clicked |
 | `speaking_cta` | Any "book me to speak" link is clicked |
 | `contact_submit` / `speaking_submit` | The contact form is sent (it opens an email draft; whether the email is then sent can't be known) |
 | `nav_open` | The menu or contents panel is opened |
+| `nav_click` | Contact is followed from the navigation (not counted as a call to action) |
+| `book_click` | The link out to the book's page is followed |
 | `qualified` | **Primary metric.** In one session, the visitor viewed a case study and then took a contact or speaking action |
 
 ### Success, defined before launch
@@ -67,13 +69,9 @@ email is stored.
 
 These are design differences, kept on purpose, and noted so they can be read into the results:
 
-- A shows a contents list on the home page and a contents rail on wide
-  screens; B uses a top navigation bar and a full-screen menu on phones.
-- B repeats a "Let's work together" band at the bottom of most pages; A ends
-  every chapter with previous/next chapter links and contact details in the footer.
-- B's header has a "Work with me" button on wide screens; A's contact link
-  sits in the contents.
-- A has one load animation (the monogram draws); B has one (the name rises and the portrait opens). Both are skipped for people who ask for reduced motion.
+- Both end every page with the same call to action (your email, "Send a message", "Book a talk"), and neither has a header button. Navigation clicks on Contact are logged as `nav_click`, not as a call to action.
+- A navigates with a running head and a Contents dialog; B with a top bar and a full-screen menu on phones.
+- A's load animation draws the monogram; B's raises your name. Both are skipped for reduced motion.
 
 Avoid changing either design substantially while the test runs.
 

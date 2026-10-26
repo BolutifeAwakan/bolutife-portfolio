@@ -6,8 +6,8 @@ this repo, with no dependencies and no build step.
 The site now holds three designs that share one set of content:
 
 - **The current site** (`legacy`): what bolutifeawakan.com shows today.
-- **A. The Living Brand Book** (`book`): the site as a personal brand book.
-- **B. The Personal Editorial** (`editorial`): the site as a magazine profile.
+- **A. The Living Brand Book** (`book`): the site as your brand guidelines, in full-screen plates.
+- **B. The Personal Editorial** (`editorial`): dark, photo-led, huge condensed type, with Mason Wong as the reference.
 
 Nothing changes for visitors until you switch it on (see "Run the A/B test").
 

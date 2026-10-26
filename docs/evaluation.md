@@ -10,18 +10,10 @@ Three kinds of statement appear below and are labelled:
 
 ## The two directions in one line each
 
-- **A. The Living Brand Book.** The site set as your personal brand guidelines:
-  a cover, a contents page, seven numbered chapters, running heads, figure
-  captions, spec tables and previous/next chapter folios. White paper, near-black
-  ink and one spot green taken from the 2025 portraits. Instrument Sans (its
-  narrow widths for display) with Instrument Serif. Monogram: a geometric BA
-  whose B waist runs on as the A crossbar, drawn on its construction grid.
-- **B. The Personal Editorial.** The site set as a magazine profile: your name
-  as the masthead across the page and over your portrait, deep wine from the
-  patchwork top, plaster white from the arches, and green from the trousers.
-  Bodoni Moda with Schibsted Grotesk. Monogram: a hand-drawn high-contrast BA
-  whose hairline A leg crosses into the B. Lagos and London clocks, a contact
-  sheet of the shoot, drop caps and pull quotes.
+Both were rebuilt on 26 October 2026 after feedback that the first versions read as "a hub of texts". Content is unchanged; prose is cut to short lines and the pictures and type carry the pages.
+
+- **A. The Living Brand Book.** The site as your brand guidelines, set as full-screen plates the way a London studio would publish a guideline site. Cover on Aso Green with the BA monogram drawing on its construction grid; contents; Foundations; The mark (unit grid, clear space, six colourways); Colour (six swatches sampled from the portraits, click to copy); Typography (your name with live width and weight sliders); Photography (Do and Don't notes on the real shots); Applications (work); Brand architecture ("a house of brands, not a branded house": you, Design Lever and Lilac Africa as separate identities); Tone of voice ("Practical. Human. Memorable." from your own speaking intro, on Stripe Red); Editorial; Off-grid (the one plate where the grid breaks); Usage ("Clear space for a conversation"). Instrument Sans and Instrument Serif. A running head shows the chapter and folio and changes colour with the plate.
+- **B. The Personal Editorial (Mason Wong as the reference).** Black sampled from the studio portraits so the textile shot melts into the page; BOLUTIFE in heavy condensed type across the full width with "Awakan" signed above it; a statement with small photos set inside the sentence; selected work as full-screen cards that stack as you scroll; big type lists where a photo follows the cursor; an "On stage" ticker of talk topics; a desk of polaroids you can drag on "On the side"; "Say hello" signed "Bolu". Archivo at its narrowest width, IBM Plex Mono for bracketed labels, Ms Madi for the signatures. The patchwork stripe from your top is the only graphic device.
 
 ## Same content, same journeys (Built)
 
@@ -38,54 +30,26 @@ Three kinds of statement appear below and are labelled:
 - SEO tags, canonical URLs and the measurement script come from one shared
   file (`lib/shell.mjs`), so neither direction is optimised differently.
 
-## Performance (Measured)
+## Performance
 
-Measured on the preview deployment in the Claude desktop browser at phone
-width (375 × 812), warm cache, on a Lagos connection, 26 October 2026. One run
-per page after a warm-up visit. Treat as indicative; repeat with Lighthouse or
-PageSpeed Insights on the preview URLs for a lab comparison.
+The figures measured earlier on 26 October were for the first versions and no longer apply. Re-measure both rebuilt directions on the preview with PageSpeed Insights (phone) before deciding.
 
-| Page | Direction | Server response | First content | Largest content | Layout shift |
-|---|---|---|---|---|---|
-| Home | A Brand Book | 360 ms | 496 ms | 496 ms | 0 |
-| Home | B Editorial | 129 ms | 356 ms | 356 ms | 0 |
-| Home | Current site | 124 ms | 368 ms | 388 ms | 0 |
-| About | A Brand Book | 189 ms | 304 ms | 304 ms | 0 |
-| About | B Editorial | 128 ms | 320 ms | 320 ms | 0 |
-| Case study | A Brand Book | 125 ms | 372 ms | 380 ms | 0 |
-| Case study | B Editorial | 181 ms | 352 ms | 352 ms | 0 |
-
-Page weight before fonts and CMS images (local server, uncompressed):
+Page weight of the rebuilt home pages before fonts and images (local server, uncompressed):
 
 | | A Brand Book | B Editorial |
 |---|---|---|
-| HTML, home | 21 KB | 18 KB |
-| CSS | 27 KB | 30 KB |
-| JavaScript (design + measurement) | 7 KB | 7 KB |
-| Web fonts (Google Fonts, measured in browser) | about 71 KB | about 143 KB |
-| Elements on the home page | 354 | 253 |
+| HTML, home | 46 KB | 25 KB |
+| CSS | 54 KB | 36 KB |
+| JavaScript (design) | 5 KB | 5 KB |
+| Elements on the home page | about 770 | about 400 |
+| Web font families | 2 (Instrument Sans, Instrument Serif) | 3 (Archivo, IBM Plex Mono, Ms Madi) |
 
-Neither uses a loader or splash screen. Each has one load animation, skipped
-for visitors who ask for reduced motion. B's animation hides the name and
-portrait for about a second on first paint; it did not delay first content in
-the runs above, but watch Largest Contentful Paint in field data.
+Neither uses a loader. Each has one load animation, skipped for reduced motion: A draws the monogram's construction lines; B raises the letters of your name and writes "Awakan". B adds a light film grain over the page.
 
 ## Accessibility (Built and Measured)
 
-- Both: skip link first in the tab order; visible focus outlines; one h1 per
-  page and no skipped heading levels (checked automatically); alt text on
-  every image; the menu or contents panel moves focus in, closes with Escape
-  and returns focus to its button (checked in a headless browser); form fields
-  have labels; motion off for reduced-motion users; no horizontal scroll at 375px.
-- Colour contrast (WCAG AA needs 4.5:1 for body text):
-
-| Pair | A | B |
-|---|---|---|
-| Body text on background | 17.2 : 1 | 14.6 : 1 |
-| Secondary text | 6.4 : 1 | 5.4 : 1 |
-| Accent green on background | 6.6 : 1 | 5.5 : 1 |
-| Text on wine | n/a | 12.4 : 1 |
-
+- Both: skip link first in the tab order; visible focus outlines; one h1 per page and no skipped heading levels; alt text on every image; the menu (B) and contents (A) are modal: focus stays inside, Escape closes, focus returns to the button; form fields have labels; motion off for reduced-motion users; no horizontal scroll at 390px. A's type sliders are labelled range inputs; B's draggable photos are a mouse-only extra and hold nothing you can't read elsewhere.
+- Colour contrast meets WCAG AA in both. A: green and red fields carry white text, gold and sky carry Night. B: body text on black about 15 : 1, secondary text about 6 : 1, gold signatures about 5.6 : 1.
 - Not yet done: a screen-reader pass with VoiceOver, and an automated axe
   audit on the deployed preview.
 
@@ -93,19 +57,17 @@ the runs above, but watch Largest Contentful Paint in field data.
 
 | | A. The Living Brand Book | B. The Personal Editorial |
 |---|---|---|
-| Visual identity | Systematic and calm. Reads as a designer who builds systems. | Bold and personal. Reads as a person first, then a practice. |
-| Originality | The brand-book conceit is unusual for a personal site, but the visual language (white, grid, rules) is close to many design portfolios. The construction-line monogram is distinctive. | Name-as-masthead over the portrait and the wine palette are memorable and specific to the shoot. |
-| How it uses you | Your portrait is one of three cover elements. | Your portraits carry most pages. |
-| Navigation | Strongest for scanning: a contents rail on wide screens, numbered chapters, "in this chapter" lists, previous/next folios. | Conventional and quick: top bar on wide screens, full-screen menu on phones. Fewer wayfinding devices. |
-| Reading | Long pages break into numbered sections, good for reference. | Long-read layout with drop caps and pull quotes, good for stories and articles. |
-| Fit with your positioning | Shows governance and systems thinking without saying it. | Shows personality, heritage and presence, the speaker and founder side. |
-| Risk | Can feel cool or formal; the numbering is extra structure to maintain. | The big type and photo-led layout depend on strong portraits for every new section. |
-| Maintenance | New chapters need a number and a place in the contents. | New sections slot in more freely. |
+| Visual identity | Systematic, colourful, witty. Reads as a designer who builds and governs brands. | Cinematic, personal, bold. Reads as a person with presence first. |
+| Memorable moment | The site is literally your brand guidelines: colour plate, type sliders, brand architecture. | Your name across the screen with the portrait melting into black; the stacking work cards. |
+| Positioning fit | Shows brand governance and systems thinking without saying it, which suits design leadership and fractional clients. | Shows the speaker and founder side, and your style. |
+| Navigation | Contents dialog, running head with chapter and folio, numbered chapters. | Top bar, full-screen menu on phones, big list rows. |
+| Risk | Dense; the concept takes a second to land. More markup to maintain. | Dark and photo-led; needs strong pictures for every new section. |
 
 ## Content to confirm before any public launch
 
 These come from the current site or your notes, and need checking:
 
+- Lemuwé's client shows as "MerrJep" in the case study data. Check it.
 - The experience table says Chief Design Officer at Neo Health, 2023 to now. Your current role isn't on the site; decide whether to name it.
 - Education lists an Executive MBA (Future London Academy, 2025), an International MBA (Rome Business School, 2024) and an MBA (Valencia de Universidad, 2024). Your notes say a 2023 MBA and a design leadership programme at Future London Academy graduating in 2026. Make them agree.
 - Spellings and names from your voice notes: Mavin, Johnny Drille, Chike, Di'Ja, Waje.
