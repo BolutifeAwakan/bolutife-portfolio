@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Study: the first page | Bolutife Awakan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap">
+<style>
+/* A study for the first page of the book, built to one discipline:
+   one face, one size, two tones, a 28px line rhythm, and one object. */
+:root {
+  --ground: #ececea;
+  --page: #ffffff;
+  --ink: #161616;
+  --grey: #6f6f6f;
+  --fs: clamp(15px, 1.27vw, 19px);
+  --lh: calc(var(--fs) * 1.54);
+  --cw: min(73.5vw, 1180px);
+  --ch: min(70.5vh, calc(var(--cw) * 0.6));
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--ground); color: var(--ink); }
+body { font: 400 var(--fs)/var(--lh) "Instrument Sans", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+::selection { background: var(--ink); color: #fff; }
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+
+/* the room: a long scroll that you move along */
+.track { height: 300vh; }
+.view { position: fixed; inset: 0; overflow: hidden; perspective: var(--persp, 1200px); }
+.run { position: fixed; top: 22px; left: 0; right: 0; text-align: center; font-size: 11px; line-height: 16px; color: var(--grey); z-index: 5; letter-spacing: 0.01em; }
+.line { position: fixed; top: 46px; left: 50%; width: 64px; margin-left: -32px; height: 1px; background: rgba(0,0,0,.12); z-index: 5; }
+.line i { display: block; height: 1px; width: var(--p, 0%); background: var(--ink); }
+.room { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.page { position: absolute; width: var(--cw); height: var(--ch); left: calc(var(--cw) / -2); top: calc(var(--ch) / -2 + 20px); background: var(--page); border-radius: 2px; overflow: hidden; backface-visibility: hidden; }
+
+/* the first page: a column of words and one object */
+.col { position: absolute; left: 10%; top: 50%; transform: translateY(-50%); width: min(36%, 30em); }
+.col p, .col h1, .col h2 { font: inherit; }
+.col .t { color: var(--ink); }
+.col .g { color: var(--grey); }
+.col .gap { height: var(--lh); }
+.rec div { display: grid; grid-template-columns: 6.5em 1fr; }
+.rec dt { color: var(--grey); }
+.rec dd { color: var(--grey); }
+.doors { color: var(--ink); }
+.doors a { color: var(--grey); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; text-decoration-color: rgba(0,0,0,.22); transition: color .3s, text-decoration-color .3s; }
+.doors a:hover, .doors a:focus-visible, .doors a.on { color: var(--ink); text-decoration-color: var(--ink); }
+
+/* words set themselves, like type on a press */
+.w { display: inline-block; opacity: 0; letter-spacing: 0.18em; filter: blur(2px); transition: opacity .7s cubic-bezier(.2,.7,.1,1), letter-spacing 1s cubic-bezier(.2,.7,.1,1), filter .7s; transition-delay: calc(var(--k) * 26ms + 300ms); }
+.set .w { opacity: 1; letter-spacing: 0; filter: none; }
+
+/* the object: a portrait printed as live halftone */
+.print { position: absolute; right: 9%; top: 14%; width: 19%; aspect-ratio: 4 / 5; }
+.print canvas, .print img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.print img { object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.print.gl img { visibility: hidden; }
+.plate { position: absolute; left: 0; top: calc(100% + 10px); font-size: 11px; line-height: 16px; color: var(--grey); white-space: nowrap; }
+
+.next { background: var(--page); }
+.next .ph { position: absolute; inset: 0; background: #2b2b2b url("/assets/photos/lawn-stand-1280.jpg") center / cover; filter: grayscale(1); }
+
+.note { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; font-size: 11px; line-height: 16px; color: var(--grey); }
+
+@media (max-width: 760px) {
+  :root { --cw: 88vw; --ch: min(76vh, 720px); --fs: 15px; }
+  .col { left: 9%; width: 82%; top: auto; bottom: 9%; transform: none; }
+  .print { right: auto; left: 9%; top: 8%; width: 34%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .w { transition: none; opacity: 1; letter-spacing: 0; filter: none; }
+}
+</style>
+</head>
+<body>
+<div class="track"></div>
+<div class="view" id="view">
+  <p class="run" id="run">The beginning</p>
+  <div class="line"><i id="bar"></i></div>
+  <div class="room" id="room">
+
+    <section class="page" data-i="0" aria-label="The beginning">
+      <div class="col" id="col">
+        <h1 class="t">Bolutife Awakan</h1>
+        <p class="g">Design leader, brand strategist, founder</p>
+        <div class="gap"></div>
+        <p class="t doors">Making design count in <a href="#make" data-door="chair-gold">the brands I build</a>, <a href="#lead" data-door="colonnade">the teams I lead</a>, and <a href="#build" data-door="garden-sun">the leaders I grow</a>.</p>
+        <div class="gap"></div>
+        <dl class="rec">
+          <div><dt>Day job</dt><dd>Leading brand at a fintech</dd></div>
+          <div><dt>Building</dt><dd>Design Lever and Lilac Africa</dd></div>
+          <div><dt>Based</dt><dd>Lagos and London</dd></div>
+        </dl>
+      </div>
+      <figure class="print" id="print">
+        <img src="/assets/photos/steps-smile-1280.jpg" alt="Bolutife, seated on stone steps, smiling" id="printImg">
+        <figcaption class="plate" id="plate">Plate 1, Lagos</figcaption>
+      </figure>
+    </section>
+
+    <section class="page next" data-i="1" aria-hidden="true"><div class="ph"></div></section>
+    <section class="page next" data-i="2" aria-hidden="true"></section>
+  </div>
+  <p class="note">A study of the first page. Move the cursor near the portrait, and over the three phrases.</p>
+</div>
+
+<script>
+(() => {
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- words set themselves ---------- */
+  const col = document.getElementById("col");
+  let k = 0;
+  const wrap = (node) => {
+    [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const s = document.createElement("span");
+          s.className = "w"; s.style.setProperty("--k", k++); s.textContent = part;
+          frag.appendChild(s);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) wrap(n);
+    });
+  };
+  wrap(col);
+  requestAnimationFrame(() => requestAnimationFrame(() => col.classList.add("set")));
+
+  /* ---------- the room, with weight ---------- */
+  const pages = [...document.querySelectorAll(".page")];
+  const view = document.getElementById("view"), bar = document.getElementById("bar");
+  let R = 1200, theta = 1, o = 0, target = 0;
+  const measure = () => {
+    const cw = pages[0].offsetWidth;
+    R = cw * 1.1; theta = (cw * 1.04) / R;
+    view.style.setProperty("--persp", `${Math.round(R * 0.94)}px`);
+  };
+  const scrollTarget = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    return max > 0 ? (scrollY / max) * (pages.length - 1) : 0;
+  };
+  const frame = () => {
+    target = scrollTarget();
+    o += (target - o) * (still ? 1 : 0.075); // weight: the room catches up, it doesn't snap
+    pages.forEach((p, i) => {
+      const d = i - o, ad = Math.abs(d);
+      p.style.transform = `translateZ(${R}px) rotateY(${(-d * theta * 180 / Math.PI).toFixed(3)}deg) translateZ(${-R}px)`;
+      p.style.filter = ad < 0.02 ? "" : `blur(${(Math.min(ad, 1) * 7).toFixed(2)}px)`;
+      p.style.opacity = String(1 - Math.max(0, Math.min(1, ad - 1.4)));
+    });
+    bar.style.width = `${(o / (pages.length - 1)) * 100}%`;
+    requestAnimationFrame(frame);
+  };
+  addEventListener("resize", measure);
+  measure();
+  frame();
+
+  /* ---------- the portrait, printed as live halftone ---------- */
+  const print = document.getElementById("print");
+  const base = document.getElementById("printImg");
+  const plate = document.getElementById("plate");
+  const cv = document.createElement("canvas");
+  const gl = cv.getContext("webgl", { premultipliedAlpha: false, antialias: true });
+  if (!gl) return;
+  print.prepend(cv);
+
+  const vs = `attribute vec2 p; varying vec2 v; void main(){ v = p * .5 + .5; v.y = 1. - v.y; gl_Position = vec4(p, 0., 1.); }`;
+  const fs = `
+    precision highp float;
+    varying vec2 v;
+    uniform sampler2D a, b;
+    uniform float mixT, cell, t;
+    uniform vec2 res, mouse, aspA, aspB;
+    float lum(vec3 c){ return dot(c, vec3(.299,.587,.114)); }
+    vec2 cover(vec2 uv, vec2 asp){ return (uv - .5) * asp + .5; }
+    void main(){
+      vec2 px = v * res;
+      // rotate the screen 45 degrees, as a printer's halftone does
+      mat2 r = mat2(.7071, -.7071, .7071, .7071);
+      vec2 g = r * px / cell;
+      vec2 c = (floor(g) + .5);
+      vec2 cpx = (transpose(r) * c) * cell;
+      vec2 uv = clamp(cpx / res, 0., 1.);
+      float la = lum(texture2D(a, cover(uv, aspA)).rgb);
+      float lb = lum(texture2D(b, cover(uv, aspB)).rgb);
+      // dots dissolve to the next portrait from the centre outwards
+      float wave = smoothstep(0., 1., mixT * 1.6 - length(uv - .5) * .9);
+      float l = mix(la, lb, wave);
+      l = smoothstep(.04, .9, l);
+      // ink spreads near the cursor
+      float near = 1. - smoothstep(0., .32, length((v - mouse) * vec2(res.x / res.y, 1.)));
+      float rad = (1. - l) * .7 + near * .16 * (1. - l * .5);
+      float d = length(fract(g) - .5);
+      float aa = 1.2 / cell;
+      float ink = 1. - smoothstep(rad - aa, rad + aa, d);
+      vec3 paper = vec3(1.);
+      vec3 col = mix(paper, vec3(.086), ink);
+      gl_FragColor = vec4(col, 1.);
+    }`;
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(s); return s; };
+  let prog;
+  try {
+    prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs.replace("transpose(r)", "mat2(r[0][0], r[1][0], r[0][1], r[1][1])")));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+  } catch (e) { cv.remove(); return; }
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, "p");
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const U = (n) => gl.getUniformLocation(prog, n);
+
+  const textures = {};
+  const load = (slug) => new Promise((res) => {
+    if (textures[slug]) return res(textures[slug]);
+    const im = new Image();
+    im.onload = () => {
+      const tx = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tx);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      textures[slug] = { tx, w: im.naturalWidth, h: im.naturalHeight };
+      res(textures[slug]);
+    };
+    im.src = `/assets/photos/${slug}-1280.jpg`;
+  });
+
+  let A = null, B = null, mixT = 0, mixTo = 0;
+  let mouse = [-9, -9], mouseTo = [-9, -9];
+  const coverAsp = (tex) => {
+    const r = cv.width / cv.height, ir = tex.w / tex.h;
+    return r > ir ? [1, ir / r] : [r / ir, 1];
+  };
+  const size = () => {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = Math.round(print.clientWidth * dpr);
+    cv.height = Math.round(print.clientHeight * dpr);
+    gl.viewport(0, 0, cv.width, cv.height);
+  };
+  const draw = () => {
+    if (!A) return;
+    mixT += (mixTo - mixT) * (still ? 1 : 0.06);
+    mouse[0] += (mouseTo[0] - mouse[0]) * 0.12;
+    mouse[1] += (mouseTo[1] - mouse[1]) * 0.12;
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, A.tx); gl.uniform1i(U("a"), 0);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, (B || A).tx); gl.uniform1i(U("b"), 1);
+    gl.uniform1f(U("mixT"), mixT);
+    gl.uniform1f(U("cell"), Math.max(2.6 * Math.min(2, devicePixelRatio || 1), cv.width / 120));
+    gl.uniform2f(U("res"), cv.width, cv.height);
+    gl.uniform2f(U("mouse"), mouse[0], mouse[1]);
+    gl.uniform2fv(U("aspA"), coverAsp(A));
+    gl.uniform2fv(U("aspB"), coverAsp(B || A));
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    // once a change has fully landed, it becomes the new base
+    if (B && mixT > 0.995) { A = B; B = null; mixT = mixTo = 0; }
+    requestAnimationFrame(draw);
+  };
+
+  const plates = { "steps-smile": "Plate 1, Lagos", "chair-gold": "Plate 2, the brands", "colonnade": "Plate 3, the teams", "garden-sun": "Plate 4, the leaders" };
+  let current = "steps-smile", leaveT = 0;
+  const swap = async (slug) => {
+    clearTimeout(leaveT);
+    if (slug === current && !B) return;
+    current = slug;
+    plate.textContent = plates[slug];
+    const tex = await load(slug);
+    if (current !== slug) return;
+    if (B) { A = B; }
+    B = tex; mixT = 0; mixTo = 1;
+  };
+
+  load("steps-smile").then((t) => {
+    A = t;
+    size();
+    print.classList.add("gl");
+    draw();
+    ["chair-gold", "colonnade", "garden-sun"].forEach(load);
+  });
+  addEventListener("resize", size);
+
+  // the cursor, measured in the portrait's own space
+  addEventListener("pointermove", (e) => {
+    const r = cv.getBoundingClientRect();
+    mouseTo = [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height];
+  });
+  document.querySelectorAll("[data-door]").forEach((a) => {
+    const on = () => { document.querySelectorAll("[data-door]").forEach((x) => x.classList.toggle("on", x === a)); swap(a.dataset.door); };
+    const off = () => { a.classList.remove("on"); leaveT = setTimeout(() => swap("steps-smile"), 600); };
+    a.addEventListener("pointerenter", on); a.addEventListener("focus", on);
+    a.addEventListener("pointerleave", off); a.addEventListener("blur", off);
+    a.addEventListener("click", (e) => e.preventDefault());
+  });
+})();
+</script>
+</body>
+</html>
