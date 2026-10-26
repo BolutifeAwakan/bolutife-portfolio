@@ -15,6 +15,17 @@ Both were rebuilt on 26 October 2026 after feedback that the first versions read
 - **A. The Living Brand Book.** The site as your brand guidelines, set as full-screen plates the way a London studio would publish a guideline site. Cover on Aso Green with the BA monogram drawing on its construction grid; contents; Foundations; The mark (unit grid, clear space, six colourways); Colour (six swatches sampled from the portraits, click to copy); Typography (your name with live width and weight sliders); Photography (Do and Don't notes on the real shots); Applications (work); Brand architecture ("a house of brands, not a branded house": you, Design Lever and Lilac Africa as separate identities); Tone of voice ("Practical. Human. Memorable." from your own speaking intro, on Stripe Red); Editorial; Off-grid (the one plate where the grid breaks); Usage ("Clear space for a conversation"). Instrument Sans and Instrument Serif. A running head shows the chapter and folio and changes colour with the plate.
 - **B. The Personal Editorial (Mason Wong as the reference).** Black sampled from the studio portraits so the textile shot melts into the page; BOLUTIFE in heavy condensed type across the full width with "Awakan" signed above it; a statement with small photos set inside the sentence; selected work as full-screen cards that stack as you scroll; big type lists where a photo follows the cursor; an "On stage" ticker of talk topics; a desk of polaroids you can drag on "On the side"; "Say hello" signed "Bolu". Archivo at its narrowest width, IBM Plex Mono for bracketed labels, Ms Madi for the signatures. The patchwork stripe from your top is the only graphic device.
 
+### Added 26 October: C. The Arc
+
+Built after feedback that A and B were "not there yet" and that the brand book should not be literal. C is the positioning strategy turned into the site, not a visual conceit:
+
+- **Cover:** the strategy's cover line, "Making design count in the brands I build, the teams I lead, and the leaders I grow". Each phrase is a door: hover or focus changes the portrait and the proof line, and a click goes to that part of the story. A Currently row (day job, building, based, with live clocks) and two intents: Work with me, Book a talk.
+- **Proof as facts:** the named brands and teams, and the three recognitions with issuers and years.
+- **The arc:** three acts (I Make, II Lead, III Build the conditions). Each act's title stays in view while its proof scrolls past, with a rail showing where you are. Make holds the work and where it started; Lead holds the belief, practice, the operator line and the roles; Build holds Design Lever and Lilac Africa (each in its own neutral identity), mentoring across 15 countries, and the book.
+- **Speaking as a pillar:** "Hope, then a first step.", the four tracks, Book me to speak.
+- **Field notes**, **On the side**, and the same Work with me close on every page, with the four ways to work together.
+- **Look:** deep green and gold sampled from the portraits; Instrument Serif and Instrument Sans, as planned for v2. Pictures settle gently into place as they scroll in, in browsers that support it, and not for reduced motion.
+
 ## Same content, same journeys (Built)
 
 - One content model (`lib/model.mjs`) feeds both. Pages in both: Home, Work,

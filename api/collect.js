@@ -53,7 +53,7 @@ export default async function handler(req, res) {
     return res.end();
   }
   const cfg = config();
-  if (!e || !EVENTS.has(e.name) || !cfg.enabled || e.exp !== cfg.id || !["book", "editorial"].includes(e.dir)) {
+  if (!e || !EVENTS.has(e.name) || !cfg.enabled || e.exp !== cfg.id || !(cfg.arms || []).includes(e.dir)) {
     res.statusCode = 204;
     return res.end();
   }

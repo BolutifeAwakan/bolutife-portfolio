@@ -30,7 +30,7 @@ const must = {
   "/contact": [m.person.email, "Speaking at an event"],
   "/index": contentIndex(m).map((i) => i.title),
 };
-for (const dir of ["brand-book", "personal-editorial"]) {
+for (const dir of ["brand-book", "personal-editorial", "the-arc"]) {
   for (const p of pages) {
     const out = await route(`/preview/${dir}${p === "/" ? "" : p}`, {}, {});
     ok(out.status === 200, `${dir} ${p} returned ${out.status}`);

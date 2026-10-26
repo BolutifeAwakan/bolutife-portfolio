@@ -12,6 +12,27 @@ export default {
     "I've spent over a decade working across design, creative direction, and business. These days, I'm also building initiatives, developing people, and sharing what I learn along the way.",
   identity: ["Design Leader", "Brand Strategist", "Founder"],
 
+  // The Arc (direction C). The cover line and the three acts come from the
+  // positioning strategy (October 2026), built on her own account of her career.
+  cover: {
+    lead: "Making design count",
+    doors: [
+      { key: "make", text: "the brands I build", proof: "Identities and brand worlds for music, fintech, fashion and founders" },
+      { key: "lead", text: "the teams I lead", proof: "Leading design teams across fintech and health tech" },
+      { key: "build", text: "the leaders I grow", proof: "Design Lever, Lilac Africa and four years of mentoring across 15 countries" },
+    ],
+  },
+  now: [
+    { label: "Day job", text: "Leading brand at a fintech" },
+    { label: "Building", text: "Design Lever and Lilac Africa" },
+  ],
+  arc: {
+    make: { title: "Make", line: "Over a decade of brand work, from music and entertainment into tech." },
+    lead: { title: "Lead", line: "From making the work to leading the teams who make it, across fintech and health tech." },
+    build: { title: "Build the conditions", line: "A company, a social enterprise, mentoring and the stage: the conditions that let design win." },
+  },
+  stagePromise: "Hope, then a first step.",
+
   belief:
     "Great design requires more than creative ability. It depends on strategic thinking, execution, capable people, leadership, business understanding, and the conditions that enable good work.",
 
