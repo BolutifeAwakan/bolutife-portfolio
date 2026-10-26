@@ -44,6 +44,13 @@
       const a = e.target.closest("a");
       if (a && a.hash && a.pathname === location.pathname) close();
     });
+    dlg.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+      const f = [...dlg.querySelectorAll("a[href], button")];
+      const first = f[0], end = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); end.focus(); }
+      else if (!e.shiftKey && document.activeElement === end) { e.preventDefault(); first.focus(); }
+    });
     dlg.addEventListener("close", () => { btn.setAttribute("aria-expanded", "false"); btn.focus(); });
   }
 
@@ -75,6 +82,23 @@
     const set = () => { spec.style.setProperty(`--${r.dataset.axis}`, r.value); if (out) out.textContent = r.value; };
     r.addEventListener("input", set);
   });
+
+  /* Fit the address to its clear-space box, whatever font arrives */
+  const fits = [...document.querySelectorAll("[data-fit]")];
+  const fit = () => fits.forEach((el) => {
+    el.style.fontSize = "";
+    const box = el.parentElement;
+    const cs = getComputedStyle(box);
+    const room = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const size = parseFloat(getComputedStyle(el).fontSize);
+    if (el.scrollWidth > room) el.style.fontSize = Math.floor((size * room) / el.scrollWidth) + "px";
+  });
+  if (fits.length) {
+    root.classList.add("bk-fit");
+    fit();
+    if (document.fonts) document.fonts.ready.then(fit);
+    let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(fit, 120); });
+  }
 
   /* Contact form: opens an email draft with the message filled in */
   const form = document.querySelector(".bk-form[data-mailto]");
