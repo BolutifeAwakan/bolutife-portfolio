@@ -17,14 +17,25 @@ Both were rebuilt on 26 October 2026 after feedback that the first versions read
 
 ### Added 26 October: C. The Book
 
-The brand-book idea as a real object you handle, not a brand manual, and in black, white and grey only (photographs in black and white; the work shows its colour only when you reach for it).
+The brand book as something you walk through, with z1han.com as the reference for how it feels. Black, white and grey only; photographs printed in black and white (the work shows its colour only when you reach for it).
 
-- **The object:** a black cloth-bound book with a blind-embossed BA, lying on a grey table under a lamp that follows the cursor. Paper has grain and curves into the spine; the page block thins on one side and grows on the other as you read.
-- **Handling it:** the cover swings open on its hinge. Pages fold from the corner you hold, like paper: hover near a corner and it lifts, grab and drag and the page bends over showing its back and casting a shadow on the page beneath, let go to finish the turn or let it fall back. A tap on a page turns it; arrow keys, a sideways trackpad swipe, and Back and Turn buttons work too. Contents entries and the cover-line doors riffle through the pages to their chapter. Page sound (synthesised paper and the cover's thud) is off until turned on. No scroll-jacking: the page scrolls normally.
-- **The content follows the positioning strategy:** a title page with the cover line ("Making design count in the brands I build, the teams I lead, and the leaders I grow", each phrase a door), the Currently facts and three intents (Work with me, Book a talk, Explore the book); then contents and eight chapters: What I believe, Who I am (Make, Lead, Build the conditions), The work (with proof: brands and teams, recognitions), What I'm building (each venture in its own name), On stage ("Hope, then a first step." with the four tracks) and Field notes, How I lead, On the side, and Work with me (four ways to work together).
-- **Phones:** one page at a time, folding under the finger.
-- **Chapter pages:** the same paper laid flat, with a running head and "Back to the book", which reopens it at that chapter.
-- **Accessibility:** only the pages in view take focus; reduced motion turns pages without animation; without JavaScript the pages sit one after another.
+- **The room:** the book's pages are held up as cards on a curve around you, on a quiet grey ground. Scrolling, dragging sideways, a sideways trackpad swipe, the arrow keys, or Back and Next move you along it. The page in front of you is sharp; the ones beside it bend away at the edges and soften. A running head names the page you're on, with a thin progress line. Pages settle into place when you stop. A quiet paper sound is off until turned on.
+- **One thing to touch on each page, all from the positioning strategy:**
+  - The beginning: the cover line "Making design count in the brands I build, the teams I lead, and the leaders I grow". Each phrase changes the portrait and takes you to its chapter.
+  - Today: a photograph with a glass lens you move to look closer, the time in Lagos and London, and the Currently facts.
+  - What I believe: the belief, its words arriving as you do.
+  - Who I am: Make, Lead and Build the conditions as three tabs, each with its own portrait.
+  - The work: the words "The work" part to let the featured projects through; they lean toward your cursor and show their colour when you reach for one.
+  - Proof: the brands and teams by name, and the recognitions with issuers and years.
+  - What I'm building: Design Lever and Lilac Africa, each in its own name; the one you reach for comes forward.
+  - On stage: "Hope, then a first step." and the four talks as cue cards you tap through.
+  - Field notes: three notes as papers that fan out, and the book.
+  - How I lead: the three areas and the roles.
+  - On the side: a loose collection of portraits that drifts with your hand.
+  - Work with me: the four ways in, the email, and a note you write and sign ("Yours, ...") that opens as an email.
+  - The end: the cover line written out by hand, signed.
+- **Chapter pages:** the same white paper on the grey ground, with a running head and "Back to the book".
+- **Accessibility:** only the page in front can take focus; the tabs work with arrow keys; reduced motion removes the animation; without JavaScript the pages sit one after another.
 
 ## Same content, same journeys (Built)
 
