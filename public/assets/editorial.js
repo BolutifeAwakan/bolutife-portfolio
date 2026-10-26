@@ -14,7 +14,7 @@
 
   // Display lines that fill their container exactly
   const fitAll = () =>
-    document.querySelectorAll(".ed-fit").forEach((el) => {
+    document.querySelectorAll(".ed-fit:not(.ed-fit--left)").forEach((el) => {
       const inner = el.firstElementChild;
       if (!inner) return;
       el.classList.remove("is-fitted");
