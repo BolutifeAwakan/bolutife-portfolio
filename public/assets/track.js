@@ -60,8 +60,9 @@
     const h = el.getAttribute("href") || "";
     const p = h.replace(/^\/preview\/[^/]+/, "");
     if (/^mailto:/.test(h)) return track("contact_cta", "email");
-    if (/^\/contact\?about=speaking/.test(p)) return track("speaking_cta", p);
-    if (/^\/contact/.test(p)) return track("contact_cta", p);
+    const inNav = !!el.closest("nav, [data-nav]");
+    if (/^\/contact\?about=speaking/.test(p)) return track(inNav ? "nav_click" : "speaking_cta", p);
+    if (/^\/contact/.test(p)) return track(inNav ? "nav_click" : "contact_cta", p);
     if (/^\/work(\/|$)/.test(p)) return track("work_click", p);
   });
 

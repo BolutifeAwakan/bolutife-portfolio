@@ -1,15 +1,48 @@
-# Bolutife Awakan — portfolio
+# Bolutife Awakan — website
 
-The website for bolutifeawakan. Same design as the Framer site, with content managed in Sanity.
+The website for bolutifeawakan.com. Content is managed in Sanity; the code is
+this repo, with no dependencies and no build step.
+
+The site now holds three designs that share one set of content:
+
+- **The current site** (`legacy`): what bolutifeawakan.com shows today.
+- **A. The Living Brand Book** (`book`): the site as a personal brand book.
+- **B. The Personal Editorial** (`editorial`): the site as a magazine profile.
+
+Nothing changes for visitors until you switch it on (see "Run the A/B test").
 
 - **Edit content:** https://bolutife.sanity.studio (sign in with your Sanity account)
-- **Website code:** this repo. No dependencies, no build step.
+- **Compare the designs:** `/preview` on any deployment
 
-## How it works
+## Look at either design
 
-Every page is rendered by `api/render.js` from the content in Sanity (project `4t9br1cb`, dataset `production`). When you publish in the editor, the site shows the change within about a minute. If Sanity can't be reached, the site falls back to `content/seed.mjs`.
+Open `/preview` for links to both directions and the current site. Each link
+keeps you inside that design as you click around, on desktop or phone:
 
-## Add a new case study
+- `/preview/brand-book` and any page under it, for example `/preview/brand-book/work`
+- `/preview/personal-editorial` and any page under it
+- `/preview/current` for today's site
+
+Preview pages are hidden from search engines, and opening one marks your
+browser as internal, so your own visits are never counted in the test.
+
+## Add or update content
+
+Projects, notes, testimonials, awards, services, speaking photos, playground
+shots and most page text come from Sanity, as before. Publish there and both
+designs update within a minute.
+
+The new v2 content that Sanity doesn't hold yet lives in `content/v2.mjs`:
+the headline, ventures (Design Lever, Lilac Africa), books, speaking topics
+and talks, the path, and the On the side text. Edit that file and push, and
+both designs update on the next deploy. These fields can move into Sanity
+later; `lib/model.mjs` already prefers a Sanity value when one exists
+(under `settings.v2`).
+
+The 2025 portraits are in `public/assets/photos` (each at 640, 1280 and 2000px,
+WebP and JPEG). `lib/photos.mjs` lists them with their descriptions.
+
+### Add a new case study
 
 1. Open the editor → **Project** → create a new one.
 2. **Card** tab: title, web address (click Generate), one-line summary, thumbnail (GIFs work). Tick "Show on the home page" to feature it. Set its position (1 shows first).
@@ -17,33 +50,80 @@ Every page is rendered by `api/render.js` from the content in Sanity (project `4
 4. Add **story sections**: a small heading, the text (leave an empty line between paragraphs), and the images. Set each image to Full width or Half width; two half-width images sit side by side.
 5. Hit **Publish**.
 
-## Award hover images and the loader
+### Award hover images and the loader (current site only)
 
-- **Awards:** each award has a "Hover image". It shows in a small card that follows the cursor on the home page.
-- **Loader:** the intro animation on the home page. Edit the three lines of text and the two images under **Loader**, or untick "Show the loader" to turn it off. Each visitor sees it once, then not again for 7 days.
+- **Awards:** each award has a "Hover image". It shows in a small card that follows the cursor on the current home page.
+- **Loader:** the intro animation on the current home page. Edit the three lines of text and the two images under **Loader**, or untick "Show the loader" to turn it off. The new designs don't use a loader.
+
+## Run the A/B test
+
+All settings are environment variables in Vercel (Project → Settings →
+Environment Variables → Production), followed by a redeploy (Deployments →
+latest → Redeploy).
+
+| Variable | What it does | Default |
+|---|---|---|
+| `EXPERIMENT_ENABLED` | `1` runs the test. Anything else turns it off. | off |
+| `EXPERIMENT_SPLIT` | Percent of new visitors who get the Brand Book (the rest get the Editorial). | `50` |
+| `EXPERIMENT_ID` | Name of this run. Change it to start over and reassign everyone. | `v2-directions-1` |
+| `DEFAULT_DIRECTION` | What everyone sees when the test is off: `legacy`, `book` or `editorial`. | `legacy` |
+| `ANALYTICS_FORWARD_URL` | Where to send each event so it's kept (see below). | none |
+
+**Before you start the test**, decide where events are stored (Vercel keeps
+function logs only briefly): set `ANALYTICS_FORWARD_URL` or add a log drain.
+`docs/experiment.md` explains the events, the success metric and consent.
+
+- **Change the split:** set `EXPERIMENT_SPLIT`, for example `70`, and redeploy. People already assigned keep their direction.
+- **Read the results:** export the `ba_event` lines and run `node scripts/results.mjs events.jsonl`. It won't call a winner until there's enough evidence.
+- **End the test:** set `EXPERIMENT_ENABLED` to `0` and redeploy. Everyone then sees `DEFAULT_DIRECTION`.
+- **Make one design permanent:** set `DEFAULT_DIRECTION` to `book` or `editorial`, `EXPERIMENT_ENABLED` to `0`, and redeploy. Old addresses (`/notes`, `/playground`) redirect to the new ones (`/writing`, `/experiments`).
+- **Retire a design for good:** once one is permanent, delete the other's folder (`lib/themes/book` or `lib/themes/editorial`) and its files in `public/assets` (`book.css` and `book.js`, or `editorial.css` and `editorial.js`), and remove it from `THEMES` in `lib/router.mjs`. The legacy templates (`lib/templates.mjs`, `public/assets/site.css`, `site.js`) can go too.
+
+## How it's built
+
+```
+api/render.js          every page request; sets cookies and caching
+api/collect.js         receives A/B test events
+lib/content.mjs        reads Sanity (falls back to content/seed.mjs)
+lib/model.mjs          the shared content layer both designs render from
+lib/router.mjs         routes, previews, redirects, sitemap
+lib/experiment.mjs     test settings and visitor assignment
+lib/shell.mjs          SEO tags, canonical URLs and analytics, identical for both designs
+lib/themes/book/       Direction A templates   (public/assets/book.css, book.js)
+lib/themes/editorial/  Direction B templates   (public/assets/editorial.css, editorial.js)
+lib/themes/marks.mjs   the two BA monograms
+lib/templates.mjs      the current site's templates
+public/assets/track.js measurement, identical for both designs
+test/run.mjs           checks both designs are complete and comparable
+scripts/results.mjs    reads exported test events
+docs/                  the test plan, usability script and evaluation
+```
 
 ## Deploy
 
-Import this repo in Vercel. Framework preset: Other. Leave build and output settings empty. Vercel serves `public/` and the `api/` function.
+The repo is connected to Vercel. Pushing to `main` deploys production; any
+other branch gets a preview deployment. Framework preset: Other, no build settings.
 
-## Preview locally
+## Work on it locally
 
 ```
-node dev.mjs
+node dev.mjs                 # http://localhost:3000, live Sanity content
+node test/run.mjs            # checks both designs render every page with the same content
 ```
-Open http://localhost:3000.
 
-## Playground
+To work offline, save a content snapshot module and run
+`DEV_CONTENT=/path/to/snapshot.mjs node dev.mjs`.
 
-Shots and small explorations, shown as a gallery at /playground.
+## Playground (Experiments)
+
+Shots and small explorations. The current site shows them at `/playground`;
+both new designs show them at `/experiments`.
 
 1. Open the editor → **Playground shot** → create a new one.
-2. Pick a **Category** (e.g. Posters). To add a new one, create it under **Playground category** first. Categories show as filters on the page, but only once they have at least one shot.
+2. Pick a **Category** (e.g. Posters). To add a new one, create it under **Playground category** first.
 3. Add an image or GIF (or a video), and optionally a title, caption, tags and a link to where it lives.
-4. Tick "Make it wide" for landscape pieces that should span two columns.
-5. Hit **Publish**. The Playground link appears in the menu as soon as there's at least one shot.
-
-The page title and intro are under **Playground page**.
+4. Tick "Make it wide" for landscape pieces.
+5. Hit **Publish**.
 
 ## Image grade for notes
 

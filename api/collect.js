@@ -23,6 +23,8 @@ export const EVENTS = new Set([
   "speaking_submit",   // submitted the contact form with "Speaking" chosen
   "qualified",         // primary metric: viewed a case study, then took a contact or speaking action, in one session
   "nav_open",          // opened the menu or contents panel
+  "nav_click",         // followed Contact from the navigation (not counted as a call to action)
+  "book_click",        // followed a link out to the book's page
 ]);
 
 const clean = (v, n = 80) => (typeof v === "string" ? v.slice(0, n).replace(/[^\w\-/:. #?=&]/g, "") : null);
