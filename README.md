@@ -3,11 +3,12 @@
 The website for bolutifeawakan.com. Content is managed in Sanity; the code is
 this repo, with no dependencies and no build step.
 
-The site now holds three designs that share one set of content:
+The site now holds four designs that share one set of content:
 
 - **The current site** (`legacy`): what bolutifeawakan.com shows today.
 - **A. The Living Brand Book** (`book`): the site as your brand guidelines, in full-screen plates.
 - **B. The Personal Editorial** (`editorial`): dark, photo-led, huge condensed type, with Mason Wong as the reference.
+- **C. The Book** (`realbook`): the home page is a real book you open and turn (scroll, drag, tap or arrow keys), each spread a chapter of you; chapter pages are the same paper laid flat. Page sound is off until a visitor turns it on.
 
 Nothing changes for visitors until you switch it on (see "Run the A/B test").
 
@@ -21,6 +22,7 @@ keeps you inside that design as you click around, on desktop or phone:
 
 - `/preview/brand-book` and any page under it, for example `/preview/brand-book/work`
 - `/preview/personal-editorial` and any page under it
+- `/preview/the-book` and any page under it
 - `/preview/current` for today's site
 
 Preview pages are hidden from search engines, and opening one marks your
@@ -64,9 +66,10 @@ latest → Redeploy).
 | Variable | What it does | Default |
 |---|---|---|
 | `EXPERIMENT_ENABLED` | `1` runs the test. Anything else turns it off. | off |
-| `EXPERIMENT_SPLIT` | Percent of new visitors who get the Brand Book (the rest get the Editorial). | `50` |
+| `EXPERIMENT_ARMS` | The two designs to compare, for example `realbook,editorial`. | `book,editorial` |
+| `EXPERIMENT_SPLIT` | Percent of new visitors who get the first design in `EXPERIMENT_ARMS`. | `50` |
 | `EXPERIMENT_ID` | Name of this run. Change it to start over and reassign everyone. | `v2-directions-1` |
-| `DEFAULT_DIRECTION` | What everyone sees when the test is off: `legacy`, `book` or `editorial`. | `legacy` |
+| `DEFAULT_DIRECTION` | What everyone sees when the test is off: `legacy`, `book`, `editorial` or `realbook`. | `legacy` |
 | `ANALYTICS_FORWARD_URL` | Where to send each event so it's kept (see below). | none |
 
 **Before you start the test**, decide where events are stored (Vercel keeps
@@ -91,6 +94,7 @@ lib/experiment.mjs     test settings and visitor assignment
 lib/shell.mjs          SEO tags, canonical URLs and analytics, identical for both designs
 lib/themes/book/       Direction A templates   (public/assets/book.css, book.js)
 lib/themes/editorial/  Direction B templates   (public/assets/editorial.css, editorial.js)
+lib/themes/realbook/   Direction C templates   (public/assets/realbook.css, realbook.js)
 lib/themes/marks.mjs   the two BA monograms
 lib/templates.mjs      the current site's templates
 public/assets/track.js measurement, identical for both designs
