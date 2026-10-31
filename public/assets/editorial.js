@@ -409,6 +409,87 @@
   // Leaving the desk or opening another interest stops the music.
   document.querySelectorAll(".ed-dp__close, .ed-tags--live [data-interest], .ed-desk__p").forEach((el) => el.addEventListener("click", () => { if (!el.closest(".ed-dp--playlist")) stop(); }));
 
+  // About: the badge sways when the pointer brushes past, then settles.
+  const badge = document.querySelector("[data-badge]");
+  if (badge && fine && !still) {
+    let ang = 0, vel = 0, lastX = null, raf = 0;
+    const step = () => {
+      vel += -ang * 0.06; vel *= 0.92; ang += vel;
+      badge.style.rotate = `${ang.toFixed(3)}deg`;
+      raf = Math.abs(ang) + Math.abs(vel) > 0.02 ? requestAnimationFrame(step) : (badge.style.rotate = "", 0);
+    };
+    badge.closest("section").addEventListener("pointermove", (e) => {
+      if (lastX !== null) {
+        const r = badge.getBoundingClientRect();
+        const near = Math.abs(e.clientX - (r.left + r.width / 2)) < r.width && e.clientY > r.top - 40 && e.clientY < r.bottom + 40;
+        if (near) vel += Math.max(-1.2, Math.min(1.2, (e.clientX - lastX) * 0.05));
+        if (!raf) raf = requestAnimationFrame(step);
+      }
+      lastX = e.clientX;
+    });
+  }
+
+  // About: the path draws itself through each stop as you scroll.
+  document.querySelectorAll("[data-path]").forEach((wrap) => {
+    const svg = wrap.querySelector("svg"), track = wrap.querySelector(".ed-path__track"), line = wrap.querySelector(".ed-path__line");
+    const stops = [...wrap.querySelectorAll(".ed-path__stop")];
+    let pts = [], len = 0, q = false;
+    const build = () => {
+      const w = wrap.getBoundingClientRect();
+      pts = stops.map((st) => { const d = st.querySelector(".ed-path__dot").getBoundingClientRect(); return [d.left + d.width / 2 - w.left, d.top + d.height / 2 - w.top]; });
+      if (!pts.length) return;
+      let d = `M ${pts[0][0]} 0 L ${pts[0][0]} ${pts[0][1]}`;
+      for (let i = 1; i < pts.length; i++) {
+        const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], my = (y0 + y1) / 2;
+        d += ` C ${x0} ${my}, ${x1} ${my}, ${x1} ${y1}`;
+      }
+      const last = pts[pts.length - 1];
+      d += ` L ${last[0]} ${w.height}`;
+      track.setAttribute("d", d); line.setAttribute("d", d);
+      svg.setAttribute("viewBox", `0 0 ${w.width} ${w.height}`);
+      len = line.getTotalLength();
+      line.style.strokeDasharray = `${len}`;
+      draw();
+    };
+    const draw = () => {
+      q = false;
+      if (!len) return;
+      const r = wrap.getBoundingClientRect();
+      const head = still ? r.height : Math.min(r.height, Math.max(0, innerHeight * 0.62 - r.top));
+      // how much of the path lies above the drawing head
+      let lo = 0, hi = len;
+      for (let k = 0; k < 18; k++) { const mid = (lo + hi) / 2; if (line.getPointAtLength(mid).y < head) lo = mid; else hi = mid; }
+      line.style.strokeDashoffset = `${len - lo}`;
+      stops.forEach((st, i) => st.classList.toggle("is-on", pts[i] && pts[i][1] <= head));
+    };
+    build();
+    if (document.fonts) document.fonts.ready.then(build);
+    addEventListener("load", build);
+    addEventListener("resize", build);
+    addEventListener("scroll", () => { if (!q) { q = true; requestAnimationFrame(draw); } }, { passive: true });
+  });
+
+  // About: experience tabs.
+  document.querySelectorAll(".ed-tabs").forEach((list) => {
+    const tabs = [...list.querySelectorAll('[role="tab"]')];
+    const show = (t) => {
+      tabs.forEach((x) => {
+        const on = x === t;
+        x.setAttribute("aria-selected", String(on));
+        x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+      });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => show(t));
+      t.addEventListener("keydown", (e) => {
+        const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!d) return;
+        const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); show(n);
+      });
+    });
+  });
+
   // Contact form: opens an email draft with the message filled in
   const form = document.querySelector(".ed-form[data-mailto]");
   if (form) {
