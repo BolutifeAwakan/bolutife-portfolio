@@ -245,13 +245,25 @@
       });
       panels.forEach((p) => (p.hidden = p.dataset.for !== open));
       tags.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.interest === open)));
+      focus();
       if (open) {
         track("side_open", open);
         if (!wide()) panel.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "nearest" });
       }
       layout();
     };
-    const setHover = (key) => { if (open || !wide()) return; hover = key; layout(); };
+    // Tunnel vision: the card being looked at stays sharp; the rest falls back.
+    const side = desk.closest(".ed-side");
+    const focus = () => {
+      const hot = open || hover;
+      if (side) side.classList.toggle("is-focus", !!hot);
+      cards.forEach((c) => c.classList.toggle("is-hot", c.dataset.interest === hover || c.dataset.interest === open));
+    };
+    const setHover = (key) => {
+      if (open) { hover = key; focus(); return; } // in the open view, hovering a waiting card just brings it into focus
+      if (!wide()) return;
+      hover = key; layout(); focus();
+    };
 
     tags.forEach((t) => {
       t.addEventListener("click", () => setOpen(t.dataset.interest));

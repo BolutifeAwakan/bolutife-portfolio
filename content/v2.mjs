@@ -208,15 +208,16 @@ export default {
         ],
       },
       {
-        title: "Films", format: "tickets",
-        image: "https://images.unsplash.com/photo-1762541693135-fb989de961e1?w=1200&q=80&auto=format&fit=crop",
-        imageAlt: "Projector light across an empty cinema",
+        title: "Films", format: "posters",
+        image: "https://upload.wikimedia.org/wikipedia/en/c/c8/Lionheart_%282018_film%29_poster.jpg",
+        imageAlt: "Lionheart film poster",
         body: "Seeing movies.",
+        // Posters are the films' own (from their Wikipedia pages).
         items: [
-          {"title": "Lionheart", "year": "2018", "note": "Directed by Genevieve Nnaji"},
-          {"title": "The Woman King", "year": "2022", "note": "Directed by Gina Prince-Bythewood"},
-          {"title": "Hidden Figures", "year": "2016", "note": "Directed by Theodore Melfi"},
-          {"title": "Spirited Away", "year": "2001", "note": "Directed by Hayao Miyazaki"},
+          {"title": "Lionheart", "year": "2018", "by": "Genevieve Nnaji", "posters": ["https://upload.wikimedia.org/wikipedia/en/c/c8/Lionheart_%282018_film%29_poster.jpg"]},
+          {"title": "The Woman King", "year": "2022", "by": "Gina Prince-Bythewood", "posters": ["https://upload.wikimedia.org/wikipedia/en/0/0a/The_Woman_King_%28film%29_poster.jpg", "https://upload.wikimedia.org/wikipedia/en/2/2c/The_Woman_King_poster.jpg"]},
+          {"title": "Hidden Figures", "year": "2016", "by": "Theodore Melfi", "posters": ["https://upload.wikimedia.org/wikipedia/en/4/4f/The_official_poster_for_the_film_Hidden_Figures%2C_2016.jpg"]},
+          {"title": "Spirited Away", "year": "2001", "by": "Hayao Miyazaki", "posters": ["https://upload.wikimedia.org/wikipedia/en/d/db/Spirited_Away_Japanese_poster.png"]},
         ],
       },
       {
