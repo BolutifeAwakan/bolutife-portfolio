@@ -37,7 +37,7 @@ must["/thoughts"] = [...must["/writing"], m.speaking.promise, ...m.speaking.trac
 const mustEd = { "/about": [...must["/about"], ...m.side.interests.map((i) => i.title)] };
 const editorialPages = [
   ...pages.filter((p) => !["/speaking", "/on-the-side"].includes(p)).map((p) => (p === "/writing" ? "/thoughts" : p)),
-  "/shop", "/shop/worth-the-work", "/shop/signature",
+  "/shop/worth-the-work", "/shop/signature",
   ...m.writing.notes.filter((n) => n.internal).map((n) => `/thoughts/${n.slug}`),
 ];
 for (const dir of ["brand-book", "personal-editorial", "the-book"]) {
