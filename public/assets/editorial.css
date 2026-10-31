@@ -272,6 +272,9 @@ html.ed-menu-open { overflow: hidden; }
 /* ---------- selected work: cards that stack as you scroll ---------- */
 
 .ed-stack__card { position: sticky; top: 0; height: 100svh; min-height: 560px; }
+/* Each card holds still for a stretch of scrolling before the next one slides over,
+   so its words can be read. */
+.ed-stack__card:not(:last-child) { margin-bottom: 55svh; }
 .ed-stack__a {
   position: relative;
   display: flex;
@@ -685,6 +688,7 @@ h2.ed-stack__t { margin: 0; }
   .ed-intro { grid-template-columns: 1fr; }
   .ed-intro__space, .ed-intro__grow { display: none; }
   .ed-stack__card { height: 86svh; min-height: 520px; }
+  .ed-stack__card:not(:last-child) { margin-bottom: 40svh; }
   .ed-stack__band { grid-template-columns: 1fr; grid-template-areas: "meta" "t" "s" "go"; gap: 10px; padding-bottom: 22px; }
   .ed-stack__t { font-size: clamp(44px, 13vw, 72px); }
   .ed-stack__go { justify-self: start; }
