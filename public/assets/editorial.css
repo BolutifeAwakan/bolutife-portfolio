@@ -295,7 +295,7 @@ html.ed-menu-open { overflow: hidden; }
 .ed-stack__a:hover .ed-stack__img img { transform: scale(1.035); }
 .ed-stack__band {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   grid-template-areas: "meta meta meta" "t s go";
   gap: 14px 32px;
   align-items: end;
@@ -305,7 +305,7 @@ html.ed-menu-open { overflow: hidden; }
 }
 .ed-stack__meta { grid-area: meta; display: flex; flex-wrap: wrap; }
 .ed-stack__meta .ed-br:first-child { color: var(--bone); }
-.ed-stack__t { grid-area: t; font: 800 var(--t-h2)/0.82 var(--display); font-stretch: 62%; text-transform: uppercase; letter-spacing: -0.01em; transition: color 0.25s; }
+.ed-stack__t { grid-area: t; white-space: nowrap; font: 800 var(--t-h2)/0.82 var(--display); font-stretch: 62%; text-transform: uppercase; letter-spacing: -0.01em; transition: color 0.25s; }
 .ed-stack__s { grid-area: s; max-width: 40ch; font-size: var(--t-body); line-height: 1.45; color: var(--ash); }
 .ed-stack__go { grid-area: go; font: 700 var(--t-small)/1 var(--display); font-stretch: 85%; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; padding-bottom: 6px; background: linear-gradient(var(--gold), var(--gold)) 0 100% / 30% 2px no-repeat; transition: background-size 0.35s; }
 .ed-stack__a:hover .ed-stack__go, .ed-stack__a:focus-visible .ed-stack__go { background-size: 100% 2px; }
@@ -687,6 +687,7 @@ h2.ed-stack__t { margin: 0; }
   .ed-foot__row { grid-template-columns: 1fr; align-items: start; }
   .ed-foot__grid { grid-template-columns: 1fr 1fr; }
   .ed-stack__band { grid-template-columns: 1fr auto; grid-template-areas: "meta meta" "t t" "s go"; }
+  .ed-stack__s { max-width: 52ch; }
 }
 
 @media (max-width: 800px) {
@@ -708,7 +709,7 @@ h2.ed-stack__t { margin: 0; }
   .ed-stack__card { height: 86svh; min-height: 520px; }
   .ed-stack__card:not(:last-child) { margin-bottom: 40svh; }
   .ed-stack__band { grid-template-columns: 1fr; grid-template-areas: "meta" "t" "s" "go"; gap: 10px; padding-bottom: 22px; }
-  .ed-stack__t { font-size: clamp(44px, 13vw, 72px); }
+  .ed-stack__t { font-size: clamp(44px, 13vw, 72px); white-space: normal; }
   .ed-stack__go { justify-self: start; }
   .ed-row__a { grid-template-columns: 1fr; gap: 6px; }
   .ed-row__s, .ed-row__go { grid-column: 1; justify-self: start; }
