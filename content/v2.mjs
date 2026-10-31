@@ -103,9 +103,7 @@ export default {
       kind: "Social enterprise",
       line: "Creating better access to education, mentorship, and career opportunities for women in design and technology.",
       body: "Lilac Africa gives women in design and technology a path into opportunity, a community to learn with, and mentorship.",
-      offers: [
-        { title: "Lilac Luminaries", body: "A live, virtual pan-African masterclass programme for senior women in design and technology." },
-      ],
+      offers: [],
       url: "https://www.lilacafrica.com/",
       cta: "Visit Lilac Africa",
     },
