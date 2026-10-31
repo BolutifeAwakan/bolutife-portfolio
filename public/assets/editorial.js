@@ -98,13 +98,15 @@
       const top = Math.min(Math.max(vh * 0.12 - s.top, t.top - s.top), s.height - padB - H);
       const tx = t.left - s.left + W / 2, ty = top + H / 2;
       const p = Math.min(1, Math.max(0, (vh * 0.72 - (c.top + c.height / 2)) / (vh * 0.42)));
-      const e = ease(p);
-      const w = cw + (W - cw) * e, h = ch + (H - ch) * e;
-      const x = cx + (tx - cx) * e - w / 2, y = cy + (ty - cy) * e - h / 2;
+      // First it slides out of the sentence into the empty column, then it opens up.
+      const em = ease(Math.min(1, p / 0.45));
+      const es = ease(Math.min(1, Math.max(0, (p - 0.35) / 0.65)));
+      const w = cw + (W - cw) * es, h = ch + (H - ch) * es;
+      const x = cx + (tx - cx) * em - w / 2, y = cy + (ty - cy) * em - h / 2;
       grow.style.width = `${w}px`;
       grow.style.height = `${h}px`;
-      grow.style.borderRadius = `${(ch / 2) * (1 - e)}px`;
-      grow.style.transform = `translate(${x}px, ${y}px) rotate(${-3 * (1 - e)}deg)`;
+      grow.style.borderRadius = `${(ch / 2) * (1 - es)}px`;
+      grow.style.transform = `translate(${x}px, ${y}px) rotate(${-3 * (1 - em)}deg)`;
       grow.classList.add("is-ready");
       seed.style.visibility = "hidden";
     };
