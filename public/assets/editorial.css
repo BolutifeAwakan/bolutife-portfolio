@@ -671,6 +671,7 @@ h2.ed-stack__t { margin: 0; }
   .ed-row__s, .ed-row__go { grid-column: 1; justify-self: start; }
   .ed-rows--path .ed-row__a { grid-template-columns: 1fr; }
   .ed-vent__item { grid-template-columns: 1fr; gap: 10px; }
+  .ed-vent__k { display: none; }
   .ed-vent__line, .ed-vent__item > a { grid-column: 1; }
   .ed-side { grid-template-columns: 1fr; }
   .ed-sign--side { left: 52vw; top: 0.1em; font-size: 52px; }
