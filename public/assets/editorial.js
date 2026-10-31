@@ -573,9 +573,10 @@
     const fetchFile = (d) => { const a = document.createElement("a"); a.href = d.file; a.download = ""; document.body.appendChild(a); a.click(); a.remove(); };
     let known = false;
     try { known = !!localStorage.getItem("ba-lead"); } catch (e) {}
-    document.querySelectorAll("[data-download]").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll("[data-download]").forEach((b) => b.addEventListener("click", (e) => {
       want = { key: b.dataset.download, file: b.dataset.file };
-      if (known) { fetchFile(want); track("download", want.key); return; }
+      if (known) { track("download", want.key); return; }
+      e.preventDefault();
       f.elements["asset"].value = want.key;
       gate.showModal();
       f.elements["name"].focus();
