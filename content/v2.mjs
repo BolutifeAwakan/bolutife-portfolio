@@ -172,14 +172,62 @@ export default {
     // Each interest is one card on the desk. `photo` is a slug from lib/photos.mjs;
     // without one the card is a coloured note until a real photo is added.
     interests: [
-      // `kinds`: the things she loves in each, shown when the card is opened ({ title, note }).
-      // `gallery`: photo slugs shown when the card is opened.
-      { title: "Fashion", body: "Dressing is how I tell my own story.", photo: "chair-gold", gallery: ["garden-sun", "lawn-crouch", "arch-white"] },
-      { title: "Photography", body: "" },
-      { title: "Music", body: "Listening to music. I sang and played instruments before I designed anything.", kinds: [{ title: "Beautiful Rain", note: "The Cavemen, from ROOTS. On repeat." }] },
-      { title: "Books", body: "Reading books." },
-      { title: "Films", body: "Seeing movies." },
-      { title: "Friends & family", body: "Time spent with the people I love." },
+      // Each interest opens into its own little world (`format`). Items marked
+      // `ph: true` are placeholders waiting for her real favourites: replace the
+      // words and remove `ph` (a placeholder shows with a dashed edge on the site).
+      {
+        title: "Fashion", format: "lookbook", photo: "chair-gold",
+        body: "Dressing is how I tell my own story.",
+        gallery: ["garden-sun", "lawn-crouch", "arch-white"],
+        items: [
+          { title: "Designer or label", note: "What I love about their work", ph: true },
+          { title: "Designer or label", note: "What I love about their work", ph: true },
+        ],
+      },
+      {
+        title: "Photography", format: "contact",
+        body: "",
+        lead: "Things I notice and keep.",
+        items: Array.from({ length: 6 }, () => ({ title: "A photo I took", note: "Where and when", ph: true })),
+      },
+      {
+        title: "Music", format: "playlist",
+        body: "Listening to music. I sang and played instruments before I designed anything.",
+        items: [
+          { title: "Beautiful Rain", by: "The Cavemen", note: "On repeat" },
+          { title: "Song title", by: "Artist", ph: true },
+          { title: "Song title", by: "Artist", ph: true },
+          { title: "Song title", by: "Artist", ph: true },
+          { title: "Song title", by: "Artist", ph: true },
+        ],
+      },
+      {
+        title: "Books", format: "shelf",
+        body: "Reading books.",
+        items: [
+          { title: "Currently reading", by: "Author", now: true, ph: true },
+          { title: "Book title", by: "Author", ph: true },
+          { title: "Book title", by: "Author", ph: true },
+          { title: "Book title", by: "Author", ph: true },
+          { title: "Book title", by: "Author", ph: true },
+          { title: "Book title", by: "Author", ph: true },
+        ],
+      },
+      {
+        title: "Films", format: "tickets",
+        body: "Seeing movies.",
+        items: [
+          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
+          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
+          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
+          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
+        ],
+      },
+      {
+        title: "Friends & family", format: "moments",
+        body: "Time spent with the people I love.",
+        items: Array.from({ length: 4 }, () => ({ title: "A moment worth keeping", ph: true })),
+      },
     ],
   },
 
