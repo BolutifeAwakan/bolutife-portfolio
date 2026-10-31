@@ -204,9 +204,9 @@
             // the rest gather in a loose row along the bottom, ready to be opened next
             const k = others.indexOf(s), n = others.length;
             const s2 = 0.42, gap = 14;
-            const rowW = n * w * s2 + (n - 1) * gap;
-            const cx = (W - rowW) / 2 + k * (w * s2 + gap) + (w * s2) / 2;
-            const cy = H - (h * s2) / 2;
+            const ph = st[pickedIdx].c.offsetHeight * Math.min(1.35, (W * 0.42) / w);
+            const cx = W * 0.03 + k * (w * s2 + gap) + (w * s2) / 2;
+            const cy = Math.min(H - (h * s2) / 2, ph + 48 + (h * s2) / 2);
             tx = cx - (x0 + w / 2); ty = cy - (y0 + h / 2); sc = s2; r = (k % 2 ? 4 : -4);
           }
         } else if (hoverIdx >= 0) {
