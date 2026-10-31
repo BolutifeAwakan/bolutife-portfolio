@@ -180,13 +180,24 @@
     const TILT = [-6, 4, -3, 5, -5, 3];
     const st = cards.map((c, i) => ({ c, ox: 0, oy: 0, rot: TILT[i % TILT.length] }));
     const wide = () => innerWidth > 800;
-    let open = null, hover = null, z = 10;
+    let open = null, hover = null, z = 10, baseH = 0;
 
     const layout = () => {
-      const W = desk.clientWidth, H = desk.clientHeight;
+      if (!open) { desk.style.minHeight = ""; baseH = desk.clientHeight; }
+      const W = desk.clientWidth, H = baseH || desk.clientHeight;
       const pickedIdx = open ? cards.findIndex((c) => c.dataset.interest === open) : -1;
       const hoverIdx = !open && hover ? cards.findIndex((c) => c.dataset.interest === hover) : -1;
       const others = st.filter((_, i) => i !== pickedIdx);
+      // Where the row of other cards sits: under both the open card and its panel.
+      let rowTop = 0;
+      if (open && wide() && pickedIdx >= 0) {
+        const pc = st[pickedIdx].c, pw = pc.offsetWidth;
+        const psc = Math.min(1.35, (W * 0.42) / pw);
+        panel.style.left = `${W * 0.03 + pw * psc + W * 0.05}px`;
+        rowTop = Math.max(pc.offsetHeight * psc, panel.offsetTop + panel.offsetHeight) + 48;
+        const rowH = pc.offsetHeight * 0.42;
+        desk.style.minHeight = `${Math.max(H, rowTop + rowH + 24)}px`;
+      } else desk.style.minHeight = "";
       st.forEach((s, i) => {
         const c = s.c;
         if (!wide()) { c.style.transform = ""; return; }
@@ -199,14 +210,12 @@
             tx = W * 0.03 + (w * sc) / 2 - (x0 + w / 2);
             ty = (h * sc) / 2 - (y0 + h / 2);
             r = -2;
-            panel.style.left = `${W * 0.03 + w * sc + W * 0.05}px`;
           } else {
             // the rest gather in a loose row along the bottom, ready to be opened next
             const k = others.indexOf(s), n = others.length;
             const s2 = 0.42, gap = 14;
-            const ph = st[pickedIdx].c.offsetHeight * Math.min(1.35, (W * 0.42) / w);
             const cx = W * 0.03 + k * (w * s2 + gap) + (w * s2) / 2;
-            const cy = Math.min(H - (h * s2) / 2, ph + 48 + (h * s2) / 2);
+            const cy = rowTop + (h * s2) / 2;
             tx = cx - (x0 + w / 2); ty = cy - (y0 + h / 2); sc = s2; r = (k % 2 ? 4 : -4);
           }
         } else if (hoverIdx >= 0) {
