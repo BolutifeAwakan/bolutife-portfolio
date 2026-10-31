@@ -322,6 +322,12 @@ html.ed-menu-open { overflow: hidden; }
 .ed-grid__t { font: 800 var(--t-h3)/0.88 var(--display); font-stretch: 62%; text-transform: uppercase; transition: color 0.25s; }
 .ed-grid a:hover .ed-grid__t { color: var(--gold); }
 .ed-grid__s { display: block; margin-top: 10px; color: var(--ash); max-width: 52ch; font-size: var(--t-body); }
+/* a pair of cards (speaking + book, or two books) inside a section */
+.ed-grid--pair { margin-bottom: calc(var(--block) * 1.6); }
+.ed-grid--pair figure { aspect-ratio: 5 / 4; }
+.ed-grid__book { display: grid; place-items: center; }
+.ed-grid__book .ed-cover { transform: none; box-shadow: none; border-radius: 0; height: 100%; }
+.ed-grid__book .ed-cover--type { width: auto; aspect-ratio: 2 / 3; height: 78%; padding: 7% 6% 5% 8%; }
 .ed-grid__go { display: inline-block; margin-top: 14px; font: 700 var(--t-small)/1 var(--display); font-stretch: 85%; text-transform: uppercase; letter-spacing: 0.03em; border-bottom: 1px solid; padding-bottom: 3px; }
 
 .ed-teaser { display: grid; grid-template-columns: 1fr 2fr auto; grid-template-areas: "k k k" "t s go"; gap: 12px 32px; align-items: end; margin: 0 var(--g); padding: var(--block) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-decoration: none; }
