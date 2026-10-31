@@ -74,6 +74,37 @@
     update();
   }
 
+  // Intro: the photo in the sentence opens up on the right. The chip nearest
+  // the middle of the screen leads; hovering a chip brings its photo forward.
+  const stage = document.querySelector(".ed-intro__stage");
+  if (stage && getComputedStyle(stage).display !== "none") {
+    const shots = [...stage.querySelectorAll(".ed-intro__shot")];
+    const chips = [...document.querySelectorAll(".ed-intro .ed-chip[data-i]")];
+    let cur = 0, queued = false;
+    const show = (i) => {
+      if (i === cur || !shots[i]) return;
+      shots.forEach((s) => s.classList.remove("was-on"));
+      shots[cur].classList.replace("is-on", "was-on");
+      shots[i].classList.add("is-on");
+      chips.forEach((c) => c.classList.toggle("is-on", +c.dataset.i === i));
+      cur = i;
+    };
+    chips.forEach((c) => c.classList.toggle("is-on", +c.dataset.i === 0));
+    const pick = () => {
+      queued = false;
+      const mid = innerHeight * 0.5;
+      let best = cur, d = Infinity;
+      chips.forEach((c) => {
+        const r = c.getBoundingClientRect();
+        const dist = Math.abs(r.top + r.height / 2 - mid);
+        if (dist < d) { d = dist; best = +c.dataset.i; }
+      });
+      show(best);
+    };
+    addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(pick); } }, { passive: true });
+    if (fine) chips.forEach((c) => c.addEventListener("pointerenter", () => show(+c.dataset.i)));
+  }
+
   // Menu as a modal dialog: background made inert, focus kept inside
   const btn = document.querySelector(".ed-head__menu");
   const menu = document.getElementById("ed-menu");
