@@ -168,27 +168,57 @@
     }
   }
 
-  // The desk: photos you can pick up and move
+  // The desk: one card per interest. Pick an interest (or a card) to bring it
+  // forward; on wide screens the cards can also be picked up and moved.
   document.querySelectorAll("[data-desk]").forEach((desk) => {
-    if (!fine || innerWidth <= 800) return;
-    let z = 10;
-    desk.querySelectorAll("[data-drag]").forEach((p) => {
+    const sec = desk.closest(".ed-side") || document;
+    const tags = [...sec.querySelectorAll(".ed-tags--live [data-interest]")];
+    const cards = [...desk.querySelectorAll("[data-drag]")];
+    let z = 10, picked = null;
+    const pick = (key) => {
+      picked = picked === key ? null : key;
+      desk.classList.toggle("has-pick", !!picked);
+      cards.forEach((c) => {
+        const on = c.dataset.interest === picked;
+        c.classList.toggle("is-picked", on);
+        if (on) c.style.zIndex = ++z;
+        c.style.setProperty("--lift", on ? "1" : "0");
+      });
+      tags.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.interest === picked)));
+      if (picked) track("side_pick", picked);
+    };
+    tags.forEach((t) => t.addEventListener("click", () => pick(t.dataset.interest)));
+    if (fine) tags.forEach((t) => {
+      t.addEventListener("pointerenter", () => { if (picked !== t.dataset.interest) pick(t.dataset.interest); });
+    });
+
+    const canDrag = fine && innerWidth > 800;
+    cards.forEach((p) => {
       const base = getComputedStyle(p).transform;
-      let sx, sy, ox = 0, oy = 0;
+      let sx, sy, ox = 0, oy = 0, moved = false, down = false;
+      const place = (lift) => {
+        const r = still ? 0 : ox * 0.01;
+        p.style.transform = lift ? `translate(${ox}px, ${oy}px) scale(1.06)` : `translate(${ox}px, ${oy}px) ${base === "none" ? "" : base} rotate(${r}deg)`;
+      };
       p.addEventListener("pointerdown", (e) => {
+        if (!canDrag) return;
+        down = true; moved = false;
         p.setPointerCapture(e.pointerId);
-        p.classList.add("is-drag");
         p.style.zIndex = ++z;
         sx = e.clientX - ox; sy = e.clientY - oy;
       });
       p.addEventListener("pointermove", (e) => {
-        if (!p.classList.contains("is-drag")) return;
-        ox = e.clientX - sx; oy = e.clientY - sy;
-        p.style.transform = `translate(${ox}px, ${oy}px) ${base === "none" ? "" : base} rotate(${still ? 0 : ox * 0.01}deg)`;
+        if (!down) return;
+        const nx = e.clientX - sx, ny = e.clientY - sy;
+        if (!moved && Math.abs(nx - ox) + Math.abs(ny - oy) < 4) return;
+        moved = true; p.classList.add("is-drag");
+        ox = nx; oy = ny; place(false);
       });
-      const end = () => p.classList.remove("is-drag");
-      p.addEventListener("pointerup", end);
+      const end = () => { down = false; p.classList.remove("is-drag"); };
+      p.addEventListener("pointerup", () => { const wasMove = moved; end(); if (!wasMove) pick(p.dataset.interest); });
       p.addEventListener("pointercancel", end);
+      if (!canDrag) p.addEventListener("click", () => pick(p.dataset.interest));
+      new MutationObserver(() => { if (!p.classList.contains("is-drag")) place(p.classList.contains("is-picked")); }).observe(p, { attributes: true, attributeFilter: ["class"] });
     });
   });
 

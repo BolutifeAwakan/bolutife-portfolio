@@ -168,8 +168,11 @@ export default {
   },
 
   side: {
-    intro: "Away from the desk, there's music, photography, books, films, and time spent with the people I love. Some of those interests find their way into my work. Most are just for me.",
+    intro: "Away from the desk, there's fashion, music, photography, books, films, and time spent with the people I love. Some of those interests find their way into my work. Most are just for me.",
+    // Each interest is one card on the desk. `photo` is a slug from lib/photos.mjs;
+    // without one the card is a coloured note until a real photo is added.
     interests: [
+      { title: "Fashion", body: "Dressing is how I tell my own story.", photo: "chair-gold" },
       { title: "Photography", body: "" },
       { title: "Music", body: "Listening to music. I sang and played instruments before I designed anything." },
       { title: "Books", body: "Reading books." },
