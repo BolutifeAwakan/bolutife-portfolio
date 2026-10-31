@@ -140,3 +140,10 @@ For an Unsplash photo, add this to the end of its `images.unsplash.com/photo-…
 ```
 
 For your own photos, apply the Baked filter with warmth pulled back before uploading.
+
+## Editorial direction: Thoughts, Shop and email (October 2026 revision)
+
+- Essays live in `content/thoughts.mjs` and render at `/thoughts/<slug>` (old `/writing` and `/notes` addresses redirect).
+- Books live in `content/v2.mjs` → `books`. Worth the Work editions and prices mirror the Selar store; update both together. Signature is marked `available: false` until it can be ordered.
+- Email sign-ups post to the form URL in Sanity → Settings → Newsletter URL (e.g. a Kit, Mailchimp or Substack form endpoint). Until that is set, the form opens a pre-filled email to hello@bolutifeawakan.com.
+- The public review copy is the separate Vercel project `bolutife-v2` (bolutife-v2-nu.vercel.app). It shows the editorial direction at its root; redeploy it after pushing (it is deployed from this branch on request, not on every push).
