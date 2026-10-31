@@ -565,37 +565,23 @@
     })
   );
 
-  // Thoughts: press kit downloads ask for a name and an email first, then download.
-  const gate = document.getElementById("ed-gate");
-  if (gate && gate.showModal) {
-    const f = gate.querySelector("[data-gate]");
-    let want = null;
-    const fetchFile = (d) => { const a = document.createElement("a"); a.href = d.file; a.download = ""; document.body.appendChild(a); a.click(); a.remove(); };
-    let known = false;
-    try { known = !!localStorage.getItem("ba-lead"); } catch (e) {}
-    document.querySelectorAll("[data-download]").forEach((b) => b.addEventListener("click", (e) => {
-      want = { key: b.dataset.download, file: b.dataset.file };
-      if (known) { track("download", want.key); return; }
-      e.preventDefault();
-      f.elements["asset"].value = want.key;
-      gate.showModal();
-      f.elements["name"].focus();
-    }));
+  // Thoughts: the CV is given in exchange for a name and an email; the download starts on send.
+  document.querySelectorAll("[data-lead]").forEach((f) => {
+    const note = f.querySelector("[data-lead-note]");
     f.addEventListener("submit", async (e) => {
-      if (e.submitter && e.submitter.value === "cancel") return;
       e.preventDefault();
       if (!f.reportValidity()) return;
-      const btn = f.querySelector(".ed-btn");
+      const btn = f.querySelector("button[type=submit]");
       btn.disabled = true;
+      const v = (n) => f.elements[n] ? f.elements[n].value : "";
       try {
-        await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: f.elements["name"].value, email: f.elements["email"].value, org: f.elements["org"].value, asset: f.elements["asset"].value, page: location.pathname }) });
+        await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: v("name"), email: v("email"), org: v("org"), asset: f.dataset.lead, page: location.pathname }) });
       } catch (err) {}
-      try { localStorage.setItem("ba-lead", "1"); } catch (err) {}
-      known = true;
-      track("download", want && want.key);
-      gate.close();
+      track("download", f.dataset.lead);
+      const a = document.createElement("a"); a.href = f.dataset.file; a.download = ""; document.body.appendChild(a); a.click(); a.remove();
+      if (note) note.textContent = "Thanks, your download has started. ";
+      if (note && !note.querySelector("a")) { const l = document.createElement("a"); l.href = f.dataset.file; l.download = ""; l.textContent = "Download it again"; note.appendChild(l); }
       btn.disabled = false;
-      if (want) fetchFile(want);
     });
-  }
+  });
 })();

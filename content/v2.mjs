@@ -140,9 +140,11 @@ export default {
       byline: "Book by Bolutife Awakan",
       subtitle: "The Journey to your Authentic Self",
       line: "A book on personal branding that starts with one question: who am I?",
+      cover: "https://res.cloudinary.com/paystack/image/upload/q_auto/w_1080,c_limit/public/files/products/qccrdz4t18so0f2avvna.jpg",
       path: "/shop/signature",
-      cta: "About the book",
-      available: false,
+      cta: "Explore the book",
+      buyUrl: "https://paystack.com/buy/signature-your-personal-branding-guide",
+      price: "NGN 15,000",
     },
   ],
   storeUrl: "https://selar.com/m/Bolutife01",
@@ -264,7 +266,7 @@ export default {
   ],
   shopIntro: "Books and resources built from the things I've learned about branding, design, and the business of creative work.",
   // Her Connectr page for booking calls. Every "Book a call" goes straight there once set.
-  bookingUrl: "",
+  bookingUrl: "https://conectr.me/bolutifeawakan",
   // Roles in the order of her CV (her list, 31 Oct 2026). Countries from her CV.
   roles: [
     { org: "Risevest", role: "Group Design Lead", period: "2026 - Now", country: "Nigeria" },
