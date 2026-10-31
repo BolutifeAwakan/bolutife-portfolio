@@ -19,7 +19,7 @@
   --sign: "Ms Madi", cursive;
 
   /* item lists share one grid: label, title, summary, action */
-  --row-cols: minmax(110px, 1.1fr) 5fr 3fr minmax(0, auto);
+  --row-cols: minmax(0, 1.2fr) minmax(0, 4.6fr) minmax(0, 3fr) minmax(0, 1.4fr);
 
   /* spacing */
   --g: clamp(16px, 2.2vw, 32px);       /* page gutter */
@@ -342,7 +342,7 @@ a.ed-row__a:hover .ed-br, a.ed-row__a:focus-visible .ed-br { color: var(--night)
 a.ed-row__a:hover .ed-row__t { transform: translateX(10px); }
 .ed-row__s { font-size: var(--t-small); line-height: 1.45; color: var(--ash); max-width: 42ch; }
 a.ed-row__a:hover .ed-row__s { color: var(--night); }
-.ed-row__go { font: 700 var(--t-small)/1 var(--display); font-stretch: 85%; text-transform: uppercase; white-space: nowrap; }
+.ed-row__go { justify-self: end; font: 700 var(--t-small)/1 var(--display); font-stretch: 85%; text-transform: uppercase; white-space: nowrap; }
 .ed-rows--xl .ed-row__t { font-size: var(--t-h2); line-height: 0.86; }
 .ed-rows--xl .ed-row__a { padding-top: 22px; padding-bottom: 18px; }
 .ed-rows--xl div.ed-row__a:hover .ed-row__t { color: var(--gold); }
