@@ -40,7 +40,7 @@
       hq = false;
       const r = hero.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, -r.top / (r.height * 0.7)));
-      name.style.setProperty("--split", (p * p * (3 - 2 * p)).toFixed(4));
+      hero.style.setProperty("--split", (p * p * (3 - 2 * p)).toFixed(4));
     };
     addEventListener("scroll", () => { if (!hq) { hq = true; requestAnimationFrame(split); } }, { passive: true });
     split();
