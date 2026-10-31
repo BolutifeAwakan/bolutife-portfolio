@@ -449,6 +449,7 @@ a.ed-row__a:hover .ed-row__s { color: var(--night); }
 
 .ed-open { padding-top: clamp(110px, 12vw, 170px); }
 .ed-sec .ed-open { padding-top: 0; margin-bottom: 28px; }
+.ed-open__line p + p { margin-top: 0.7em; }
 .ed-open__line { padding: 22px var(--g) 0; max-width: calc(44ch + 2 * var(--g)); margin-left: auto; font-size: 17px; color: var(--ash); }
 .ed-sec .ed-open__h .ed-fit, .ed-sec .ed-open .ed-fit { font-size: min(calc((100vw - 2 * var(--g)) / (var(--n) * 0.415)), 15vw); }
 .ed-sec .ed-open .ed-fit.is-fitted { font-size: min(var(--fs), 15vw); }
@@ -544,7 +545,7 @@ a.ed-row__a:hover .ed-row__s { color: var(--night); }
 .ed-reel figure { flex: 0 0 min(70vw, 520px); scroll-snap-align: start; }
 
 .ed-article__head { padding: clamp(110px, 12vw, 170px) var(--g) 0; max-width: calc(1100px + 2 * var(--g)); }
-.ed-article__t { font: 800 clamp(48px, 8vw, 132px)/0.86 var(--display); font-stretch: 62%; text-transform: uppercase; letter-spacing: -0.005em; max-width: 14ch; }
+.ed-article__t { font: 800 clamp(48px, 8vw, 132px)/0.86 var(--display); font-stretch: 62%; text-transform: uppercase; letter-spacing: -0.005em; max-width: 20ch; }
 .ed-article__s { margin-top: 24px; font: 500 clamp(20px, 2vw, 28px)/1.2 var(--display); font-stretch: 85%; max-width: 36ch; }
 .ed-article__by { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 4px 0; }
 .ed-article__cover { margin: 48px 0 0; }
@@ -629,11 +630,11 @@ a.ed-row__a:hover .ed-row__s { color: var(--night); }
 /* experiments: a looser gallery */
 .ed-shots { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); padding: 0 var(--g); align-items: start; }
 .ed-shot { grid-column: span 6; }
-.ed-shot--a { grid-column: 1 / span 7; }
+.ed-shot--a { grid-column: 1 / span 6; }
 .ed-shot--b { grid-column: 8 / span 5; margin-top: clamp(40px, 8vw, 140px); }
 .ed-shot--c { grid-column: 3 / span 6; }
 .ed-shot.is-hidden { display: none; }
-.ed-shot img, .ed-shot video { width: 100%; border-radius: 2px; transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.1, 1); }
+.ed-shot img, .ed-shot video { width: auto; max-width: 100%; max-height: 82svh; border-radius: 2px; transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.1, 1); }
 .ed-shot:nth-child(odd) img { transform: rotate(-0.6deg); }
 .ed-shot:nth-child(even) img { transform: rotate(0.8deg); }
 .ed-shot:hover img { transform: rotate(0) scale(1.01); }
