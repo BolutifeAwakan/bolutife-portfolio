@@ -291,6 +291,24 @@
     layout();
   });
 
+  // Music: each song plays its 30-second store preview; one at a time.
+  const audio = new Audio();
+  let playing = null;
+  const stop = () => { audio.pause(); if (playing) playing.classList.remove("is-playing"); playing = null; };
+  audio.addEventListener("ended", stop);
+  document.querySelectorAll("[data-playlist] .ed-play__row").forEach((b) => {
+    b.addEventListener("click", () => {
+      const li = b.closest("li");
+      if (playing === li) return stop();
+      stop();
+      if (!b.dataset.preview) return;
+      audio.src = b.dataset.preview;
+      audio.play().then(() => { playing = li; li.classList.add("is-playing"); track("side_play", b.querySelector(".ed-play__t").textContent); }).catch(() => {});
+    });
+  });
+  // Leaving the desk or opening another interest stops the music.
+  document.querySelectorAll(".ed-dp__close, .ed-tags--live [data-interest], .ed-desk__p").forEach((el) => el.addEventListener("click", () => { if (!el.closest(".ed-dp--playlist")) stop(); }));
+
   // Contact form: opens an email draft with the message filled in
   const form = document.querySelector(".ed-form[data-mailto]");
   if (form) {

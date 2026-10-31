@@ -168,65 +168,68 @@ export default {
   },
 
   side: {
-    intro: "Away from the desk, there's fashion, music, photography, books, films, and time spent with the people I love. Some of those interests find their way into my work. Most are just for me.",
+    intro: "Away from the desk, there's fashion, music, books, films, and time spent with the people I love. Some of those interests find their way into my work. Most are just for me.",
     // Each interest is one card on the desk. `photo` is a slug from lib/photos.mjs;
     // without one the card is a coloured note until a real photo is added.
     interests: [
-      // Each interest opens into its own little world (`format`). Items marked
-      // `ph: true` are placeholders waiting for her real favourites: replace the
-      // words and remove `ph` (a placeholder shows with a dashed edge on the site).
+      // Each interest is a card on the desk (`image` or a local `photo` slug on its
+      // face) and opens into its own little world (`format`).
+      // Music and book covers come from Apple Music / Apple Books; music plays the
+      // store's 30-second preview. Friends & family uses stand-in photos
+      // (`standin: true`, from Unsplash) until her own hangout photos replace them.
       {
         title: "Fashion", format: "lookbook", photo: "chair-gold",
         body: "Dressing is how I tell my own story.",
         gallery: ["garden-sun", "lawn-crouch", "arch-white"],
-        items: [
-          { title: "Designer or label", note: "What I love about their work", ph: true },
-          { title: "Designer or label", note: "What I love about their work", ph: true },
-        ],
-      },
-      {
-        title: "Photography", format: "contact",
-        body: "",
-        lead: "Things I notice and keep.",
-        items: Array.from({ length: 6 }, () => ({ title: "A photo I took", note: "Where and when", ph: true })),
       },
       {
         title: "Music", format: "playlist",
-        body: "Listening to music. I sang and played instruments before I designed anything.",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f1/61/a1/f161a175-cbb5-b371-bc0c-14d6fd60264e/67730ee9-be73-467c-80df-07f47e56c05b.jpg/600x600bb.jpg",
+        body: "I sang and played instruments before I designed anything.",
         items: [
-          { title: "Beautiful Rain", by: "The Cavemen", note: "On repeat" },
-          { title: "Song title", by: "Artist", ph: true },
-          { title: "Song title", by: "Artist", ph: true },
-          { title: "Song title", by: "Artist", ph: true },
-          { title: "Song title", by: "Artist", ph: true },
+          {"title": "Beautiful Rain", "by": "The Cavemen", "album": "Roots", "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f1/61/a1/f161a175-cbb5-b371-bc0c-14d6fd60264e/67730ee9-be73-467c-80df-07f47e56c05b.jpg/600x600bb.jpg", "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/21/64/fe/2164fec6-95bc-ffde-52bc-971d14f14b77/mzaf_9155742022724506071.plus.aac.p.m4a", "url": "https://music.apple.com/us/album/beautiful-rain/1527596673", "note": "On repeat"},
+          {"title": "Bibanke", "by": "Aṣa", "album": "Aṣa", "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/85/9e/2a/859e2a4d-694b-6ecd-ba0f-ee74ea1d4c9f/cover.jpg/600x600bb.jpg", "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bf/1c/1e/bf1c1e27-b4ed-7ca8-6095-52ec099299b6/mzaf_11087570720656217643.plus.aac.p.m4a", "url": "https://music.apple.com/us/album/bibanke/1444729965"},
+          {"title": "Free Mind", "by": "Tems", "album": "For Broken Ears", "art": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c6/4d/ed/c64ded15-9cd9-4bd7-a3ea-051178b2427d/195497234301.jpg/600x600bb.jpg", "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/23/76/10/2376109d-960f-5238-d0c2-a3f31b876477/mzaf_3424759630146198062.plus.aac.p.m4a", "url": "https://music.apple.com/us/album/free-mind/1532252592"},
+          {"title": "Water No Get Enemy", "by": "Fela Kuti", "album": "Expensive Shit", "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/00/72/0b/00720bab-3cba-5f1c-5405-1cd5a3037491/720841207597_Cover.jpg/600x600bb.jpg", "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e0/49/a3/e049a3fd-c94b-5289-9519-02d1ee8706fa/mzaf_5005095867929399591.plus.aac.p.m4a", "url": "https://music.apple.com/us/album/water-no-get-enemy/739004054"},
+          {"title": "Last Last", "by": "Burna Boy", "album": "Love, Damini", "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ca/eb/31/caeb3173-eaf0-0cd5-65ea-585adfe312ba/075679745156.jpg/600x600bb.jpg", "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/42/c0/0f/42c00f8b-fff6-2529-70c3-861c21143c0a/mzaf_2842108628707526245.plus.aac.p.m4a", "url": "https://music.apple.com/us/album/last-last/1623677591"},
         ],
       },
       {
         title: "Books", format: "shelf",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Publication122/v4/a3/c3/73/a3c37376-b40b-d71f-9f18-78c2f9d08831/9780593653425.d.jpg/600x600bb.jpg",
         body: "Reading books.",
         items: [
-          { title: "Currently reading", by: "Author", now: true, ph: true },
-          { title: "Book title", by: "Author", ph: true },
-          { title: "Book title", by: "Author", ph: true },
-          { title: "Book title", by: "Author", ph: true },
-          { title: "Book title", by: "Author", ph: true },
-          { title: "Book title", by: "Author", ph: true },
+          {"title": "The Creative Act", "by": "Rick Rubin", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication122/v4/a3/c3/73/a3c37376-b40b-d71f-9f18-78c2f9d08831/9780593653425.d.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/the-creative-act/id1621808272", "now": true},
+          {"title": "Dare to Lead", "by": "Brené Brown", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication114/v4/ff/d8/7a/ffd87a45-4950-a350-b1e6-e78b1f8de896/9780399592546.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/dare-to-lead/id1384267645"},
+          {"title": "Half of a Yellow Sun", "by": "Chimamanda Ngozi Adichie", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/d9/5f/64/d95f64a4-ef5c-f689-6a7d-51f099197421/9780307485779.d.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/half-of-a-yellow-sun/id420053899"},
+          {"title": "Things Fall Apart", "by": "Chinua Achebe", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication127/v4/c9/2d/e4/c92de4ef-7345-602a-a5a9-a3379c837cd3/9780307743855.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/things-fall-apart/id1230757278"},
+          {"title": "Steal Like an Artist", "by": "Austin Kleon", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication122/v4/6c/8f/70/6c8f709c-47bc-d570-af3f-cb3eef8a5b1b/9780761171256.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/steal-like-an-artist/id6443055944"},
+          {"title": "Atomic Habits", "by": "James Clear", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/1f/1b/d3/1f1bd34a-aa29-25e8-b133-7e19b38a5702/9780735211308.d.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/atomic-habits/id1384286945"},
         ],
       },
       {
         title: "Films", format: "tickets",
+        image: "https://images.unsplash.com/photo-1762541693135-fb989de961e1?w=1200&q=80&auto=format&fit=crop",
+        imageAlt: "Projector light across an empty cinema",
         body: "Seeing movies.",
         items: [
-          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
-          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
-          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
-          { title: "Film title", year: "Year", note: "One line on why it stays with me", ph: true },
+          {"title": "Lionheart", "year": "2018", "note": "Directed by Genevieve Nnaji"},
+          {"title": "The Woman King", "year": "2022", "note": "Directed by Gina Prince-Bythewood"},
+          {"title": "Hidden Figures", "year": "2016", "note": "Directed by Theodore Melfi"},
+          {"title": "Spirited Away", "year": "2001", "note": "Directed by Hayao Miyazaki"},
         ],
       },
       {
         title: "Friends & family", format: "moments",
+        image: "https://images.unsplash.com/photo-1630726410985-a1021e8a232a?w=1200&q=80&auto=format&fit=crop",
+        imageAlt: "Friends laughing together outdoors",
         body: "Time spent with the people I love.",
-        items: Array.from({ length: 4 }, () => ({ title: "A moment worth keeping", ph: true })),
+        items: [
+          {"image": "https://images.unsplash.com/photo-1630726410985-a1021e8a232a?w=800&q=80&auto=format&fit=crop", "alt": "Friends laughing together outdoors", "standin": true},
+          {"image": "https://images.unsplash.com/photo-1731475761027-0b6b33b74547?w=800&q=80&auto=format&fit=crop", "alt": "Friends around a dinner table", "standin": true},
+          {"image": "https://images.unsplash.com/photo-1611432580340-af48bd7549ed?w=800&q=80&auto=format&fit=crop", "alt": "Two friends on a sofa", "standin": true},
+          {"image": "https://images.unsplash.com/photo-1683549387218-f52690727f51?w=800&q=80&auto=format&fit=crop", "alt": "Friends cooking together in a kitchen", "standin": true},
+        ],
       },
     ],
   },
