@@ -267,14 +267,16 @@ export default {
   bookingUrl: "",
   // Roles in the order of her CV (her list, 31 Oct 2026). Countries from her CV.
   roles: [
-    { org: "Showgear Limited", role: "Creative Designer", period: "2016 - 2020", country: "Nigeria" },
-    { org: "MSports Limited", role: "Brand Designer", period: "2020", country: "West Africa" },
-    { org: "Terragon Group", role: "Senior Brand & Marketing Designer", period: "2021 - 2022", country: "Nigeria" },
-    { org: "Traction Apps", role: "Brand & Creatives Manager", period: "2022 - 2024", country: "Nigeria" },
-    { org: "Interswitch Group", role: "Senior Brand Designer", period: "2024 - 2025", country: "Nigeria" },
-    { org: "Capex Funds", role: "Creative Director", period: "2021 - 2023", country: "" },
     { org: "Risevest", role: "Group Design Lead", period: "2026 - Now", country: "Nigeria" },
+    { org: "Neo Health", role: "Head of Design", period: "2024", country: "US" },
+    { org: "Capex Funds", role: "Creative Director", period: "2021 - 2023", country: "US" },
+    { org: "Interswitch Group", role: "Senior Brand Designer", period: "2024 - 2025", country: "Nigeria" },
+    { org: "Traction Apps", role: "Brand & Creatives Manager", period: "2022 - 2024", country: "Nigeria" },
+    { org: "Terragon Group", role: "Senior Brand & Marketing Designer", period: "2021 - 2022", country: "Nigeria" },
+    { org: "MSports Limited", role: "Brand Designer", period: "2020", country: "West Africa" },
+    { org: "Showgear Limited", role: "Creative Designer", period: "2016 - 2020", country: "Nigeria" },
   ],
+
   // Added to the top of Recognition.
   awardsLatest: [{ title: "Exponential Design Leader", org: "", year: "2026" }],
 
