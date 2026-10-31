@@ -9,7 +9,7 @@
   const setThemeLabel = () => {
     if (!themeBtn) return;
     const light = root.dataset.theme === "light";
-    themeBtn.textContent = light ? "Dark" : "Light";
+    themeBtn.title = light ? "Dark mode" : "Light mode";
     themeBtn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
   };
   setThemeLabel();
@@ -409,21 +409,34 @@
   // Leaving the desk or opening another interest stops the music.
   document.querySelectorAll(".ed-dp__close, .ed-tags--live [data-interest], .ed-desk__p").forEach((el) => el.addEventListener("click", () => { if (!el.closest(".ed-dp--playlist")) stop(); }));
 
-  // About: the badge sways when the pointer brushes past, then settles.
+  // About: the badge drops in on a spring, swings on its long strap, and settles.
+  // Time-based, so it is equally smooth at 60Hz and 120Hz; the pointer can nudge it afterwards.
   const badge = document.querySelector("[data-badge]");
-  if (badge && fine && !still) {
-    let ang = 0, vel = 0, lastX = null, raf = 0;
-    const step = () => {
-      vel += -ang * 0.06; vel *= 0.92; ang += vel;
-      badge.style.rotate = `${ang.toFixed(3)}deg`;
-      raf = Math.abs(ang) + Math.abs(vel) > 0.02 ? requestAnimationFrame(step) : (badge.style.rotate = "", 0);
+  if (badge && !still) {
+    badge.classList.add("is-live");
+    const H = innerHeight * 1.1;
+    let y = -H, vy = 0, ang = 3.5, va = 0, last = 0, raf = 0, landed = false, lastX = null;
+    const paint = () => { badge.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) rotate(${ang.toFixed(3)}deg)`; };
+    paint();
+    const step = (t) => {
+      const dt = Math.min(0.032, last ? (t - last) / 1000 : 0.016);
+      last = t;
+      // drop: slightly underdamped, so it dips a touch past rest and eases back
+      vy += (-y * 46 - vy * 10.5) * dt; y += vy * dt;
+      // swing: a slow pendulum with light damping, a few long, shrinking arcs
+      if (!landed && y > -40) { landed = true; va += -vy * 0.004; }
+      va += (-ang * 9 - va * 1.5) * dt; ang += va * dt;
+      paint();
+      if (Math.abs(y) + Math.abs(vy) + Math.abs(ang) * 20 + Math.abs(va) * 20 > 0.05) raf = requestAnimationFrame(step);
+      else { y = vy = ang = va = 0; badge.style.transform = ""; raf = 0; last = 0; }
     };
-    badge.closest("section").addEventListener("pointermove", (e) => {
+    setTimeout(() => (raf = requestAnimationFrame(step)), 200);
+    if (fine) badge.closest("section").addEventListener("pointermove", (e) => {
       if (lastX !== null) {
         const r = badge.getBoundingClientRect();
         const near = Math.abs(e.clientX - (r.left + r.width / 2)) < r.width && e.clientY > r.top - 40 && e.clientY < r.bottom + 40;
-        if (near) vel += Math.max(-1.2, Math.min(1.2, (e.clientX - lastX) * 0.05));
-        if (!raf) raf = requestAnimationFrame(step);
+        if (near) va += Math.max(-4, Math.min(4, (e.clientX - lastX) * 0.12));
+        if (near && !raf) raf = requestAnimationFrame(step);
       }
       lastX = e.clientX;
     });
@@ -551,4 +564,37 @@
       document.querySelectorAll(".ed-shot").forEach((s) => s.classList.toggle("is-hidden", !!c && s.dataset.cat !== c));
     })
   );
+
+  // Thoughts: press kit downloads ask for a name and an email first, then download.
+  const gate = document.getElementById("ed-gate");
+  if (gate && gate.showModal) {
+    const f = gate.querySelector("[data-gate]");
+    let want = null;
+    const fetchFile = (d) => { const a = document.createElement("a"); a.href = d.file; a.download = ""; document.body.appendChild(a); a.click(); a.remove(); };
+    let known = false;
+    try { known = !!localStorage.getItem("ba-lead"); } catch (e) {}
+    document.querySelectorAll("[data-download]").forEach((b) => b.addEventListener("click", () => {
+      want = { key: b.dataset.download, file: b.dataset.file };
+      if (known) { fetchFile(want); track("download", want.key); return; }
+      f.elements["asset"].value = want.key;
+      gate.showModal();
+      f.elements["name"].focus();
+    }));
+    f.addEventListener("submit", async (e) => {
+      if (e.submitter && e.submitter.value === "cancel") return;
+      e.preventDefault();
+      if (!f.reportValidity()) return;
+      const btn = f.querySelector(".ed-btn");
+      btn.disabled = true;
+      try {
+        await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: f.elements["name"].value, email: f.elements["email"].value, org: f.elements["org"].value, asset: f.elements["asset"].value, page: location.pathname }) });
+      } catch (err) {}
+      try { localStorage.setItem("ba-lead", "1"); } catch (err) {}
+      known = true;
+      track("download", want && want.key);
+      gate.close();
+      btn.disabled = false;
+      if (want) fetchFile(want);
+    });
+  }
 })();

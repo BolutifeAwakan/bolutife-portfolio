@@ -253,6 +253,26 @@ export default {
   shopIntro: "Books and resources built from the things I've learned about branding, design, and the business of creative work.",
   // Her Connectr page for booking calls. Every "Book a call" goes straight there once set.
   bookingUrl: "",
+  // Roles in the order of her CV (her list, 31 Oct 2026). Countries from her CV.
+  roles: [
+    { org: "Showgear Limited", role: "Creative Designer", period: "2016 - 2020", country: "Nigeria" },
+    { org: "MSports Limited", role: "Brand Designer", period: "2020", country: "West Africa" },
+    { org: "Terragon Group", role: "Senior Brand & Marketing Designer", period: "2021 - 2022", country: "Nigeria" },
+    { org: "Traction Apps", role: "Brand & Creatives Manager", period: "2022 - 2024", country: "Nigeria" },
+    { org: "Interswitch Group", role: "Senior Brand Designer", period: "2024 - 2025", country: "Nigeria" },
+    { org: "Capex Funds", role: "Creative Director", period: "2021 - 2023", country: "" },
+    { org: "Risevest", role: "Group Design Lead", period: "2026 - Now", country: "Nigeria" },
+  ],
+  // Added to the top of Recognition.
+  awardsLatest: [{ title: "Exponential Design Leader", org: "", year: "2026" }],
+
+  // Press and speaking downloads on Thoughts. Each asks for a name and email first.
+  downloads: [
+    { key: "press-kit", title: "Press kit", note: "Bio, photos and talk topics in one PDF.", file: "/assets/press/bolutife-awakan-press-kit.pdf" },
+    { key: "headshots", title: "Headshots", note: "Six portraits, high resolution.", file: "/assets/press/bolutife-awakan-headshots.zip" },
+    { key: "cv", title: "CV", note: "Roles, education and recognition.", file: "/assets/press/bolutife-awakan-cv.pdf" },
+  ],
+
   contactLine: "Building a brand, strengthening a design team, or planning something I'd be a good fit for? I'd love to hear about it.",
 
   photoCredit: "Portraits by KN Photography",

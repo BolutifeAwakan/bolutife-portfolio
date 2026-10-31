@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 import handler from "./api/render.js";
 import collect from "./api/collect.js";
+import lead from "./api/lead.js";
 
 const types = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".txt": "text/plain", ".ico": "image/x-icon" };
 
@@ -21,6 +22,7 @@ http
       }
     }
     if (p === "/api/collect") return collect(req, res);
+    if (p === "/api/lead") return lead(req, res);
     return handler(req, res);
   })
   .listen(process.env.PORT || 3000, () => console.log("http://localhost:" + (process.env.PORT || 3000)));
