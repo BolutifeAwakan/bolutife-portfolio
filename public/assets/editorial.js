@@ -4,6 +4,25 @@
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Light and dark mode. The choice is remembered on this device.
+  const themeBtn = document.querySelector("[data-theme-toggle]");
+  const setThemeLabel = () => {
+    if (!themeBtn) return;
+    const light = root.dataset.theme === "light";
+    themeBtn.textContent = light ? "Dark" : "Light";
+    themeBtn.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+  };
+  setThemeLabel();
+  if (themeBtn) themeBtn.addEventListener("click", () => {
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    root.classList.add("is-theming");
+    root.dataset.theme = next;
+    try { localStorage.setItem("ba-theme", next); } catch (e) {}
+    setThemeLabel();
+    track("theme", next);
+    setTimeout(() => root.classList.remove("is-theming"), 450);
+  });
+
   // Lagos and London clocks
   const tick = () =>
     document.querySelectorAll("time[data-tz]").forEach((t) => {
