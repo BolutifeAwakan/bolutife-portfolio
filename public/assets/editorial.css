@@ -478,26 +478,44 @@ a.ed-row__a:hover .ed-row__s { color: var(--night); }
 .ed-desk__p figcaption { position: absolute; left: 10px; bottom: 9px; }
 .ed-desk__p figcaption .ed-br { color: var(--night); }
 .ed-desk__p.is-drag { cursor: grabbing; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); }
-.ed-desk__p { transition: box-shadow 0.2s, transform 0.45s cubic-bezier(0.2, 0.7, 0.1, 1), opacity 0.3s, filter 0.3s; }
+.ed-desk__p { transition: box-shadow 0.25s, transform 0.7s cubic-bezier(0.2, 0.75, 0.1, 1), opacity 0.35s; will-change: transform; }
 .ed-desk__p.is-drag { transition: box-shadow 0.2s; }
-.ed-desk__p--1 { left: 2%; top: 4%; transform: rotate(-6deg); }
-.ed-desk__p--2 { left: 34%; top: 0; transform: rotate(4deg); }
-.ed-desk__p--3 { left: 66%; top: 7%; transform: rotate(-3deg); }
-.ed-desk__p--4 { left: 9%; top: 46%; transform: rotate(5deg); }
-.ed-desk__p--5 { left: 41%; top: 50%; transform: rotate(-5deg); }
-.ed-desk__p--6 { left: 70%; top: 52%; transform: rotate(3deg); }
-/* choosing an interest brings its card forward */
-.ed-desk.has-pick .ed-desk__p { opacity: 0.45; filter: saturate(0.6); }
-.ed-desk.has-pick .ed-desk__p.is-picked { opacity: 1; filter: none; z-index: 50; box-shadow: 0 34px 70px rgba(0, 0, 0, 0.65); }
+.ed-desk__p:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.ed-desk__p--1 { left: 2%; top: 4%; }
+.ed-desk__p--2 { left: 34%; top: 0; }
+.ed-desk__p--3 { left: 66%; top: 7%; }
+.ed-desk__p--4 { left: 9%; top: 46%; }
+.ed-desk__p--5 { left: 41%; top: 50%; }
+.ed-desk__p--6 { left: 70%; top: 52%; }
+.ed-desk__p.is-picked { z-index: 60; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7); cursor: default; }
+.ed-desk.is-open .ed-desk__p:not(.is-picked) { cursor: pointer; }
 /* notes stand in for a photo until there is one */
-.ed-note { display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 4 / 5; padding: 14% 12%; color: var(--bone); pointer-events: none; }
-.ed-note--green { background: var(--green); }
-.ed-note--red { background: var(--red); }
-.ed-note--gold { background: var(--gold); }
-.ed-note--violet { background: var(--violet); }
-.ed-note--sky { background: var(--sky); }
-.ed-note__t { font: 400 clamp(36px, 3.6vw, 60px)/0.95 var(--sign); transform: rotate(-6deg); transform-origin: 0 50%; }
-.ed-note__s { font: 500 var(--t-small)/1.35 var(--display); max-width: 22ch; }
+.ed-memo { display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 4 / 5; padding: 14% 12%; color: var(--bone); pointer-events: none; }
+.ed-memo--green { background: var(--green); }
+.ed-memo--red { background: var(--red); }
+.ed-memo--gold { background: var(--gold); }
+.ed-memo--violet { background: var(--violet); }
+.ed-memo--sky { background: var(--sky); }
+.ed-memo__t { font: 400 clamp(36px, 3.6vw, 60px)/0.95 var(--sign); transform: rotate(-6deg); transform-origin: 0 50%; }
+.ed-memo__s { font: 500 var(--t-small)/1.35 var(--display); max-width: 22ch; }
+/* what opens beside a chosen card */
+.ed-desk__panel { position: absolute; top: 2%; left: 52%; right: 0; z-index: 40; opacity: 0; pointer-events: none; transform: translateY(14px); transition: opacity 0.35s, transform 0.5s cubic-bezier(0.2, 0.75, 0.1, 1); }
+.ed-desk.is-open .ed-desk__panel { opacity: 1; pointer-events: auto; transform: none; transition-delay: 0.18s; }
+.ed-dp__t { font: 400 clamp(52px, 5.4vw, 96px)/0.95 var(--sign); color: var(--gold); transform: rotate(-4deg); transform-origin: 0 50%; }
+.ed-dp__s { margin-top: 18px; max-width: 32ch; font: 500 var(--t-lead)/1.3 var(--display); font-stretch: 90%; }
+.ed-dp__gallery { margin-top: var(--block); display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 460px; }
+.ed-dp__gallery figure { aspect-ratio: 4 / 5; overflow: hidden; background: var(--panel); }
+.ed-dp__gallery img { width: 100%; height: 100%; object-fit: cover; }
+.ed-dp__kinds { margin-top: var(--block); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; max-width: 520px; }
+.ed-dp__k { display: block; font: 800 var(--t-h4)/0.95 var(--display); font-stretch: 62%; text-transform: uppercase; }
+.ed-dp__n { display: block; margin-top: 6px; color: var(--ash); font-size: var(--t-small); line-height: 1.4; }
+.ed-desk.is-open .ed-dp__gallery figure, .ed-desk.is-open .ed-dp__kinds li { animation: dp-in 0.6s cubic-bezier(0.2, 0.75, 0.1, 1) both; }
+.ed-dp__gallery figure:nth-child(2), .ed-dp__kinds li:nth-child(2) { animation-delay: 0.08s; }
+.ed-dp__gallery figure:nth-child(3), .ed-dp__kinds li:nth-child(3) { animation-delay: 0.16s; }
+.ed-dp__kinds li:nth-child(4) { animation-delay: 0.24s; }
+.ed-dp__kinds li:nth-child(n + 5) { animation-delay: 0.32s; }
+@keyframes dp-in { from { opacity: 0; transform: translateY(16px); } }
+.ed-dp__close { margin-top: var(--block); background: none; border: 0; border-bottom: 1px solid; padding: 0 0 3px; color: var(--bone); font: inherit; cursor: pointer; }
 
 /* ---------- footer ---------- */
 
@@ -702,6 +720,9 @@ h2.ed-stack__t { margin: 0; }
   .ed-sign--side { left: 52vw; top: 0.1em; font-size: 52px; }
   .ed-desk { min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 14px; padding-top: 12px; }
   .ed-desk__p { position: relative; left: auto !important; top: auto !important; width: auto; padding: 7px 7px 28px; }
+  .ed-desk__panel { position: static; grid-column: 1 / -1; display: none; opacity: 1; transform: none; padding-top: 18px; }
+  .ed-desk.is-open .ed-desk__panel { display: block; }
+  .ed-desk.is-open .ed-desk__p.is-picked { outline: 2px solid var(--gold); outline-offset: 3px; }
   .ed-hint { display: none; }
   .ed-grid { grid-template-columns: 1fr; gap: 56px; }
   .ed-grid__item--wide figure { aspect-ratio: 16 / 10; }
@@ -740,5 +761,6 @@ h2.ed-stack__t { margin: 0; }
   .ed-marquee__in { animation: none; }
   [data-reveal], [data-reveal].is-pending { transition: none; opacity: 1; transform: none; }
   .ed-stack__a { transform: none; filter: none; }
-  .ed-stack__img img, .ed-grid img, .ed-chip, .ed-cover, .ed-row__t { transition: none; }
+  .ed-stack__img img, .ed-grid img, .ed-chip, .ed-cover, .ed-row__t, .ed-desk__p, .ed-desk__panel { transition: none; }
+  .ed-dp__gallery figure, .ed-dp__kinds li { animation: none !important; }
 }

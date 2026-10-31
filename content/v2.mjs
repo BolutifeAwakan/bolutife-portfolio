@@ -172,9 +172,11 @@ export default {
     // Each interest is one card on the desk. `photo` is a slug from lib/photos.mjs;
     // without one the card is a coloured note until a real photo is added.
     interests: [
-      { title: "Fashion", body: "Dressing is how I tell my own story.", photo: "chair-gold" },
+      // `kinds`: the things she loves in each, shown when the card is opened ({ title, note }).
+      // `gallery`: photo slugs shown when the card is opened.
+      { title: "Fashion", body: "Dressing is how I tell my own story.", photo: "chair-gold", gallery: ["garden-sun", "lawn-crouch", "arch-white"] },
       { title: "Photography", body: "" },
-      { title: "Music", body: "Listening to music. I sang and played instruments before I designed anything." },
+      { title: "Music", body: "Listening to music. I sang and played instruments before I designed anything.", kinds: [{ title: "Beautiful Rain", note: "The Cavemen, from ROOTS. On repeat." }] },
       { title: "Books", body: "Reading books." },
       { title: "Films", body: "Seeing movies." },
       { title: "Friends & family", body: "Time spent with the people I love." },
@@ -197,6 +199,8 @@ export default {
     "Self-initiated work",
   ],
   shopIntro: "Books and resources built from the things I've learned about branding, design, and the business of creative work.",
+  // Her Connectr page for booking calls. Every "Book a call" goes straight there once set.
+  bookingUrl: "",
   contactLine: "Building a brand, strengthening a design team, or planning something I'd be a good fit for? I'd love to hear about it.",
 
   photoCredit: "Portraits by KN Photography",

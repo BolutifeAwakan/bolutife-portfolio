@@ -168,58 +168,118 @@
     }
   }
 
-  // The desk: one card per interest. Pick an interest (or a card) to bring it
-  // forward; on wide screens the cards can also be picked up and moved.
+  // The desk: one card per interest. Hover a card (or its name) and the others
+  // lean away; open it and the rest gather in a row below while what she loves
+  // in that interest opens beside it. Cards can still be dragged when nothing is open.
   document.querySelectorAll("[data-desk]").forEach((desk) => {
     const sec = desk.closest(".ed-side") || document;
     const tags = [...sec.querySelectorAll(".ed-tags--live [data-interest]")];
     const cards = [...desk.querySelectorAll("[data-drag]")];
-    let z = 10, picked = null;
-    const pick = (key) => {
-      picked = picked === key ? null : key;
-      desk.classList.toggle("has-pick", !!picked);
-      cards.forEach((c) => {
-        const on = c.dataset.interest === picked;
-        c.classList.toggle("is-picked", on);
-        if (on) c.style.zIndex = ++z;
-        c.style.setProperty("--lift", on ? "1" : "0");
+    const panel = desk.querySelector(".ed-desk__panel");
+    const panels = [...desk.querySelectorAll(".ed-dp")];
+    const TILT = [-6, 4, -3, 5, -5, 3];
+    const st = cards.map((c, i) => ({ c, ox: 0, oy: 0, rot: TILT[i % TILT.length] }));
+    const wide = () => innerWidth > 800;
+    let open = null, hover = null, z = 10;
+
+    const layout = () => {
+      const W = desk.clientWidth, H = desk.clientHeight;
+      const pickedIdx = open ? cards.findIndex((c) => c.dataset.interest === open) : -1;
+      const hoverIdx = !open && hover ? cards.findIndex((c) => c.dataset.interest === hover) : -1;
+      const others = st.filter((_, i) => i !== pickedIdx);
+      st.forEach((s, i) => {
+        const c = s.c;
+        if (!wide()) { c.style.transform = ""; return; }
+        const w = c.offsetWidth, h = c.offsetHeight, x0 = c.offsetLeft, y0 = c.offsetTop;
+        let tx = s.ox, ty = s.oy, sc = 1, r = s.rot;
+        if (open) {
+          if (i === pickedIdx) {
+            // the chosen card comes forward on the left
+            sc = Math.min(1.35, (W * 0.42) / w);
+            tx = W * 0.03 + (w * sc) / 2 - (x0 + w / 2);
+            ty = (h * sc) / 2 - (y0 + h / 2);
+            r = -2;
+            panel.style.left = `${W * 0.03 + w * sc + W * 0.05}px`;
+          } else {
+            // the rest gather in a loose row along the bottom, ready to be opened next
+            const k = others.indexOf(s), n = others.length;
+            const s2 = 0.42, gap = 14;
+            const rowW = n * w * s2 + (n - 1) * gap;
+            const cx = (W - rowW) / 2 + k * (w * s2 + gap) + (w * s2) / 2;
+            const cy = H - (h * s2) / 2;
+            tx = cx - (x0 + w / 2); ty = cy - (y0 + h / 2); sc = s2; r = (k % 2 ? 4 : -4);
+          }
+        } else if (hoverIdx >= 0) {
+          if (i === hoverIdx) { sc = 1.06; r = 0; }
+          else {
+            // lean away from the card being looked at
+            const hc = st[hoverIdx].c;
+            const dx = (x0 + w / 2) - (hc.offsetLeft + hc.offsetWidth / 2);
+            const dy = (y0 + h / 2) - (hc.offsetTop + hc.offsetHeight / 2);
+            const d = Math.hypot(dx, dy) || 1;
+            tx += (dx / d) * 46; ty += (dy / d) * 46; sc = 0.96;
+          }
+        }
+        c.style.transform = `translate(${tx}px, ${ty}px) rotate(${still ? 0 : r}deg) scale(${sc})`;
       });
-      tags.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.interest === picked)));
-      if (picked) track("side_pick", picked);
     };
-    tags.forEach((t) => t.addEventListener("click", () => pick(t.dataset.interest)));
-    if (fine) tags.forEach((t) => {
-      t.addEventListener("pointerenter", () => { if (picked !== t.dataset.interest) pick(t.dataset.interest); });
+
+    const setOpen = (key) => {
+      open = key && key !== open ? key : null;
+      hover = null;
+      desk.classList.toggle("is-open", !!open);
+      cards.forEach((c) => {
+        const on = c.dataset.interest === open;
+        c.classList.toggle("is-picked", on);
+        c.setAttribute("aria-expanded", String(on));
+        if (on) c.style.zIndex = ++z;
+      });
+      panels.forEach((p) => (p.hidden = p.dataset.for !== open));
+      tags.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.interest === open)));
+      if (open) {
+        track("side_open", open);
+        if (!wide()) panel.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "nearest" });
+      }
+      layout();
+    };
+    const setHover = (key) => { if (open || !wide()) return; hover = key; layout(); };
+
+    tags.forEach((t) => {
+      t.addEventListener("click", () => setOpen(t.dataset.interest));
+      if (fine) { t.addEventListener("pointerenter", () => setHover(t.dataset.interest)); t.addEventListener("pointerleave", () => setHover(null)); }
+    });
+    desk.querySelectorAll(".ed-dp__close").forEach((b) => b.addEventListener("click", () => setOpen(null)));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) setOpen(null); });
+
+    st.forEach((s) => {
+      const c = s.c;
+      let sx, sy, down = false, moved = false;
+      c.addEventListener("pointerenter", () => { if (fine && !down) setHover(c.dataset.interest); });
+      c.addEventListener("pointerleave", () => { if (fine && !down) setHover(null); });
+      c.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(c.dataset.interest); } });
+      c.addEventListener("pointerdown", (e) => {
+        down = true; moved = false;
+        if (!(fine && wide()) || open) return;
+        c.setPointerCapture(e.pointerId);
+        c.style.zIndex = ++z;
+        sx = e.clientX - s.ox; sy = e.clientY - s.oy;
+      });
+      c.addEventListener("pointermove", (e) => {
+        if (!down || open || !(fine && wide()) || sx === undefined) return;
+        const nx = e.clientX - sx, ny = e.clientY - sy;
+        if (!moved && Math.abs(nx - s.ox) + Math.abs(ny - s.oy) < 5) return;
+        moved = true; hover = null; c.classList.add("is-drag");
+        s.ox = nx; s.oy = ny; s.rot = TILT[cards.indexOf(c) % TILT.length] + nx * 0.01;
+        layout();
+      });
+      const end = () => { down = false; sx = undefined; c.classList.remove("is-drag"); };
+      c.addEventListener("pointerup", () => { const wasMove = moved; end(); if (!wasMove) setOpen(c.dataset.interest); });
+      c.addEventListener("pointercancel", end);
     });
 
-    const canDrag = fine && innerWidth > 800;
-    cards.forEach((p) => {
-      const base = getComputedStyle(p).transform;
-      let sx, sy, ox = 0, oy = 0, moved = false, down = false;
-      const place = (lift) => {
-        const r = still ? 0 : ox * 0.01;
-        p.style.transform = lift ? `translate(${ox}px, ${oy}px) scale(1.06)` : `translate(${ox}px, ${oy}px) ${base === "none" ? "" : base} rotate(${r}deg)`;
-      };
-      p.addEventListener("pointerdown", (e) => {
-        if (!canDrag) return;
-        down = true; moved = false;
-        p.setPointerCapture(e.pointerId);
-        p.style.zIndex = ++z;
-        sx = e.clientX - ox; sy = e.clientY - oy;
-      });
-      p.addEventListener("pointermove", (e) => {
-        if (!down) return;
-        const nx = e.clientX - sx, ny = e.clientY - sy;
-        if (!moved && Math.abs(nx - ox) + Math.abs(ny - oy) < 4) return;
-        moved = true; p.classList.add("is-drag");
-        ox = nx; oy = ny; place(false);
-      });
-      const end = () => { down = false; p.classList.remove("is-drag"); };
-      p.addEventListener("pointerup", () => { const wasMove = moved; end(); if (!wasMove) pick(p.dataset.interest); });
-      p.addEventListener("pointercancel", end);
-      if (!canDrag) p.addEventListener("click", () => pick(p.dataset.interest));
-      new MutationObserver(() => { if (!p.classList.contains("is-drag")) place(p.classList.contains("is-picked")); }).observe(p, { attributes: true, attributeFilter: ["class"] });
-    });
+    let rt2;
+    addEventListener("resize", () => { clearTimeout(rt2); rt2 = setTimeout(layout, 120); });
+    layout();
   });
 
   // Contact form: opens an email draft with the message filled in
