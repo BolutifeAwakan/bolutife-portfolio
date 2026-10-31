@@ -352,6 +352,8 @@ a.ed-row__a:hover, a.ed-row__a:focus-visible { background: var(--bone); color: v
 a.ed-row__a:hover .ed-br, a.ed-row__a:focus-visible .ed-br { color: var(--night); }
 .ed-row__t { font: 800 var(--t-h3)/0.9 var(--display); font-stretch: 62%; text-transform: uppercase; transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.1, 1); }
 a.ed-row__a:hover .ed-row__t { transform: translateX(10px); }
+.ed-row__k { min-width: 0; }
+.ed-row__k .ed-br { white-space: normal; }
 .ed-row__s { font-size: var(--t-small); line-height: 1.45; color: var(--ash); max-width: 42ch; }
 a.ed-row__a:hover .ed-row__s { color: var(--night); }
 .ed-row__go { justify-self: end; font: 700 var(--t-small)/1 var(--display); font-stretch: 85%; text-transform: uppercase; white-space: nowrap; }
@@ -545,6 +547,9 @@ a.ed-row__a:hover .ed-row__s { color: var(--night); }
 
 .ed-copy { padding: var(--sec) var(--g) 0; max-width: calc(900px + 2 * var(--g)); }
 .ed-copy p + p { margin-top: 1em; }
+.ed-copy--split { max-width: none; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 6vw, 120px); align-items: start; }
+.ed-copy__photo { position: sticky; top: 14svh; margin: 0; overflow: hidden; background: var(--panel); }
+.ed-copy__photo img { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; }
 .ed-copy p { font-size: var(--t-read); max-width: 62ch; }
 .ed-copy .ed-copy__lead { font: 500 clamp(24px, 2.6vw, 38px)/1.18 var(--display); font-stretch: 85%; max-width: 34ch; margin-bottom: 1em; letter-spacing: -0.01em; }
 .ed-big-line { padding: 0 var(--g); margin-bottom: 28px; font: 500 clamp(24px, 2.8vw, 42px)/1.14 var(--display); font-stretch: 82%; max-width: calc(30ch + 2 * var(--g)); }
@@ -706,6 +711,8 @@ h2.ed-stack__t { margin: 0; }
   .ed-intro__p { font-size: clamp(30px, 9vw, 44px); }
   .ed-intro { grid-template-columns: 1fr; }
   .ed-intro__space, .ed-intro__grow { display: none; }
+  .ed-copy--split { grid-template-columns: 1fr; }
+  .ed-copy__photo { display: none; }
   .ed-stack__card { height: 86svh; min-height: 520px; }
   .ed-stack__card:not(:last-child) { margin-bottom: 40svh; }
   .ed-stack__band { grid-template-columns: 1fr; grid-template-areas: "meta" "t" "s" "go"; gap: 10px; padding-bottom: 22px; }
