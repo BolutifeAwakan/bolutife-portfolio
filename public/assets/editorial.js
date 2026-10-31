@@ -44,6 +44,16 @@
     };
     addEventListener("scroll", () => { if (!hq) { hq = true; requestAnimationFrame(split); } }, { passive: true });
     split();
+    // "Scroll down" sits just above the last letter of the name.
+    const sd = hero.querySelector(".ed-hero__scroll");
+    const place = () => {
+      if (!sd || getComputedStyle(sd).display === "none") return;
+      const n = name.querySelector(".ed-fit__in").getBoundingClientRect(), h = hero.getBoundingClientRect();
+      sd.style.bottom = `${Math.round(h.bottom - n.top + 6)}px`;
+    };
+    place();
+    if (document.fonts) document.fonts.ready.then(place);
+    addEventListener("resize", place);
   }
 
   // Page headlines with the same giant type break in the middle too, once they
