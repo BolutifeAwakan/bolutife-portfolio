@@ -123,6 +123,7 @@ export default {
       subtitle: "A practical guide to pricing creative work and building a sustainable business.",
       cover: "https://files.selar.co/product-images/2026/products/Bolutife01/worth-the-work-for-senior-selar.com-6a10bf8d17516.jpg",
       path: "/shop/worth-the-work",
+      storeUrl: "https://selar.com/m/Bolutife01",
       cta: "Explore the book",
       editions: [
         { title: "For senior designers", detail: "Digital edition, with the companion pricing calculator", price: "$25", url: "https://selar.com/worththeworkforseniors" },
