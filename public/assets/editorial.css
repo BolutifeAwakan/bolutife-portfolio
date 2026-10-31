@@ -325,6 +325,8 @@ html.ed-menu-open { overflow: hidden; }
 /* a pair of cards (speaking + book, or two books) inside a section */
 .ed-grid--pair { margin-bottom: calc(var(--block) * 2); }
 .ed-grid figure + .ed-grid__t { margin-top: 20px; }
+/* a sub-heading inside a section, set like the card titles beside it */
+.ed-sub { padding: 0 var(--g); margin-bottom: 20px; font: 800 var(--t-h3)/0.88 var(--display); font-stretch: 62%; text-transform: uppercase; }
 .ed-grid--pair figure { aspect-ratio: 5 / 4; }
 .ed-grid__book { display: grid; place-items: center; }
 .ed-grid__book .ed-cover { transform: none; box-shadow: none; border-radius: 0; height: 100%; }
