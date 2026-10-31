@@ -94,7 +94,7 @@ export default {
         { title: "Research pathway", body: "A pathway into design research." },
       ],
       // From Design Lever's own site.
-      image: { src: "https://www.designleverinc.com/images/scenes/fly-practice.webp", alt: "Two design leaders in a studio office", pos: "50% 62%" },
+      image: { src: "https://www.designleverinc.com/images/scenes/fly-academy.webp", alt: "A design leader working with a team around a table", pos: "50% 40%" },
       url: "https://www.designleverinc.com",
       cta: "Explore Design Lever",
     },
