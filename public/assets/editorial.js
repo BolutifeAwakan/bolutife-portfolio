@@ -46,6 +46,25 @@
     split();
   }
 
+  // Page headlines with the same giant type break in the middle too, once they
+  // are in the top half of the screen and you keep scrolling.
+  const splits = [...document.querySelectorAll("[data-split]")];
+  if (splits.length && !still) {
+    let sq = false;
+    const run = () => {
+      sq = false;
+      const vh = innerHeight;
+      splits.forEach((el) => {
+        const top = el.getBoundingClientRect().top + scrollY;
+        const start = Math.max(0, top - vh * 0.5);
+        const p = Math.min(1, Math.max(0, (scrollY - start) / (vh * 0.6)));
+        el.style.setProperty("--split", (p * p * (3 - 2 * p)).toFixed(4));
+      });
+    };
+    addEventListener("scroll", () => { if (!sq) { sq = true; requestAnimationFrame(run); } }, { passive: true });
+    run();
+  }
+
   // Reveal on scroll. Only elements below the fold wait, so nothing above it flashes.
   // Transform and opacity only, so it stays cheap.
   if (!still) {

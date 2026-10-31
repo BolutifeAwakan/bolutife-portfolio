@@ -240,7 +240,9 @@ html.ed-menu-open { overflow: hidden; }
 /* the name breaks in the middle as you scroll away from the hero */
 .ed-ch--l, .ed-hero__last { translate: calc(var(--split, 0) * -62vw) 0; }
 .ed-ch--r { translate: calc(var(--split, 0) * 62vw) 0; }
-.ed-ch--l, .ed-ch--r { will-change: translate; }
+.ed-ch--l, .ed-ch--r { display: inline-block; white-space: pre; will-change: translate; }
+/* page headlines break the same way; the halves leave through the page edges */
+.ed-open__h, .ed-work__h, .ed-about-hero__h { overflow-x: clip; overflow-clip-margin: 0; }
 .ed-ch { display: inline-block; animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.1, 1) both; animation-delay: calc(var(--d) * 55ms + 120ms); }
 @keyframes rise { from { transform: translateY(0.5em); opacity: 0; } }
 .ed-hero__scroll { position: absolute; left: 50%; transform: translateX(-50%); top: 96px; text-decoration: none; }
