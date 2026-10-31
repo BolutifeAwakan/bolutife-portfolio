@@ -10,7 +10,7 @@ export default {
   headline: "I build brands, lead creative teams, and help businesses get more from design.",
   supporting:
     "I've spent over a decade working across design, creative direction, and business. These days, I'm also building initiatives, developing people, and sharing what I learn along the way.",
-  identity: ["Design Leader", "Brand Strategist", "Founder"],
+  identity: ["Designer", "Design Leader", "Founder"],
   base: "Lagos, Nigeria",
 
   // Homepage introduction (content revision, October 2026).
