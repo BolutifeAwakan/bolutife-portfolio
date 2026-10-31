@@ -358,6 +358,8 @@ a.ed-row__a:hover .ed-row__s { color: var(--night); }
 .ed-sec--flush { padding-top: var(--block); }
 .ed-sec--tight { padding-top: var(--block); }
 .ed-sec > .ed-label, .ed-sec > h3.ed-label { padding: 0 var(--g); }
+.ed-sec__intro { padding: 0 var(--g); margin: calc(var(--block) * -0.4) 0 var(--block); max-width: calc(62ch + 2 * var(--g)); color: var(--ash); font-size: var(--t-body); }
+.ed-open + .ed-stage { min-height: 86svh; }
 
 /* ventures: names set in the site's own display type */
 .ed-vent { border-bottom: 1px solid var(--line); }
