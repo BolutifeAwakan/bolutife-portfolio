@@ -74,35 +74,46 @@
     update();
   }
 
-  // Intro: the photo in the sentence opens up on the right. The chip nearest
-  // the middle of the screen leads; hovering a chip brings its photo forward.
-  const stage = document.querySelector(".ed-intro__stage");
-  if (stage && getComputedStyle(stage).display !== "none") {
-    const shots = [...stage.querySelectorAll(".ed-intro__shot")];
-    const chips = [...document.querySelectorAll(".ed-intro .ed-chip[data-i]")];
-    let cur = 0, queued = false;
-    const show = (i) => {
-      if (i === cur || !shots[i]) return;
-      shots.forEach((s) => s.classList.remove("was-on"));
-      shots[cur].classList.replace("is-on", "was-on");
-      shots[i].classList.add("is-on");
-      chips.forEach((c) => c.classList.toggle("is-on", +c.dataset.i === i));
-      cur = i;
-    };
-    chips.forEach((c) => c.classList.toggle("is-on", +c.dataset.i === 0));
-    const pick = () => {
+  // Intro: the photo beside "teams" grows out of the sentence as you scroll and
+  // settles as a large picture in the empty column, then shrinks back on the way up.
+  const grow = document.querySelector(".ed-intro__grow");
+  const seed = document.querySelector(".ed-intro .ed-chip[data-grow]");
+  if (grow && seed && !still) {
+    const sec = grow.closest(".ed-intro");
+    const space = sec.querySelector(".ed-intro__space");
+    let queued = false;
+    const ease = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+    const frame = () => {
       queued = false;
-      const mid = innerHeight * 0.5;
-      let best = cur, d = Infinity;
-      chips.forEach((c) => {
-        const r = c.getBoundingClientRect();
-        const dist = Math.abs(r.top + r.height / 2 - mid);
-        if (dist < d) { d = dist; best = +c.dataset.i; }
-      });
-      show(best);
+      if (getComputedStyle(space).display === "none") { grow.classList.remove("is-ready"); seed.style.visibility = ""; return; }
+      const vh = innerHeight;
+      const s = sec.getBoundingClientRect();
+      if (s.bottom < -vh || s.top > vh * 2) return;
+      const c = seed.getBoundingClientRect();
+      const t = space.getBoundingClientRect();
+      const cw = seed.offsetWidth, ch = seed.offsetHeight;
+      const cx = c.left + c.width / 2 - s.left, cy = c.top + c.height / 2 - s.top;
+      const W = t.width, H = Math.min(vh * 0.76, W * 1.3);
+      const padB = parseFloat(getComputedStyle(sec).paddingBottom) || 0;
+      const top = Math.min(Math.max(vh * 0.12 - s.top, t.top - s.top), s.height - padB - H);
+      const tx = t.left - s.left + W / 2, ty = top + H / 2;
+      const p = Math.min(1, Math.max(0, (vh * 0.72 - (c.top + c.height / 2)) / (vh * 0.42)));
+      const e = ease(p);
+      const w = cw + (W - cw) * e, h = ch + (H - ch) * e;
+      const x = cx + (tx - cx) * e - w / 2, y = cy + (ty - cy) * e - h / 2;
+      grow.style.width = `${w}px`;
+      grow.style.height = `${h}px`;
+      grow.style.borderRadius = `${(ch / 2) * (1 - e)}px`;
+      grow.style.transform = `translate(${x}px, ${y}px) rotate(${-3 * (1 - e)}deg)`;
+      grow.classList.add("is-ready");
+      seed.style.visibility = "hidden";
     };
-    addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(pick); } }, { passive: true });
-    if (fine) chips.forEach((c) => c.addEventListener("pointerenter", () => show(+c.dataset.i)));
+    const req = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };
+    addEventListener("scroll", req, { passive: true });
+    addEventListener("resize", req);
+    addEventListener("load", req);
+    if (document.fonts) document.fonts.ready.then(req);
+    req();
   }
 
   // Menu as a modal dialog: background made inert, focus kept inside
