@@ -30,6 +30,22 @@
   let rt;
   addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(fitAll, 120); });
 
+  // Hero: as you scroll on, the first name breaks in the middle and its halves
+  // slide out of the frame, left and right.
+  const hero = document.querySelector(".ed-hero");
+  if (hero && !still) {
+    const name = hero.querySelector(".ed-hero__name");
+    let hq = false;
+    const split = () => {
+      hq = false;
+      const r = hero.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / (r.height * 0.7)));
+      name.style.setProperty("--split", (p * p * (3 - 2 * p)).toFixed(4));
+    };
+    addEventListener("scroll", () => { if (!hq) { hq = true; requestAnimationFrame(split); } }, { passive: true });
+    split();
+  }
+
   // Reveal on scroll. Only elements below the fold wait, so nothing above it flashes.
   // Transform and opacity only, so it stays cheap.
   if (!still) {
@@ -180,7 +196,8 @@
     const TILT = [-6, 4, -3, 5, -5, 3];
     const st = cards.map((c, i) => ({ c, ox: 0, oy: 0, rot: TILT[i % TILT.length] }));
     const wide = () => innerWidth > 800;
-    let open = null, hover = null, z = 10, baseH = 0;
+    let open = null, hover = null, z = 10, baseH = 0, spread = still ? 1 : 0;
+    const PILE = [-5, 4, -2, 6, -1];
 
     const layout = () => {
       if (!open) { desk.style.minHeight = ""; baseH = desk.clientHeight; }
@@ -218,6 +235,14 @@
             const cy = rowTop + (h * s2) / 2;
             tx = cx - (x0 + w / 2); ty = cy - (y0 + h / 2); sc = s2; r = (k % 2 ? 4 : -4);
           }
+        } else if (spread < 1) {
+          // Before the section is in view the cards sit in one pile in the middle
+          // of the desk; scrolling deals them out to their places.
+          const e = spread * spread * (3 - 2 * spread), k = 1 - e;
+          tx = s.ox + (W / 2 - (x0 + w / 2)) * k;
+          ty = s.oy + (H * 0.42 - (y0 + h / 2)) * k;
+          r = s.rot * e + PILE[i % PILE.length] * k;
+          sc = 1 - 0.06 * k;
         } else if (hoverIdx >= 0) {
           if (i === hoverIdx) { sc = 1.06; r = 0; }
           else {
@@ -298,6 +323,21 @@
       c.addEventListener("pointercancel", end);
     });
 
+    // Scroll deals the pile out: 0 while the desk is below the fold, 1 once it is well in view.
+    if (!still) {
+      let q = false;
+      const deal = () => {
+        q = false;
+        const t = desk.getBoundingClientRect().top;
+        const next = Math.min(1, Math.max(0, (innerHeight * 0.7 - t) / (innerHeight * 0.65)));
+        if (Math.abs(next - spread) < 0.002 || open) return;
+        spread = next;
+        desk.classList.toggle("is-dealing", spread < 1);
+        layout();
+      };
+      addEventListener("scroll", () => { if (!q) { q = true; requestAnimationFrame(deal); } }, { passive: true });
+      deal();
+    }
     let rt2;
     addEventListener("resize", () => { clearTimeout(rt2); rt2 = setTimeout(layout, 120); });
     layout();
