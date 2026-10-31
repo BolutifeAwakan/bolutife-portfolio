@@ -118,4 +118,51 @@
       location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
   }
+
+  // Email sign-up: posts to the newsletter provider when one is connected
+  // (the form then has an action); otherwise opens a short email to Bolutife.
+  document.querySelectorAll("form[data-signup]").forEach((f) => {
+    const done = f.querySelector(".ed-signup__done");
+    f.addEventListener("submit", (e) => {
+      const email = f.querySelector('input[type="email"]').value.trim();
+      const source = f.dataset.source || "site";
+      track("signup", source);
+      if (f.getAttribute("action")) {
+        if (done) done.textContent = "Thanks. Check your inbox to confirm.";
+        return; // the provider's form handles the rest
+      }
+      e.preventDefault();
+      const subject = source === "signature" ? "Tell me when Signature is available" : "Add me to your email list";
+      location.href = `mailto:${f.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Please add ${email} (from ${source}).`)}`;
+      if (done) done.textContent = "Your email app should open with the request filled in. Send it and you're on the list.";
+    });
+  });
+
+  // Copy the article link (or use the device's share sheet)
+  document.querySelectorAll("[data-share]").forEach((b) => {
+    b.addEventListener("click", async () => {
+      const url = location.href.split("#")[0];
+      try {
+        if (navigator.share && matchMedia("(pointer: coarse)").matches) { await navigator.share({ title: document.title, url }); return; }
+        await navigator.clipboard.writeText(url);
+        b.textContent = "Link copied";
+      } catch (err) {
+        const t = document.createElement("textarea");
+        t.value = url; document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); b.textContent = "Link copied"; } catch (_) { b.textContent = url; }
+        t.remove();
+      }
+      setTimeout(() => { b.textContent = "Copy link"; }, 2400);
+    });
+  });
+
+  // Experiments filter
+  const filters = document.querySelectorAll(".ed-filter [data-filter]");
+  filters.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const c = btn.dataset.filter;
+      filters.forEach((x) => x.setAttribute("aria-pressed", String(x === btn)));
+      document.querySelectorAll(".ed-shot").forEach((s) => s.classList.toggle("is-hidden", !!c && s.dataset.cat !== c));
+    })
+  );
 })();

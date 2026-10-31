@@ -30,8 +30,16 @@ const must = {
   "/contact": [m.person.email, "Speaking at an event"],
   "/index": contentIndex(m).map((i) => i.title),
 };
+must["/thoughts"] = must["/writing"];
+must["/shop"] = m.books.map((b) => b.title);
+must["/shop/worth-the-work"] = ["Worth the Work", ...m.books[0].editions.map((e) => e.price)];
+const editorialPages = [
+  ...pages.map((p) => (p === "/writing" ? "/thoughts" : p)),
+  "/shop", "/shop/worth-the-work", "/shop/signature",
+  ...m.writing.notes.filter((n) => n.internal).map((n) => `/thoughts/${n.slug}`),
+];
 for (const dir of ["brand-book", "personal-editorial", "the-book"]) {
-  for (const p of pages) {
+  for (const p of dir === "personal-editorial" ? editorialPages : pages) {
     const out = await route(`/preview/${dir}${p === "/" ? "" : p}`, {}, {});
     ok(out.status === 200, `${dir} ${p} returned ${out.status}`);
     if (out.status !== 200) continue;
@@ -54,6 +62,10 @@ console.log("2. Old addresses redirect");
 for (const [from, to] of [["/notes", "/writing"], ["/playground", "/experiments"], ["/bookings", "/contact?about=speaking"]]) {
   const out = await route(`/preview/brand-book${from}`, {}, {});
   ok(out.status === 301 && out.location === `/preview/brand-book${to}`, `${from} should redirect to ${to}, got ${out.status} ${out.location}`);
+}
+for (const [from, to] of [["/writing", "/thoughts"], ["/notes", "/thoughts"], ["/playground", "/experiments"]]) {
+  const out = await route(`/preview/personal-editorial${from}`, {}, {});
+  ok(out.status === 301 && out.location === `/preview/personal-editorial${to}`, `editorial ${from} should redirect to ${to}, got ${out.status} ${out.location}`);
 }
 
 console.log("3. Production stays on the current site while the test is off");

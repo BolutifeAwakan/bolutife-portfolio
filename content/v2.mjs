@@ -10,7 +10,21 @@ export default {
   headline: "I build brands, lead creative teams, and help businesses get more from design.",
   supporting:
     "I've spent over a decade working across design, creative direction, and business. These days, I'm also building initiatives, developing people, and sharing what I learn along the way.",
-  identity: ["Design Leader", "Brand Strategist", "Founder"],
+  identity: ["Designer", "Design Leader", "Founder"],
+  base: "Lagos, Nigeria",
+
+  // Homepage introduction (content revision, October 2026).
+  intro: [
+    "I started out as a self-taught graphic designer. Over a decade later, I've built brands, led creative teams, and started ventures of my own.",
+    "I still care deeply about the craft. I'm just as interested in the people, decisions, and systems that make the work matter.",
+  ],
+
+  // Homepage summaries for the selected projects, keyed by slug.
+  projectSummaries: {
+    "make-music-lagos": "A visual identity celebrating the sound, culture, and creative energy of Lagos.",
+    housepadi: "An approachable identity for a property management platform, making the category feel simpler and more accessible.",
+    lemuwe: "A restrained identity for a contemporary fashion label, built through typography, proportion, and space.",
+  },
 
   // The Arc (direction C). The cover line and the three acts come from the
   // positioning strategy (October 2026), built on her own account of her career.
@@ -42,18 +56,20 @@ export default {
 
   practice: [
     {
-      title: "Brand and identity",
-      body: "Identities and the worlds around brands: positioning, visual systems, and the direction that holds them together.",
+      title: "Branding",
+      body: "I develop brand positioning, identities, and visual systems that connect business direction with how people recognise and experience a brand.",
     },
     {
       title: "Creative direction",
-      body: "Leading the creative work on campaigns, launches, events and film, from the first idea to the last asset.",
+      body: "I shape creative direction across campaigns, launches, and brand experiences, guiding ideas from concept through execution.",
     },
     {
       title: "Design leadership",
-      body: "Leading design teams, and building the conditions that let good design work inside a business.",
+      body: "I lead design teams and build the people, processes, and standards that help businesses get more value from design.",
     },
   ],
+
+  venturesIntro: "Some of the ideas I care about have become businesses of their own.",
 
   path: [
     { when: "Before design", text: "Studied food technology. Sang and played instruments. Taught myself graphic design." },
@@ -69,7 +85,7 @@ export default {
       name: "Design Lever Inc.",
       role: "Founder",
       kind: "Company",
-      line: "Making design count by building the infrastructure of African design leadership.",
+      line: "A design leadership firm helping African businesses build stronger design functions while creating opportunities for designers to grow.",
       body: "Design Lever helps growth-stage businesses use design for growth, revenue and savings, and helps great designers become great leaders.",
       offers: [
         { title: "Fractional executive leadership", body: "Executive design leadership consultations for businesses." },
@@ -78,60 +94,104 @@ export default {
         { title: "Research pathway", body: "A pathway into design research." },
       ],
       url: "https://www.designleverinc.com",
-      cta: "Visit Design Lever",
+      cta: "Explore Design Lever",
     },
     {
       slug: "lilac-africa",
       name: "Lilac Africa",
-      role: "Founder",
+      role: "Co-founder",
       kind: "Social enterprise",
-      line: "Better opportunities, community learning and mentorship for women in technology.",
-      body: "I started Lilac Africa to give women in tech a softer landing: a path into opportunity, a community to learn with, and mentorship.",
+      line: "Creating better access to education, mentorship, and career opportunities for women in design and technology.",
+      body: "Lilac Africa gives women in design and technology a path into opportunity, a community to learn with, and mentorship.",
       offers: [
         { title: "Lilac Luminaries", body: "A live, virtual pan-African masterclass programme for senior women in design and technology." },
       ],
-      url: "",
-      cta: "",
+      url: "https://www.lilacafrica.com/",
+      cta: "Visit Lilac Africa",
     },
   ],
 
+  // Books. Store facts verified on Selar (selar.com/m/Bolutife01) and in her
+  // Drive, 31 October 2026. Prices are the store's; keep them in step with it.
   books: [
     {
+      slug: "worth-the-work",
       title: "Worth the Work",
       role: "Author",
-      line: "My book, published on Amazon KDP.",
-      url: "https://worth-the-work.vercel.app",
+      byline: "Book by Bolutife Awakan",
+      line: "A practical guide to pricing creative work, understanding your costs, and building a sustainable creative business.",
+      subtitle: "A practical guide to pricing creative work and building a sustainable business.",
+      cover: "https://files.selar.co/product-images/2026/products/Bolutife01/worth-the-work-for-senior-selar.com-6a10bf8d17516.jpg",
+      path: "/shop/worth-the-work",
+      cta: "Explore the book",
+      editions: [
+        { title: "For senior designers", detail: "Digital edition, with the companion pricing calculator", price: "$25", url: "https://selar.com/worththeworkforseniors" },
+        { title: "For junior designers", detail: "Digital starter edition for designers one to three years in", price: "$10", url: "https://selar.com/worththeworkforjuniors" },
+        { title: "Physical copy", detail: "Printed edition of the senior guide", price: "$25", url: "https://selar.com/worththeworkprint" },
+      ],
+    },
+    {
+      slug: "signature",
+      title: "Signature",
+      role: "Author",
+      byline: "Book by Bolutife Awakan",
+      subtitle: "The Journey to your Authentic Self",
+      line: "A book on personal branding that starts with one question: who am I?",
+      path: "/shop/signature",
       cta: "About the book",
+      available: false,
     },
   ],
+  storeUrl: "https://selar.com/m/Bolutife01",
 
   mentoring: "Mentor for four years, across 15 countries in Africa, Europe, the UK and the Americas.",
 
   speaking: {
-    promise: "I like to inspire people, give them hope, and help them start building something practical with their lives.",
+    promise:
+      "I've spent over a decade designing, leading teams, and working with businesses. When I speak, I share what that experience has taught me, including the things I wish I'd understood much earlier.",
+    support: "My conversations usually sit somewhere between branding, design leadership, creative careers, business, and women in technology.",
     tracks: [
-      { title: "Design's value, measured", body: "How design earns revenue, saves money and drives growth, and how to measure it so the business believes it." },
+      { title: "Branding", body: "How branding shapes what people think and do, and how to put that to work." },
       { title: "Design leadership", body: "How great designers become great leaders, and what emerging markets can teach the world." },
-      { title: "Women and social enterprise", body: "Women's empowerment, social enterprising, and building a personal brand that creates opportunities." },
-      { title: "Brand", body: "How branding shapes what people think and do, and how to put that to work." },
+      { title: "Business of design", body: "How design earns revenue, saves money and drives growth, and how to measure it so the business believes it." },
+      { title: "Creative careers", body: "Building a sustainable creative career, including how to price creative work." },
+      { title: "Women in Technology", body: "Women's empowerment, social enterprising, and building a personal brand that creates opportunities." },
     ],
     talks: [
       { title: "Rethinking Design Leadership: What emerging markets can teach the world", track: "Design leadership" },
-      { title: "Beyond Visibility: Building a Personal Brand That Creates Opportunities", track: "Women and social enterprise", event: "WIMD Summit 2026" },
+      { title: "Beyond Visibility: Building a Personal Brand That Creates Opportunities", track: "Women in Technology", event: "WIMD Summit 2026" },
     ],
     formats: ["Keynotes", "Workshops", "Panels", "Guest lectures"],
   },
 
   side: {
-    intro: "Away from work, I'm a reader, a film watcher and a music lover, and I'm happiest with friends and family. I'm an introvert by nature and an extrovert when it counts. Faith, learning and curiosity run through all of it.",
+    intro: "Away from the desk, there's music, photography, books, films, and time spent with the people I love. Some of those interests find their way into my work. Most are just for me.",
     interests: [
-      { title: "Films", body: "Seeing movies." },
-      { title: "Books", body: "Reading books." },
+      { title: "Photography", body: "" },
       { title: "Music", body: "Listening to music. I sang and played instruments before I designed anything." },
-      { title: "Friends and family", body: "Hanging out with friends and family." },
-      { title: "Sharing what I learn", body: "Sharing knowledge as I get it. I like to teach by practice." },
+      { title: "Books", body: "Reading books." },
+      { title: "Films", body: "Seeing movies." },
+      { title: "Friends & family", body: "Time spent with the people I love." },
     ],
   },
+
+  thoughtsIntro: "Some things I've learned by doing. Others I'm still thinking through.",
+  experimentsIntro: [
+    "Not everything I make starts with a brief. Sometimes I'm following an idea, trying a technique, or simply seeing what happens when I make something differently.",
+    "This is where those explorations live.",
+  ],
+  experimentsKinds: [
+    "Typography explorations",
+    "Motion tests",
+    "Visual studies",
+    "Creative coding",
+    "Photography experiments",
+    "Print experiments",
+    "Unused concepts",
+    "Self-initiated work",
+  ],
+  shopIntro: "Books and resources built from the things I've learned about branding, design, and the business of creative work.",
+  contactLine: "Building a brand, strengthening a design team, or planning something I'd be a good fit for? I'd love to hear about it.",
 
   photoCredit: "Portraits by KN Photography",
 };
