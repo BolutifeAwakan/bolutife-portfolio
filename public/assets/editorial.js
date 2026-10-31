@@ -32,22 +32,26 @@
 
   // Reveal on scroll. Only elements below the fold wait, so nothing above it flashes.
   // Transform and opacity only, so it stays cheap.
-  if (!still && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          e.target.classList.remove("is-pending");
-          io.unobserve(e.target);
-        }),
-      { rootMargin: "0px 0px -8% 0px" }
-    );
-    document.querySelectorAll("[data-reveal]").forEach((el, i) => {
-      if (el.getBoundingClientRect().top < innerHeight * 0.92) return;
+  if (!still) {
+    let pending = [...document.querySelectorAll("[data-reveal]")].filter((el, i) => {
+      if (el.getBoundingClientRect().top < innerHeight * 0.92) return false;
       el.classList.add("is-pending");
       el.style.transitionDelay = `${(i % 3) * 70}ms`;
-      io.observe(el);
+      return true;
     });
+    let queued = false;
+    const check = () => {
+      queued = false;
+      const edge = innerHeight * 0.94;
+      pending = pending.filter((el) => {
+        if (el.getBoundingClientRect().top > edge) return true;
+        el.classList.remove("is-pending");
+        return false;
+      });
+      if (!pending.length) removeEventListener("scroll", onScroll);
+    };
+    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(check); } };
+    if (pending.length) { addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); }
   }
 
   // Selected work: as the next card slides over, the one beneath settles back.
