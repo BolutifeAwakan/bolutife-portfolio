@@ -227,7 +227,7 @@ html.ed-menu-open { overflow: hidden; }
   mask-image: radial-gradient(120% 90% at 50% 40%, #000 55%, transparent 80%);
 }
 .ed-hero__top { position: absolute; top: 96px; right: var(--g); text-align: right; }
-.ed-hero__id { font: 400 var(--t-small)/1.4 var(--display); color: var(--ash); white-space: nowrap; margin-left: auto; }
+.ed-hero__id { font: 800 clamp(17px, 1.5vw, 22px)/1.1 var(--display); font-stretch: 62%; text-transform: uppercase; max-width: 12ch; margin-left: auto; }
 .ed-hero__where { margin-top: 8px; }
 .ed-hero__head { position: absolute; top: 96px; left: var(--g); max-width: 19ch; font: 500 clamp(22px, 2.3vw, 36px)/1.08 var(--display); font-stretch: 85%; letter-spacing: -0.01em; }
 .ed-hero__name { position: absolute; left: var(--g); right: var(--g); bottom: calc(var(--g) * 0.6); }
