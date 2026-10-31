@@ -30,6 +30,46 @@
   let rt;
   addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(fitAll, 120); });
 
+  // Reveal on scroll. Only elements below the fold wait, so nothing above it flashes.
+  // Transform and opacity only, so it stays cheap.
+  if (!still && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.remove("is-pending");
+          io.unobserve(e.target);
+        }),
+      { rootMargin: "0px 0px -8% 0px" }
+    );
+    document.querySelectorAll("[data-reveal]").forEach((el, i) => {
+      if (el.getBoundingClientRect().top < innerHeight * 0.92) return;
+      el.classList.add("is-pending");
+      el.style.transitionDelay = `${(i % 3) * 70}ms`;
+      io.observe(el);
+    });
+  }
+
+  // Selected work: as the next card slides over, the one beneath settles back.
+  const cards = [...document.querySelectorAll(".ed-stack__card")];
+  if (cards.length && !still) {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const h = innerHeight;
+      cards.forEach((c, i) => {
+        const next = cards[i + 1];
+        const a = c.firstElementChild;
+        if (!next) { a.style.removeProperty("--sc"); a.style.removeProperty("--br"); return; }
+        const t = Math.min(1, Math.max(0, 1 - next.getBoundingClientRect().top / h));
+        a.style.setProperty("--sc", (1 - t * 0.06).toFixed(4));
+        a.style.setProperty("--br", (1 - t * 0.45).toFixed(3));
+      });
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+
   // Menu as a modal dialog: background made inert, focus kept inside
   const btn = document.querySelector(".ed-head__menu");
   const menu = document.getElementById("ed-menu");
@@ -122,7 +162,7 @@
   // Email sign-up: posts to the newsletter provider when one is connected
   // (the form then has an action); otherwise opens a short email to Bolutife.
   document.querySelectorAll("form[data-signup]").forEach((f) => {
-    const done = f.querySelector(".ed-signup__done");
+    const done = f.querySelector(".ed-su__done");
     f.addEventListener("submit", (e) => {
       const email = f.querySelector('input[type="email"]').value.trim();
       const source = f.dataset.source || "site";

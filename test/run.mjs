@@ -33,8 +33,10 @@ const must = {
 must["/thoughts"] = must["/writing"];
 must["/shop"] = m.books.map((b) => b.title);
 must["/shop/worth-the-work"] = ["Worth the Work", ...m.books[0].editions.map((e) => e.price)];
+must["/thoughts"] = [...must["/writing"], m.speaking.promise, ...m.speaking.tracks.map((t) => t.title), ...m.speaking.talks.map((t) => t.title)];
+const mustEd = { "/about": [...must["/about"], ...m.side.interests.map((i) => i.title)] };
 const editorialPages = [
-  ...pages.map((p) => (p === "/writing" ? "/thoughts" : p)),
+  ...pages.filter((p) => !["/speaking", "/on-the-side"].includes(p)).map((p) => (p === "/writing" ? "/thoughts" : p)),
   "/shop", "/shop/worth-the-work", "/shop/signature",
   ...m.writing.notes.filter((n) => n.internal).map((n) => `/thoughts/${n.slug}`),
 ];
@@ -44,7 +46,7 @@ for (const dir of ["brand-book", "personal-editorial", "the-book"]) {
     ok(out.status === 200, `${dir} ${p} returned ${out.status}`);
     if (out.status !== 200) continue;
     const text = strip(out.html);
-    for (const s of must[p] || []) ok(text.includes(strip(s)), `${dir} ${p} is missing "${s.slice(0, 50)}"`);
+    for (const s of (dir === "personal-editorial" && mustEd[p]) || must[p] || []) ok(text.includes(strip(s)), `${dir} ${p} is missing "${s.slice(0, 50)}"`);
     ok(/<h1[\s>]/.test(out.html), `${dir} ${p} has no h1`);
     ok(out.html.includes('href="#main"'), `${dir} ${p} has no skip link`);
     ok(out.html.includes('name="robots" content="noindex'), `${dir} ${p} preview is indexable`);
@@ -63,7 +65,7 @@ for (const [from, to] of [["/notes", "/writing"], ["/playground", "/experiments"
   const out = await route(`/preview/brand-book${from}`, {}, {});
   ok(out.status === 301 && out.location === `/preview/brand-book${to}`, `${from} should redirect to ${to}, got ${out.status} ${out.location}`);
 }
-for (const [from, to] of [["/writing", "/thoughts"], ["/notes", "/thoughts"], ["/playground", "/experiments"]]) {
+for (const [from, to] of [["/writing", "/thoughts"], ["/notes", "/thoughts"], ["/playground", "/experiments"], ["/speaking", "/thoughts#speaking"], ["/on-the-side", "/about#on-the-side"]]) {
   const out = await route(`/preview/personal-editorial${from}`, {}, {});
   ok(out.status === 301 && out.location === `/preview/personal-editorial${to}`, `editorial ${from} should redirect to ${to}, got ${out.status} ${out.location}`);
 }
