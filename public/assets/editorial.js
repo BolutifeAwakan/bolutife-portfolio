@@ -422,7 +422,7 @@
       const dt = Math.min(0.032, last ? (t - last) / 1000 : 0.016);
       last = t;
       // drop: slightly underdamped, so it dips a touch past rest and eases back
-      vy += (-y * 46 - vy * 10.5) * dt; y += vy * dt;
+      vy += (-y * 34 - vy * 9.5) * dt; y += vy * dt;
       // swing: a slow pendulum with light damping, a few long, shrinking arcs
       if (!landed && y > -40) { landed = true; va += -vy * 0.004; }
       va += (-ang * 9 - va * 1.5) * dt; ang += va * dt;
