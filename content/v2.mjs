@@ -93,6 +93,8 @@ export default {
         { title: "Academy", body: "For budding design leaders." },
         { title: "Research pathway", body: "A pathway into design research." },
       ],
+      // From Design Lever's own site.
+      image: { src: "https://www.designleverinc.com/images/scenes/fly-practice.webp", alt: "Two design leaders in a studio office", pos: "50% 62%" },
       url: "https://www.designleverinc.com",
       cta: "Explore Design Lever",
     },
@@ -104,6 +106,8 @@ export default {
       line: "Creating better access to education, mentorship, and career opportunities for women in design and technology.",
       body: "Lilac Africa gives women in design and technology a path into opportunity, a community to learn with, and mentorship.",
       offers: [],
+      // From Lilac Africa's own site.
+      image: { src: "https://www.lilacafrica.com/_next/static/media/leadership.4358f516.webp", alt: "Hands holding a glowing light bulb", pos: "50% 45%" },
       url: "https://www.lilacafrica.com/",
       cta: "Visit Lilac Africa",
     },
