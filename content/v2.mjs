@@ -295,8 +295,8 @@ export default {
   // The radio interview wasn't recorded, so it has no link.
   press: [
     { pub: "TVC", logo: "tvc", ar: 2.96, title: "AI is a threat to professionals: why creatives must step up", kind: "TV interview, Wake Up Nigeria", date: "September 2026", url: "https://www.youtube.com/watch?v=b9olhllG2DA", go: "Watch" },
+    { pub: "Royal Roots 107.1 FM, Lagos", logo: "royal-roots", ar: 3.18, title: "Design as infrastructure: turning creative work into business value", kind: "Radio interview, The Creative Exchange", date: "September 2026" },
     { pub: "Vanguard", logo: "vanguard", ar: 4.63, ext: "svg", title: "1,500 women, one mission: building tech pathways for African women", kind: "Feature", date: "September 2026", url: "https://www.vanguardngr.com/2026/09/1500-women-one-mission-building-tech-pathways-for-african-women/" },
-    { pub: "Royal Roots 107.1 FM, Lagos", logo: "royal-roots", ar: 3.18, title: "Live on air", kind: "Radio interview", date: "" },
     { pub: "Technext", logo: "technext", ar: 4.5, title: "The future is Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://technext24.com/2025/04/08/lilac-raising-next-female-tech-leaders/" },
     { pub: "Techeconomy", logo: "techeconomy", ar: 6.1, ext: "svg", title: "Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://techeconomy.ng/lilac-raising-the-next-generation-of-female-tech-leaders" },
     { pub: "EduTimes Africa", logo: "edutimes", ar: 3.69, title: "Understanding branding: how education made me", kind: "Interview", date: "April 2024", url: "https://edutimesafrica.com/understanding-branding-how-education-made-me-interview-with-bolutife-awakan/" },
