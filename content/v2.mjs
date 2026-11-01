@@ -107,7 +107,7 @@ export default {
       body: "Lilac Africa gives women in design and technology a path into opportunity, a community to learn with, and mentorship.",
       offers: [],
       // From Lilac Africa's own site.
-      image: { src: "https://www.lilacafrica.com/_next/static/media/leadership.4358f516.webp", alt: "Hands holding a glowing light bulb", pos: "50% 45%" },
+      image: { src: "/assets/talks/lilac-session-full.webp", alt: "A Lilac Africa session: a full room of women facing a panel of speakers", pos: "50% 55%" },
       url: "https://www.lilacafrica.com/",
       cta: "Visit Lilac Africa",
     },
