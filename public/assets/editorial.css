@@ -413,8 +413,8 @@ a.ed-row__a:hover .ed-row__s { color: var(--night); }
 .ed-rows--path .ed-row__a { grid-template-columns: minmax(200px, 1.4fr) 5fr; }
 .ed-rows--path .ed-row__k .ed-br { color: var(--bone); }
 
-.ed-peek { position: fixed; left: 0; top: 0; z-index: 30; width: min(300px, 22vw); aspect-ratio: 4 / 5; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) rotate(-4deg) scale(0.9); transition: opacity 0.2s, transform 0.3s; overflow: hidden; border-radius: 4px; }
-.ed-peek.is-on { opacity: 1; transform: translate(-50%, -50%) rotate(-4deg) scale(1); }
+.ed-peek { position: fixed; left: 0; top: 0; z-index: 30; width: min(240px, 17vw); aspect-ratio: 3 / 2; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) rotate(-2deg) scale(0.9); transition: opacity 0.2s, transform 0.3s; overflow: hidden; border-radius: 4px; }
+.ed-peek.is-on { opacity: 1; transform: translate(-50%, -50%) rotate(-2deg) scale(1); }
 .ed-peek img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- sections ---------- */
