@@ -288,10 +288,13 @@ export default {
     { event: "Untitled Designers' Conference", title: "Branding with authenticity amid content noise", format: "Keynote", year: "2024", img: "untitled-designers" },
     { event: "Design Matters '23", title: "Creativity for social change", format: "Talk", year: "2023", img: "design-matters" },
   ],
+  // Places she has spoken that have no photo card yet; shown with the venues line.
+  moreVenues: ["Cloudde Tech Conference, Ibadan"],
   // Press that features or names her. Only pieces found and checked online.
   press: [
     { pub: "Technext", title: "The future is Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://technext24.com/2025/04/08/lilac-raising-next-female-tech-leaders/" },
     { pub: "Techeconomy", title: "Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://techeconomy.ng/lilac-raising-the-next-generation-of-female-tech-leaders" },
+    { pub: "UIMSA Press", title: "Brands win ₦950k grants as Cloudde holds tech conference on creating value", kind: "News, named on the panel", date: "July 2024", url: "https://uimsapress.org/brands-win-950k-grants-as-cloudde-holds-tech-conference-on-creating-value-in-ui/" },
     { pub: "EduTimes Africa", title: "Understanding branding: how education made me", kind: "Interview", date: "April 2024", url: "https://edutimesafrica.com/understanding-branding-how-education-made-me-interview-with-bolutife-awakan/" },
     { pub: "The Creatives Note", title: "On finding design, constantly learning, investing in herself and the role of strategy in design", kind: "Interview", date: "April 2024", url: "https://thecreativesnote.substack.com/p/bolutife-awakan-brand-designer-on-finding-design" },
   ],
