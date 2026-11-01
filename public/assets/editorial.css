@@ -1208,3 +1208,30 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
 .ed-copy__fig { margin: clamp(36px, 4vw, 60px) 0 0; }
 .ed-copy__fig img { display: block; width: 100%; height: auto; }
 .ed-copy__fig figcaption { margin-top: 12px; font-size: var(--t-small); line-height: 1.5; color: var(--ash); }
+
+/* About: the story on the site grid. The opening statement takes the wide columns, the rest of the
+   story sits on the side-copy line, and the two photographs below share one height. */
+.ed-story { display: grid; grid-template-columns: var(--row-cols); column-gap: var(--rg); row-gap: clamp(56px, 6vw, 96px); align-items: start; padding: var(--sec) var(--g) 0; }
+.ed-story__lead { grid-column: 1 / 3; max-width: 30ch; font: 500 clamp(26px, 2.8vw, 42px)/1.16 var(--display); font-stretch: 85%; letter-spacing: -0.01em; text-wrap: pretty; }
+.ed-story__body { grid-column: 3 / -1; padding-top: 0.4em; }
+.ed-story__body p { max-width: 46ch; font-size: var(--t-read); line-height: 1.6; }
+.ed-story__body p + p { margin-top: 1em; }
+.ed-story__fla, .ed-story__portrait { margin: 0; }
+.ed-story__fla { grid-column: 1 / 3; position: relative; }
+.ed-story__fla img { display: block; width: 100%; height: auto; }
+.ed-story__fla figcaption { position: absolute; top: 100%; left: 0; margin-top: 12px; font-size: var(--t-small); line-height: 1.5; color: var(--ash); }
+.ed-story__portrait { grid-column: 3 / -1; align-self: stretch; position: relative; overflow: hidden; background: var(--panel); }
+.ed-story__portrait picture, .ed-story__portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1100px) {
+  .ed-story { grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); }
+  .ed-story__lead, .ed-story__fla { grid-column: 1 / -1; }
+  .ed-story__body { grid-column: 2 / -1; }
+  .ed-story__portrait { display: none; }
+}
+@media (max-width: 800px) {
+  .ed-story { grid-template-columns: minmax(0, 1fr); row-gap: 36px; }
+  .ed-story__body { grid-column: 1 / -1; padding-top: 0; }
+  .ed-story__fla { margin-bottom: 24px; }
+}
+/* About: the roles list runs tighter than other lists, since it is long and scanned rather than read */
+.ed-rows--cv .ed-row__a { padding-top: clamp(16px, 1.6vw, 24px); padding-bottom: clamp(16px, 1.6vw, 24px); }
