@@ -282,9 +282,23 @@ export default {
   awardsLatest: [{ title: "Exponential Design Leader", org: "", year: "2026" }],
 
   // Press and speaking downloads on Thoughts. Each asks for a name and email first.
+  // Talks given, with photos from the 2026 press kit.
+  pastTalks: [
+    { event: "Design Spin-Off by Sections", title: "The role of design leadership in driving growth", format: "Panel", year: "2024", img: "design-spinoff" },
+    { event: "Untitled Designers' Conference", title: "Branding with authenticity amid content noise", format: "Keynote", year: "2024", img: "untitled-designers" },
+    { event: "Design Matters '23", title: "Creativity for social change", format: "Talk", year: "2023", img: "design-matters" },
+  ],
+  // Press that features or names her. Only pieces found and checked online.
+  press: [
+    { pub: "Technext", title: "The future is Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://technext24.com/2025/04/08/lilac-raising-next-female-tech-leaders/" },
+    { pub: "Techeconomy", title: "Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://techeconomy.ng/lilac-raising-the-next-generation-of-female-tech-leaders" },
+    { pub: "EduTimes Africa", title: "Understanding branding: how education made me", kind: "Interview", date: "April 2024", url: "https://edutimesafrica.com/understanding-branding-how-education-made-me-interview-with-bolutife-awakan/" },
+    { pub: "The Creatives Note", title: "On finding design, constantly learning, investing in herself and the role of strategy in design", kind: "Interview", date: "April 2024", url: "https://thecreativesnote.substack.com/p/bolutife-awakan-brand-designer-on-finding-design" },
+  ],
   downloads: [
-    { key: "press-kit", title: "Press kit", note: "Bio, photos and talk topics in one PDF.", file: "/assets/press/bolutife-awakan-press-kit.pdf" },
+    { key: "press-kit", title: "Press kit", note: "Bio, photos and talk topics in one PDF.", file: "/assets/press/bolutife-awakan-press-kit-2026.pdf" },
     { key: "headshots", title: "Headshots", note: "Six portraits, high resolution.", file: "/assets/press/bolutife-awakan-headshots.zip" },
+    { key: "cv", title: "Request CV", href: "/contact?about=cv" },
   ],
 
   contactLine: "Building a brand, strengthening a design team, or planning something I'd be a good fit for? I'd love to hear about it.",

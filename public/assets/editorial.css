@@ -1084,3 +1084,10 @@ h2.ed-stack__t { margin: 0; }
 .ed-open__h--sign + .ed-open__line { padding-top: clamp(64px, 7vw, 120px); }
 @media (max-width: 800px) { .ed-open__sign { font-size: 0.85em; right: 4%; bottom: -0.5em; } .ed-open__h--sign + .ed-open__line { padding-top: 64px; } }
 @media (prefers-reduced-motion: reduce) { .ed-open__w span { animation: none; opacity: 1; } }
+
+/* Past talks: three photo cards under the two signature talks */
+.ed-talks--three { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(16px, 2vw, 28px); }
+.ed-talks--three .ed-talk { aspect-ratio: 4 / 4.6; }
+.ed-talks--three .ed-talk__t { font-size: var(--t-h4); max-width: 22ch; }
+.ed-dl__a--go::after { -webkit-mask: none; mask: none; background: none; content: "\2197"; width: auto; height: auto; font-size: 0.8em; }
+@media (max-width: 800px) { .ed-talks--three { grid-template-columns: 1fr; } }
