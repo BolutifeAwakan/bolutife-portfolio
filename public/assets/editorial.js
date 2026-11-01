@@ -668,4 +668,59 @@
       } catch (_) {}
     });
   });
+
+  // Home intro story: progress through the pinned section lights the words and picks the picture.
+  const story = document.querySelector("[data-story]");
+  if (story) {
+    const words = [...story.querySelectorAll(".ed-w")];
+    const chips = [...story.querySelectorAll(".ed-chip[data-beat]")];
+    const shots = [...story.querySelectorAll(".ed-intro__shot")];
+    const at = chips.map((c) => Number(c.closest(".ed-nw").querySelector(".ed-w").dataset.w));
+    let cur = -1, queued = false;
+    const show = (b) => {
+      if (b === cur) return;
+      shots.forEach((s, i) => { s.classList.toggle("was-on", i === cur); s.classList.toggle("is-on", i === b); });
+      chips.forEach((c) => c.classList.toggle("is-on", Number(c.dataset.beat) === b));
+      cur = b;
+    };
+    const frame = () => {
+      queued = false;
+      const pinned = getComputedStyle(story.querySelector(".ed-intro__pin")).position === "sticky";
+      story.classList.toggle("is-live", pinned && !still);
+      if (!pinned || still) { words.forEach((w) => w.classList.add("is-lit")); show(0); return; }
+      const r = story.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
+      const n = Math.round(p * 1.15 * words.length);
+      words.forEach((w, i) => w.classList.toggle("is-lit", i < n));
+      let b = 0;
+      at.forEach((w, i) => { if (w < n) b = Number(chips[i].dataset.beat); });
+      show(b);
+    };
+    const req = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };
+    addEventListener("scroll", req, { passive: true });
+    addEventListener("resize", req);
+    req();
+  }
+
+  // Notes archive: show only the notes with the chosen topic.
+  document.querySelectorAll("[data-filterable]").forEach((box) => {
+    const btns = [...box.querySelectorAll(".ed-filter__b")];
+    const rows = [...box.querySelectorAll(".ed-row")];
+    btns.forEach((b) => b.addEventListener("click", () => {
+      btns.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      rows.forEach((r) => { r.hidden = !!b.dataset.tag && !(r.dataset.tags || "").split("|").includes(b.dataset.tag); });
+    }));
+  });
+
+  // About badge: the hologram and gold foil catch the light where the pointer is.
+  const card = document.querySelector("[data-badge-card]");
+  if (card && fine && !still) {
+    card.closest("section").addEventListener("pointermove", (e) => {
+      const r = card.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
+      card.style.setProperty("--mx", `${x.toFixed(1)}%`);
+      card.style.setProperty("--rot", (x * 3.6).toFixed(1));
+      card.style.setProperty("--my", `${Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100)).toFixed(1)}%`);
+    }, { passive: true });
+  }
 })();

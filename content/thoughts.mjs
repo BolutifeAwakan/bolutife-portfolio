@@ -6,6 +6,98 @@
 // Each section: { heading, body }. Paragraphs are separated by a blank line.
 
 export default {
+  // Two newer notes, drafted from Bolutife's own brief (November 2026) for her review.
+  // They live only in this file until she approves them for the CMS.
+  "creativity-with-purpose": {
+    add: true,
+    order: -2,
+    tags: ["Creativity", "Purpose"],
+    title: "Creativity with Purpose",
+    summary: "Creativity without intent is noise. Purpose is what turns it into work that helps.",
+    intro: "You can be wildly creative and still be chaotic. The work I care about starts with intent: a clear, positive reason for the idea to exist.",
+    sections: [
+      {
+        heading: "",
+        body: `Creative people are often celebrated for being unpredictable. The bold idea, the unexpected turn, the thing nobody else would have tried.
+
+I love that energy. But I've learned that creativity on its own isn't the point. You can be very creative and still be chaotic: busy with ideas, producing a lot, and moving nobody forward.
+
+Creativity becomes valuable when it has a purpose behind it.`,
+      },
+      {
+        heading: "Chaos isn't the same as courage",
+        body: `It is easy to mistake noise for boldness. A campaign that shocks for the sake of it. A redesign that changes everything because the team was bored. An idea that impresses the room but confuses the people it was made for.
+
+Those things can look brave. Often they are just undirected. Real creative courage is harder: committing to an idea because it serves something that matters, and being willing to drop the clever parts that don't.`,
+      },
+      {
+        heading: "Intent is a design decision",
+        body: `Before I ask how something should look, I want to know what it is for. Who should it help? What should change for them because it exists? What would make it a good thing in their life, not just a memorable one?
+
+Those questions don't limit the creative work. They give it somewhere to go. When the intent is clear, the ideas get sharper, the debates get shorter, and the work becomes easier to defend.`,
+      },
+      {
+        heading: "Positive intent shows",
+        body: `People can feel the difference between work made to help them and work made to use them. Purpose with good intent shows up in small things: honest language, clear choices, respect for people's time and intelligence.
+
+That's the standard I try to hold, whether I'm building a brand, leading a team or teaching a class. Not just "is this creative?", but "is this creative for a reason that's good?"`,
+      },
+      {
+        heading: "The question I keep coming back to",
+        body: `Creativity is a gift. What we point it at is a choice.
+
+So before the next big idea, it's worth asking: what is this for, and who is it for?
+
+If you can answer that, the creativity will take care of itself.`,
+      },
+    ],
+  },
+
+  "where-strategy-meets-tuesday": {
+    add: true,
+    order: -1,
+    tags: ["Leadership", "Strategy"],
+    title: "Where Strategy Meets Tuesday",
+    summary: "Big reforms only count when people can feel them in their everyday lives.",
+    intro: "Leaders love the macro: the strategy, the system, the reform. The real test is whether any of it reaches the micro, the ordinary Tuesday of the people it is meant to serve.",
+    sections: [
+      {
+        heading: "",
+        body: `There's a particular kind of satisfaction in big decisions. New structures. New strategies. Reforms that look right on paper and make sense when you zoom out.
+
+But I've been thinking about a harder question. What happens after the announcement? How long before the change shows up in someone's day, and will they recognise it when it does?`,
+      },
+      {
+        heading: "The gap between the big picture and the breakfast table",
+        body: `Nigeria's recent economic reforms are a live example of this tension. The case made for them is a long-term one: that removing the fuel subsidy and unifying the exchange rate will put the economy on firmer ground. Many people's day-to-day experience so far has been higher prices and tighter budgets.
+
+You don't have to take a side on the policies to see the leadership lesson in that debate. A change can be logical at the top and still feel like a loss at home. Until the macro shows up in the micro, people judge it by what they live, not by what they're told.`,
+      },
+      {
+        heading: "The same thing happens inside companies",
+        body: `I see a smaller version of this in my own work. I lead brand across several products within one company. At that level, the work is strategic: principles, systems, governance, the decisions about what each brand stands for and how they relate.
+
+None of that matters if it stays in a document. A brand system only becomes real when a designer uses it on a Tuesday afternoon, when a marketer can make a decision without waiting for approval, when a customer notices that everything feels more like one company.
+
+High-level reform has to translate into day-to-day behaviour, or it hasn't happened yet.`,
+      },
+      {
+        heading: "Designing the last mile",
+        body: `The last mile is where most changes fail, so I try to design for it from the start. That means asking who has to do something differently for this to work, and making that change easy for them. It means tools and templates, not just principles. It means early, visible wins that people can point to, so they believe the bigger change is worth the effort.
+
+It also means listening. The people living with a change are the first to know whether it's working. Their experience is data, not resistance.`,
+      },
+      {
+        heading: "The real measure",
+        body: `Strategy is the promise. Everyday life is the proof.
+
+As leaders, we'll be judged less by the size of the changes we announce and more by whether people can feel them.
+
+So the question worth asking of any reform, in a country or in a company, is simple: where will someone notice this on an ordinary day?`,
+      },
+    ],
+  },
+
   "the-moodboard-before-the-moodboard": {
     title: "The Moodboard Before the Moodboard",
     summary: "The decisions that shape a brand long before anyone opens a design file.",

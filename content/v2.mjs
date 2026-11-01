@@ -205,9 +205,9 @@ export default {
         body: "Reading books.",
         items: [
           {"title": "The Creative Act", "by": "Rick Rubin", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication122/v4/a3/c3/73/a3c37376-b40b-d71f-9f18-78c2f9d08831/9780593653425.d.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/the-creative-act/id1621808272", "now": true, "spine": "#cbcfc6", "ink": "#151515", "w": 30},
-          {"title": "Uplifting Design", "by": "Dan Makoski", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication126/v4/1a/67/6d/1a676d4e-a990-59c8-c897-8944b4bfd0ab/0001024806.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/uplifting-design-transforming-business-society-through/id6472603540", "spine": "#1c1c1c", "ink": "#f2f2f2", "w": 30},
-          {"title": "Worth the Work", "by": "Bolutife Awakan", "cover": "https://files.selar.co/product-images/2026/products/Bolutife01/worth-the-work-for-senior-selar.com-6a10bf8d17516.jpg", "url": "https://selar.com/m/Bolutife01", "spine": "#6c6fd1", "ink": "#f3ead9", "w": 28},
-          {"title": "The Culture Map", "by": "Erin Meyer", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication114/v4/b2/0a/0a/b20a0aec-76ff-5c0b-38c3-e652d2b4b1b1/9781610392594.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/the-culture-map/id1209985939", "spine": "#f7f7f5", "ink": "#2f5f5f", "w": 34},
+          {"title": "Uplifting Design", "by": "Dan Makoski", "cover": "/assets/books/uplifting_design.jpg", "url": "https://books.apple.com/us/book/uplifting-design-transforming-business-society-through/id6472603540", "spine": "#141414", "ink": "#ffffff", "w": 30},
+          {"title": "Worth the Work", "by": "Bolutife Awakan", "cover": "/assets/books/wtw_senior.jpg", "url": "https://selar.com/m/Bolutife01", "spine": "#5b5cf3", "ink": "#ffffff", "w": 28},
+          {"title": "The Culture Map", "by": "Erin Meyer", "cover": "/assets/books/culture_map.jpg", "url": "https://books.apple.com/us/book/the-culture-map/id1209985939", "spine": "#f5e21b", "ink": "#1b1b1b", "w": 34},
           {"title": "Becoming", "by": "Michelle Obama", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication114/v4/40/85/6c/40856c45-c99f-f27e-8546-246000f0d91c/9781524763152.d.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/becoming/id1352746782", "spine": "#bacaca", "ink": "#151515", "w": 44},
           {"title": "Show Your Work!", "by": "Austin Kleon", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication122/v4/07/fd/9d/07fd9dad-85b2-a5ee-722a-8cbd830682e5/9780761181361.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/show-your-work/id6443055057", "spine": "#fed109", "ink": "#151515", "w": 24},
           {"title": "Radical Candor", "by": "Kim Scott", "cover": "https://is1-ssl.mzstatic.com/image/thumb/Publication123/v4/5f/0d/0e/5f0d0e84-d2be-bc40-d482-503e43b83252/9781250235381.jpg/600x600bb.jpg", "url": "https://books.apple.com/us/book/radical-candor-fully-revised-updated-edition/id1455111465", "spine": "#fbb325", "ink": "#151515", "w": 36},
@@ -232,14 +232,27 @@ export default {
       },
       {
         title: "Friends & family", format: "moments",
-        image: "https://images.unsplash.com/photo-1630726410985-a1021e8a232a?w=1200&q=80&auto=format&fit=crop",
-        imageAlt: "Friends laughing together outdoors",
+        image: "/assets/side/friends-coco-v2.jpg",
+        imageAlt: "Bolutife and a friend taking a mirror selfie in a lift",
         body: "Time spent with the people I love.",
+        // Her own photos and video stills, from her footage archive.
         items: [
-          {"image": "https://images.unsplash.com/photo-1630726410985-a1021e8a232a?w=800&q=80&auto=format&fit=crop", "alt": "Friends laughing together outdoors", "standin": true},
-          {"image": "https://images.unsplash.com/photo-1731475761027-0b6b33b74547?w=800&q=80&auto=format&fit=crop", "alt": "Friends around a dinner table", "standin": true},
-          {"image": "https://images.unsplash.com/photo-1611432580340-af48bd7549ed?w=800&q=80&auto=format&fit=crop", "alt": "Two friends on a sofa", "standin": true},
-          {"image": "https://images.unsplash.com/photo-1683549387218-f52690727f51?w=800&q=80&auto=format&fit=crop", "alt": "Friends cooking together in a kitchen", "standin": true},
+          {"image": "/assets/side/friends-coco-v2.jpg", "alt": "Bolutife and a friend taking a mirror selfie in a lift"},
+          {"image": "/assets/side/friends-laugh-v2.jpg", "alt": "Bolutife laughing with a friend in a pink top"},
+          {"image": "/assets/side/friends-airport-v2.jpg", "alt": "Bolutife and a friend smiling in an airport terminal"},
+          {"image": "/assets/side/friends-cafe-v2.jpg", "alt": "Bolutife and a friend outside a café"},
+        ],
+      },
+      {
+        title: "Sports", format: "sports",
+        image: "https://images.unsplash.com/photo-1781152791873-ced9456b14ac?w=1600&q=85&auto=format&fit=crop",
+        imageAlt: "Football under stadium lights",
+        body: "Watching, playing and keeping up.",
+        // Unsplash: Maryam Tello (football), Khanh Do (table tennis), Emanuel Ekström (Formula 1).
+        items: [
+          {"title": "Football", "image": "https://images.unsplash.com/photo-1781152791873-ced9456b14ac?w=1600&q=85&auto=format&fit=crop", "alt": "Football under stadium lights"},
+          {"title": "Table tennis", "image": "https://images.unsplash.com/photo-1758798480119-409a9e9925ad?w=1600&q=85&auto=format&fit=crop", "alt": "Two people playing table tennis outdoors"},
+          {"title": "Car racing", "image": "https://images.unsplash.com/photo-1762857362511-86142780dc43?w=1600&q=85&auto=format&fit=crop", "alt": "A red Formula 1 car"},
         ],
       },
     ],
