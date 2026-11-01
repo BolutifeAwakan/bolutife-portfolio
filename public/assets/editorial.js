@@ -77,7 +77,31 @@
 
   // Page headlines with the same giant type break in the middle too, once they
   // are in the top half of the screen and you keep scrolling.
-  const splits = [...document.querySelectorAll("[data-split]")];
+  const splits = [...document.querySelectorAll("[data-split]")].filter((el) => !el.closest("[data-curtain]"));
+  // A curtain headline: the page holds while the two halves of the headline, each on its own
+  // panel, part from the cut in the word and reveal the section waiting underneath.
+  document.querySelectorAll("[data-curtain]").forEach((cur) => {
+    if (still) return;
+    root.classList.add("has-curtain");
+    const inner = cur.querySelector(".ed-curtain");
+    const right = cur.querySelector(".ed-ch--r");
+    const measure = () => {
+      cur.style.setProperty("--split", "0");
+      if (right) inner.style.setProperty("--cut", `${Math.round(right.getBoundingClientRect().left)}px`);
+    };
+    let cq = false;
+    const run = () => {
+      cq = false;
+      const span = cur.offsetHeight - innerHeight;
+      const p = Math.min(1, Math.max(0, (scrollY - cur.offsetTop) / (span * 0.85 || 1)));
+      cur.style.setProperty("--split", (p * p * (3 - 2 * p)).toFixed(4));
+    };
+    measure();
+    run();
+    addEventListener("resize", () => { measure(); run(); });
+    if (document.fonts) document.fonts.ready.then(() => { measure(); run(); });
+    addEventListener("scroll", () => { if (!cq) { cq = true; requestAnimationFrame(run); } }, { passive: true });
+  });
   if (splits.length && !still) {
     let sq = false;
     const run = () => {

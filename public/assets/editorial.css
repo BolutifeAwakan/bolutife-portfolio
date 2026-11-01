@@ -1074,10 +1074,8 @@ h2.ed-stack__t { margin: 0; }
 /* Thoughts: a handwritten line writes itself across the headline, then leaves with the right half */
 .ed-open__h--sign .ed-fit { position: relative; }
 .ed-open__sign { position: absolute; right: 6%; bottom: -0.32em; z-index: 1; display: flex; font: 400 0.6em/1 var(--sign); color: var(--gold); text-transform: none; letter-spacing: 0; font-stretch: normal; white-space: pre; transform: rotate(-7deg); transform-origin: left bottom; pointer-events: none; }
-/* the line breaks in the middle with the headline: first half leaves left, second half right */
-.ed-open__w { display: inline-block; white-space: pre; will-change: translate; }
-.ed-open__w--l { translate: calc(var(--split, 0) * -62vw) 0; }
-.ed-open__w--r { translate: calc(var(--split, 0) * 62vw) 0; }
+/* the line stays whole and leaves with the right half of the headline */
+.ed-open__w { display: inline-block; white-space: pre; will-change: translate; translate: calc(var(--split, 0) * 62vw) 0; }
 /* written, not revealed: the letters appear one after another, as if by hand */
 .ed-open__w span { display: inline-block; opacity: 0; animation: letter 0.45s ease calc(0.8s + var(--i) * 0.12s) forwards; }
 @keyframes letter { to { opacity: 1; } }
@@ -1091,3 +1089,16 @@ h2.ed-stack__t { margin: 0; }
 .ed-talks--three .ed-talk__t { font-size: var(--t-h4); max-width: 22ch; }
 .ed-dl__a--go::after { -webkit-mask: none; mask: none; background: none; content: "\2197"; width: auto; height: auto; font-size: 0.8em; }
 @media (max-width: 800px) { .ed-talks--three { grid-template-columns: 1fr; } }
+
+/* Curtain headline (Thoughts): the page holds, the headline parts at the cut in the word,
+   and its two panels slide away to reveal the section already waiting underneath. Only with JS and motion. */
+.ed-curtain__p { display: none; }
+.has-curtain .ed-open--curtain { position: relative; z-index: 3; height: 200svh; margin-bottom: -100svh; padding-top: 0; pointer-events: none; }
+.has-curtain .ed-open--curtain .ed-curtain { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+.has-curtain .ed-curtain__p { display: block; position: absolute; top: 0; bottom: 0; background: var(--night); will-change: translate; }
+.has-curtain .ed-curtain__p--l { left: 0; width: var(--cut, 50%); translate: calc(var(--split, 0) * -101%) 0; box-shadow: 18px 0 40px -20px rgba(0, 0, 0, calc(var(--split, 0) * 0.9)); }
+.has-curtain .ed-curtain__p--r { left: var(--cut, 50%); right: 0; translate: calc(var(--split, 0) * 101%) 0; box-shadow: -18px 0 40px -20px rgba(0, 0, 0, calc(var(--split, 0) * 0.9)); }
+.has-curtain .ed-open--curtain .ed-open__h, .has-curtain .ed-open--curtain .ed-open__line { position: relative; }
+.has-curtain .ed-open--curtain .ed-open__h { overflow-x: visible; }
+.has-curtain .ed-open--curtain .ed-open__line { opacity: calc(1 - var(--split, 0) * 2.5); }
+.has-curtain .ed-open--curtain + .ed-sec { position: relative; z-index: 1; }
