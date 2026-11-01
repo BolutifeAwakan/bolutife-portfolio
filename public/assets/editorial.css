@@ -1070,3 +1070,10 @@ h2.ed-stack__t { margin: 0; }
   .ed-venues { grid-template-columns: 1fr; }
   .ed-venues ul { grid-column: 1; }
 }
+
+/* Thoughts: a handwritten line writes itself across the headline, then leaves with the right half */
+.ed-open__h--sign .ed-fit { position: relative; }
+.ed-open__sign { position: absolute; right: 6%; bottom: -0.16em; z-index: 1; font-size: 0.4em; line-height: 1; white-space: nowrap; text-transform: none; letter-spacing: 0; font-stretch: normal; font-weight: 400; transform: rotate(-7deg); transform-origin: left bottom; translate: calc(var(--split, 0) * 62vw) 0; animation: sign 1.4s 0.9s cubic-bezier(0.6, 0, 0.2, 1) both; }
+.ed-open__h--sign + .ed-open__line { padding-top: clamp(40px, 4.4vw, 72px); }
+@media (max-width: 800px) { .ed-open__sign { font-size: 0.5em; right: 10%; bottom: -0.5em; } .ed-open__h--sign + .ed-open__line { padding-top: 34px; } }
+@media (prefers-reduced-motion: reduce) { .ed-open__sign { animation: none; } }
