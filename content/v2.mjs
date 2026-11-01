@@ -291,17 +291,16 @@ export default {
   ],
   // Places she has spoken that have no photo card yet; shown with the venues line.
   moreVenues: [],
-  // TV and radio. The radio interview wasn't recorded, so it shows the station's logo only.
-  broadcast: [
-    { pub: "TVC, Wake Up Nigeria", title: "AI is a threat to professionals: why creatives must step up", kind: "TV interview", date: "September 2026", url: "https://www.youtube.com/watch?v=b9olhllG2DA", img: "https://i.ytimg.com/vi/b9olhllG2DA/maxresdefault.jpg" },
-    { pub: "Royal Roots 107.1 FM, Lagos", title: "Live on air", kind: "Radio interview", date: "", logo: "/assets/press/royal-roots-107-1-lagos.png" },
-  ],
-  // Press that features or names her. Only pieces found and checked online.
+  // Press, TV and radio, newest first. Each shows the outlet's logo in place of its name.
+  // The radio interview wasn't recorded, so it has no link.
   press: [
-    { pub: "Technext", title: "The future is Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://technext24.com/2025/04/08/lilac-raising-next-female-tech-leaders/" },
-    { pub: "Techeconomy", title: "Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://techeconomy.ng/lilac-raising-the-next-generation-of-female-tech-leaders" },
-    { pub: "EduTimes Africa", title: "Understanding branding: how education made me", kind: "Interview", date: "April 2024", url: "https://edutimesafrica.com/understanding-branding-how-education-made-me-interview-with-bolutife-awakan/" },
-    { pub: "The Creatives Note", title: "On finding design, constantly learning, investing in herself and the role of strategy in design", kind: "Interview", date: "April 2024", url: "https://thecreativesnote.substack.com/p/bolutife-awakan-brand-designer-on-finding-design" },
+    { pub: "TVC", logo: "tvc", ar: 2.96, title: "AI is a threat to professionals: why creatives must step up", kind: "TV interview, Wake Up Nigeria", date: "September 2026", url: "https://www.youtube.com/watch?v=b9olhllG2DA", go: "Watch" },
+    { pub: "Vanguard", logo: "vanguard", ar: 4.63, ext: "svg", title: "1,500 women, one mission: building tech pathways for African women", kind: "Feature", date: "September 2026", url: "https://www.vanguardngr.com/2026/09/1500-women-one-mission-building-tech-pathways-for-african-women/" },
+    { pub: "Royal Roots 107.1 FM, Lagos", logo: "royal-roots", ar: 3.18, title: "Live on air", kind: "Radio interview", date: "" },
+    { pub: "Technext", logo: "technext", ar: 4.5, title: "The future is Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://technext24.com/2025/04/08/lilac-raising-next-female-tech-leaders/" },
+    { pub: "Techeconomy", logo: "techeconomy", ar: 6.1, ext: "svg", title: "Lilac: raising the next generation of female tech leaders", kind: "Feature", date: "April 2025", url: "https://techeconomy.ng/lilac-raising-the-next-generation-of-female-tech-leaders" },
+    { pub: "EduTimes Africa", logo: "edutimes", ar: 3.69, title: "Understanding branding: how education made me", kind: "Interview", date: "April 2024", url: "https://edutimesafrica.com/understanding-branding-how-education-made-me-interview-with-bolutife-awakan/" },
+    { pub: "The Creatives Note", logo: "creatives-note", ar: 10.28, title: "On finding design, constantly learning, investing in herself and the role of strategy in design", kind: "Interview", date: "April 2024", url: "https://thecreativesnote.substack.com/p/bolutife-awakan-brand-designer-on-finding-design" },
   ],
   downloads: [
     { key: "press-kit", title: "Press kit", note: "Bio, photos and talk topics in one PDF.", file: "/assets/press/bolutife-awakan-press-kit-2026.pdf" },

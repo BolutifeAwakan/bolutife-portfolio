@@ -1133,3 +1133,9 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
 .ed-air__s { color: var(--ash); font-size: var(--t-small); }
 .ed-air__go { font: 700 var(--t-small)/1 var(--display); font-stretch: 85%; text-transform: uppercase; }
 @media (max-width: 800px) { .ed-air { grid-template-columns: 1fr; } }
+
+/* Press rows: the outlet's logo, in one colour that follows the theme, in place of its name */
+.ed-logo { display: block; height: clamp(20px, 1.7vw, 28px); width: min(100%, calc(var(--ar, 4) * clamp(20px, 1.7vw, 28px))); background: currentColor; -webkit-mask: center left / contain no-repeat; mask: center left / contain no-repeat; }
+.ed-rows--press .ed-row__k { align-self: center; }
+.ed-rows--press .ed-row__a { align-items: center; }
+@media (max-width: 800px) { .ed-logo { height: 22px; width: min(60%, calc(var(--ar, 4) * 22px)); margin-bottom: 6px; } }
