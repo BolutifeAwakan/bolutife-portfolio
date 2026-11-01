@@ -618,5 +618,22 @@
     row.addEventListener("scroll", update, { passive: true });
     addEventListener("resize", update);
     update();
+    // Moves on by itself, one card every few seconds, and starts over at the end.
+    // Holds while it's off screen, hovered, focused or touched, and never runs with reduced motion.
+    if (still) return;
+    let held = false, seen = false, timer = 0;
+    const hold = (v) => () => { held = v; };
+    ["pointerenter", "focusin", "touchstart"].forEach((e) => wrap.addEventListener(e, hold(true), { passive: true }));
+    ["pointerleave", "focusout"].forEach((e) => wrap.addEventListener(e, hold(false)));
+    wrap.addEventListener("touchend", () => setTimeout(() => { held = false; }, 4000), { passive: true });
+    new IntersectionObserver((es) => { seen = es[0].isIntersecting; }, { threshold: 0.4 }).observe(row);
+    const tick = () => {
+      if (!held && seen && !document.hidden) {
+        const atEnd = row.scrollLeft + row.clientWidth > row.scrollWidth - 4;
+        row.scrollTo({ left: atEnd ? 0 : row.scrollLeft + step(), behavior: "smooth" });
+      }
+      timer = setTimeout(tick, 3200);
+    };
+    timer = setTimeout(tick, 3200);
   });
 })();
