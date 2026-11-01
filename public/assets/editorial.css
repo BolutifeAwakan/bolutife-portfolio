@@ -1073,12 +1073,14 @@ h2.ed-stack__t { margin: 0; }
 
 /* Thoughts: a handwritten line writes itself across the headline, then leaves with the right half */
 .ed-open__h--sign .ed-fit { position: relative; }
-.ed-open__sign { position: absolute; right: 2%; bottom: -0.34em; z-index: 1; display: block; font-size: 0.6em; line-height: 0; color: var(--gold); transform: rotate(-7deg); transform-origin: left bottom; translate: calc(var(--split, 0) * 62vw) 0; pointer-events: none; }
+.ed-open__sign { position: absolute; right: 6%; bottom: -0.32em; z-index: 1; display: flex; font: 400 0.6em/1 var(--sign); color: var(--gold); text-transform: none; letter-spacing: 0; font-stretch: normal; white-space: pre; transform: rotate(-7deg); transform-origin: left bottom; pointer-events: none; }
+/* the line breaks in the middle with the headline: first half leaves left, second half right */
+.ed-open__w { display: inline-block; white-space: pre; will-change: translate; }
+.ed-open__w--l { translate: calc(var(--split, 0) * -62vw) 0; }
+.ed-open__w--r { translate: calc(var(--split, 0) * 62vw) 0; }
 /* written, not revealed: the letters appear one after another, as if by hand */
-.ed-open__sign svg { display: block; width: 4.27em; height: 1.47em; overflow: visible; }
-.ed-open__sign text { font-family: var(--sign); font-size: 150px; font-weight: 400; font-stretch: normal; text-transform: none; letter-spacing: 0; white-space: pre; fill: currentColor; stroke: none; }
-.ed-open__sign tspan { fill-opacity: 0; animation: ink 0.45s ease calc(0.8s + var(--i) * 0.12s) forwards; }
-@keyframes ink { to { fill-opacity: 1; } }
+.ed-open__w span { display: inline-block; opacity: 0; animation: letter 0.45s ease calc(0.8s + var(--i) * 0.12s) forwards; }
+@keyframes letter { to { opacity: 1; } }
 .ed-open__h--sign + .ed-open__line { padding-top: clamp(64px, 7vw, 120px); }
-@media (max-width: 800px) { .ed-open__sign { font-size: 0.85em; right: 4%; bottom: -0.78em; } .ed-open__h--sign + .ed-open__line { padding-top: 64px; } }
-@media (prefers-reduced-motion: reduce) { .ed-open__sign tspan { animation: none; fill-opacity: 1; } } 
+@media (max-width: 800px) { .ed-open__sign { font-size: 0.85em; right: 4%; bottom: -0.5em; } .ed-open__h--sign + .ed-open__line { padding-top: 64px; } }
+@media (prefers-reduced-motion: reduce) { .ed-open__w span { animation: none; opacity: 1; } }
