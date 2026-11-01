@@ -608,4 +608,15 @@
       btn.disabled = false;
     });
   });
+  // Sideways scrollers (Talks): arrow buttons move one card at a time and dim at the ends.
+  document.querySelectorAll("[data-scroller]").forEach((row) => {
+    const wrap = row.parentElement;
+    const btns = wrap.querySelectorAll("[data-scroll]");
+    const step = () => { const c = row.querySelector("li"); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(row).columnGap || 0) : row.clientWidth; };
+    const update = () => { btns.forEach((b) => { b.disabled = b.dataset.scroll < 0 ? row.scrollLeft < 4 : row.scrollLeft + row.clientWidth > row.scrollWidth - 4; }); };
+    btns.forEach((b) => b.addEventListener("click", () => row.scrollBy({ left: step() * Number(b.dataset.scroll), behavior: still ? "auto" : "smooth" })));
+    row.addEventListener("scroll", update, { passive: true });
+    addEventListener("resize", update);
+    update();
+  });
 })();
