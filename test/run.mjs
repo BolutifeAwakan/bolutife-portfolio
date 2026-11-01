@@ -34,7 +34,7 @@ must["/thoughts"] = must["/writing"];
 must["/shop"] = m.books.map((b) => b.title);
 must["/shop/worth-the-work"] = ["Worth the Work", ...m.books[0].editions.map((e) => e.price)];
 must["/thoughts"] = [...must["/writing"], m.speaking.promise, ...m.speaking.tracks.map((t) => t.title), ...m.speaking.talks.map((t) => t.title)];
-const mustEd = { "/about": [m.practice.belief, ...(m.about.roles.length ? m.about.roles : m.about.experience).map((x) => x.org), ...m.about.awards.map((a) => a.title), ...m.side.interests.map((i) => i.title)], "/thoughts": [...must["/thoughts"].filter((x) => x !== m.speaking.promise), m.speaking.support, ...m.downloads.map((d) => d.title)], "/ventures": [...m.ventures.flatMap((v) => [v.name, v.line, v.cta]), "Mentoring"] }; // editorial keeps Ventures light: no service lists
+const mustEd = { "/about": [m.practice.belief, ...(m.about.roles.length ? m.about.roles : m.about.experience).map((x) => x.org), ...m.about.awards.map((a) => a.title), ...m.side.interests.map((i) => i.title)], "/thoughts": [...must["/thoughts"].filter((x) => x !== m.speaking.promise), ...m.downloads.map((d) => d.title)], "/ventures": [...m.ventures.flatMap((v) => [v.name, v.line, v.cta]), "Mentoring"] }; // editorial keeps Ventures light: no service lists
 const editorialPages = [
   ...pages.filter((p) => !["/speaking", "/on-the-side"].includes(p)).map((p) => (p === "/writing" ? "/thoughts" : p)),
   "/shop/worth-the-work", "/shop/signature",

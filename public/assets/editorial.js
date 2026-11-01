@@ -641,4 +641,20 @@
     btns.forEach((b) => (b.disabled = false));
     update = () => {};
   });
+
+  // Topics: one subject forward at a time; its line shows beside the list.
+  document.querySelectorAll("[data-tops]").forEach((box) => {
+    const btns = [...box.querySelectorAll(".ed-tops__t")];
+    const caps = [...box.querySelectorAll(".ed-tops__cap [data-i]")];
+    const show = (i) => {
+      btns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.i === i)));
+      caps.forEach((c) => { c.hidden = c.dataset.i !== i; });
+    };
+    btns.forEach((b) => {
+      b.addEventListener("click", () => show(b.dataset.i));
+      b.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(b.dataset.i); } });
+      b.addEventListener("focus", () => show(b.dataset.i));
+      b.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") show(b.dataset.i); });
+    });
+  });
 })();
