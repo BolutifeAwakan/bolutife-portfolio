@@ -1041,8 +1041,12 @@ h2.ed-stack__t { margin: 0; }
 @media (min-width: 801px) and (max-width: 1100px) { .ed-shots { columns: 2; } }
 
 /* Thoughts: every list on the page shares one row size */
-.ed-rows--std .ed-row__t { font: 800 var(--t-h4)/0.95 var(--display); font-stretch: 62%; text-transform: uppercase; }
-.ed-rows--std .ed-row__a { padding-top: 20px; padding-bottom: 20px; }
+/* lists breathe: sentence-case titles at a readable measure, generous row height */
+.ed-rows--std .ed-row__t { max-width: 32ch; font: 600 clamp(20px, 1.7vw, 26px)/1.2 var(--display); font-stretch: 90%; letter-spacing: -0.005em; text-transform: none; }
+.ed-rows--std .ed-row__a { gap: 10px 32px; padding-top: clamp(28px, 2.8vw, 44px); padding-bottom: clamp(28px, 2.8vw, 44px); }
+.ed-rows--std .ed-row__s { padding-top: 0.25em; line-height: 1.55; }
+.ed-rows--std .ed-row__go { padding-top: 0.35em; color: var(--ash); transition: color 0.25s; }
+.ed-rows--std a.ed-row__a:hover .ed-row__go { color: var(--night); }
 .ed-rows--std div.ed-row__a:hover .ed-row__t { color: var(--gold); }
 .ed-sub--gap { margin-top: var(--block); }
 .ed-sub--flush { padding: 0; margin: 0; }
@@ -1136,6 +1140,5 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
 
 /* Press rows: the outlet's logo, in one colour that follows the theme, in place of its name */
 .ed-logo { display: block; height: clamp(20px, 1.7vw, 28px); width: min(100%, calc(var(--ar, 4) * clamp(20px, 1.7vw, 28px))); background: currentColor; -webkit-mask: center left / contain no-repeat; mask: center left / contain no-repeat; }
-.ed-rows--press .ed-row__k { align-self: center; }
-.ed-rows--press .ed-row__a { align-items: center; }
+.ed-rows--press .ed-row__k { padding-top: 0.2em; }
 @media (max-width: 800px) { .ed-logo { height: 22px; width: min(60%, calc(var(--ar, 4) * 22px)); margin-bottom: 6px; } }
