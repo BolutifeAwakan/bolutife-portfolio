@@ -657,4 +657,15 @@
       b.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") show(b.dataset.i); });
     });
   });
+
+  // Back links: if you arrived from the page they point to, step back so you land where you left it.
+  document.querySelectorAll("a[data-back]").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      try {
+        const from = new URL(document.referrer);
+        const to = new URL(a.href);
+        if (from.origin === location.origin && from.pathname === to.pathname && history.length > 1) { e.preventDefault(); history.back(); }
+      } catch (_) {}
+    });
+  });
 })();

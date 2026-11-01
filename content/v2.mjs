@@ -20,6 +20,10 @@ export default {
   ],
 
   // Homepage summaries for the selected projects, keyed by slug.
+  // Sharper source files for card pictures, where Sanity holds a larger copy of the same image.
+  workThumbs: {
+    traction: { url: "https://cdn.sanity.io/images/4t9br1cb/production/d58d3cf173bcf22f5600ba07060bafa80e1df4c2-2088x1392.png", w: 2088, h: 1392 },
+  },
   projectSummaries: {
     "make-music-lagos": "A visual identity celebrating the sound, culture, and creative energy of Lagos.",
     housepadi: "An approachable identity for a property management platform, making the category feel simpler and more accessible.",
