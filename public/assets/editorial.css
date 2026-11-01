@@ -1170,3 +1170,12 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
   .ed-split__line, .ed-open__line > * { grid-column: 1 / -1; }
   .ed-quote-big__aside, .ed-case__s { margin-left: 0; }
 }
+
+/* Rows with no label start their title at the margin; rows with no action let the summary run to
+   the edge, so a short description sits on two lines instead of four. The summary still starts on
+   the side-copy line. */
+@media (min-width: 1101px) {
+  .ed-row__a--nok > .ed-row__k { display: none; }
+  .ed-row__a--nok > .ed-row__t { grid-column: 1 / 3; }
+  .ed-row__a--wide > .ed-row__s { grid-column: 3 / -1; max-width: 64ch; }
+}
