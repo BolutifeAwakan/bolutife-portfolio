@@ -285,7 +285,6 @@ export default {
   downloads: [
     { key: "press-kit", title: "Press kit", note: "Bio, photos and talk topics in one PDF.", file: "/assets/press/bolutife-awakan-press-kit.pdf" },
     { key: "headshots", title: "Headshots", note: "Six portraits, high resolution.", file: "/assets/press/bolutife-awakan-headshots.zip" },
-    { key: "cv", title: "CV", note: "Roles, education and recognition.", file: "/assets/press/bolutife-awakan-cv.pdf" },
   ],
 
   contactLine: "Building a brand, strengthening a design team, or planning something I'd be a good fit for? I'd love to hear about it.",
