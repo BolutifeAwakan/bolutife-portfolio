@@ -597,10 +597,10 @@ a.ed-row__a:hover .ed-row__go { color: var(--night); }
 .ed-dp li:nth-child(n + 6) { animation-delay: 0.3s; }
 
 /* Fashion: a lookbook */
-.ed-look { display: grid; grid-template-columns: 1.25fr 1fr; grid-template-rows: auto auto; gap: 10px; }
-.ed-look figure { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--panel); }
-.ed-look figure:nth-child(1) { grid-row: 1 / 3; aspect-ratio: auto; }
-.ed-look figure:nth-child(n + 4) { display: none; }
+/* Fashion: a rail of looks, scrolled sideways */
+.ed-look { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.ed-dp > .ed-look { max-width: none; }
+.ed-look figure { flex: 0 0 clamp(150px, 42%, 210px); margin: 0; aspect-ratio: 2 / 3; overflow: hidden; background: var(--panel); scroll-snap-align: start; }
 .ed-look img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.1, 1); }
 .ed-look figure:hover img { transform: scale(1.05); }
 .ed-dp__k { display: block; font: 800 var(--t-h4)/0.95 var(--display); font-stretch: 62%; text-transform: uppercase; }
@@ -1235,3 +1235,18 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
 }
 /* About: the roles list runs tighter than other lists, since it is long and scanned rather than read */
 .ed-rows--cv .ed-row__a { padding-top: clamp(16px, 1.6vw, 24px); padding-bottom: clamp(16px, 1.6vw, 24px); }
+
+/* Books: one shelf, wide enough to hold every book in a single line */
+.ed-dp > .ed-shelves { max-width: none; }
+.ed-shelf { --k: 1; width: max-content; max-width: 100%; min-height: 182px; }
+.ed-shelf .ed-book { width: calc(var(--w, 32px) * var(--k)); height: 172px; }
+.ed-shelf .ed-book:nth-child(4n + 2) { height: 160px; }
+.ed-shelf .ed-book:nth-child(4n + 3) { height: 166px; }
+.ed-shelf .ed-book:nth-child(5n) { height: 152px; }
+.ed-shelf .ed-book__3d { width: calc(var(--w, 32px) * var(--k)); }
+.ed-shelf .ed-book:hover .ed-book__3d, .ed-shelf .ed-book:focus-within .ed-book__3d { transform: translateX(calc(var(--w, 32px) * var(--k) * -1)) rotateY(-90deg); }
+.ed-shelf .ed-book:hover, .ed-shelf .ed-book:focus-within { width: 115px; }
+.ed-shelf .ed-book__st { font-size: 10.5px; }
+.ed-shelf .ed-book__sa { font-size: 7.5px; max-width: calc(var(--w, 32px) * var(--k) - 2px); }
+.ed-shelf .ed-book__spine i { font-size: 6.5px; padding: 2px; }
+@media (max-width: 800px) { .ed-dp > .ed-shelves { overflow-x: auto; padding-bottom: 60px; margin-bottom: -60px; } .ed-shelf { max-width: none; } }
