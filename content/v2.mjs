@@ -162,7 +162,7 @@ export default {
       { title: "Women in Technology", body: "Women's empowerment, social enterprising, and building a personal brand that creates opportunities." },
     ],
     talks: [
-      { title: "Rethinking Design Leadership: What emerging markets can teach the world", track: "Design leadership", event: "Extended Pack Collective, UK 2026" },
+      { title: "Rethinking Design Leadership: What emerging markets can teach the world", event: "Extended Pack Collective, UK 2026" },
       { title: "Beyond Visibility: Building a Personal Brand That Creates Opportunities", track: "Women in Technology", event: "WIMD Summit 2026" },
     ],
     formats: ["Keynotes", "Workshops", "Panels", "Guest lectures"],
