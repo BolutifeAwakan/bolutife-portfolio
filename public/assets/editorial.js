@@ -613,27 +613,42 @@
     const wrap = row.parentElement;
     const btns = wrap.querySelectorAll("[data-scroll]");
     const step = () => { const c = row.querySelector("li"); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(row).columnGap || 0) : row.clientWidth; };
-    const update = () => { btns.forEach((b) => { b.disabled = b.dataset.scroll < 0 ? row.scrollLeft < 4 : row.scrollLeft + row.clientWidth > row.scrollWidth - 4; }); };
+    let update = () => { btns.forEach((b) => { b.disabled = b.dataset.scroll < 0 ? row.scrollLeft < 4 : row.scrollLeft + row.clientWidth > row.scrollWidth - 4; }); };
     btns.forEach((b) => b.addEventListener("click", () => row.scrollBy({ left: step() * Number(b.dataset.scroll), behavior: still ? "auto" : "smooth" })));
-    row.addEventListener("scroll", update, { passive: true });
-    addEventListener("resize", update);
+    row.addEventListener("scroll", () => update(), { passive: true });
+    addEventListener("resize", () => update());
     update();
-    // Moves on by itself, one card every few seconds, and starts over at the end.
-    // Holds while it's off screen, hovered, focused or touched, and never runs with reduced motion.
+    // Drifts on by itself as one continuous loop: the cards are repeated once, and when the
+    // first set has passed the row quietly jumps back by exactly that width, so it never slides back.
+    // Holds while off screen, hovered, focused or touched, and never runs with reduced motion.
     if (still) return;
-    let held = false, seen = false, timer = 0;
-    const hold = (v) => () => { held = v; };
+    const originals = [...row.children];
+    originals.forEach((li) => { const c = li.cloneNode(true); c.setAttribute("aria-hidden", "true"); c.querySelectorAll("a, button").forEach((x) => x.setAttribute("tabindex", "-1")); row.appendChild(c); });
+    row.classList.add("is-looping");
+    const loopW = () => row.scrollWidth / 2;
+    let held = false, seen = false, pos = row.scrollLeft, last = 0;
+    const hold = (v) => () => { held = v; if (!v) pos = row.scrollLeft; };
     ["pointerenter", "focusin", "touchstart"].forEach((e) => wrap.addEventListener(e, hold(true), { passive: true }));
     ["pointerleave", "focusout"].forEach((e) => wrap.addEventListener(e, hold(false)));
-    wrap.addEventListener("touchend", () => setTimeout(() => { held = false; }, 4000), { passive: true });
-    new IntersectionObserver((es) => { seen = es[0].isIntersecting; }, { threshold: 0.4 }).observe(row);
-    const tick = () => {
+    wrap.addEventListener("touchend", () => setTimeout(() => { held = false; pos = row.scrollLeft; }, 3000), { passive: true });
+    new IntersectionObserver((es) => { seen = es[0].isIntersecting; }, { threshold: 0.2 }).observe(row);
+    const speed = 36; // px per second
+    const frame = (t) => {
+      const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
+      last = t;
       if (!held && seen && !document.hidden) {
-        const atEnd = row.scrollLeft + row.clientWidth > row.scrollWidth - 4;
-        row.scrollTo({ left: atEnd ? 0 : row.scrollLeft + step(), behavior: "smooth" });
+        pos += speed * dt;
+        const w = loopW();
+        if (pos >= w) pos -= w;
+        row.scrollLeft = pos;
+      } else {
+        pos = row.scrollLeft;
       }
-      timer = setTimeout(tick, 3200);
+      if (row.scrollLeft >= loopW()) { row.scrollLeft -= loopW(); pos = row.scrollLeft; }
+      requestAnimationFrame(frame);
     };
-    timer = setTimeout(tick, 3200);
+    requestAnimationFrame(frame);
+    btns.forEach((b) => (b.disabled = false));
+    update = () => {};
   });
 })();
