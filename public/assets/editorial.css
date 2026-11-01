@@ -1043,7 +1043,7 @@ h2.ed-stack__t { margin: 0; }
 /* Thoughts: every list on the page shares one row size */
 /* lists: the brand's condensed capitals, but with room: a shorter measure and taller rows */
 .ed-rows--std .ed-row__t { max-width: 36ch; font: 800 var(--t-h4)/1.06 var(--display); font-stretch: 62%; text-transform: uppercase; }
-.ed-rows--std .ed-row__a { gap: 10px 32px; padding-top: clamp(28px, 2.8vw, 44px); padding-bottom: clamp(28px, 2.8vw, 44px); }
+.ed-rows--std .ed-row__a { gap: 10px 32px; padding-top: clamp(22px, 2.2vw, 34px); padding-bottom: clamp(22px, 2.2vw, 34px); }
 .ed-rows--std .ed-row__s { padding-top: 0.25em; line-height: 1.55; }
 .ed-rows--std .ed-row__go { padding-top: 0.35em; color: var(--ash); transition: color 0.25s; }
 .ed-rows--std a.ed-row__a:hover .ed-row__go { color: var(--night); }
