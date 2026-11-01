@@ -284,7 +284,7 @@ export default {
   // Press and speaking downloads on Thoughts. Each asks for a name and email first.
   // Talks given, with photos from the 2026 press kit.
   pastTalks: [
-    { event: "Cloudde Tech Conference, Ibadan", title: "Attracting high-value clients as a value-based designer", format: "Panel", year: "2024", img: "cloudde-panel", pos: "55% 62%" },
+    { event: "Cloudde Tech Conference, Ibadan", title: "Attracting high-value clients as a value-based designer", format: "Panel", year: "2024", img: "cloudde-lens", pos: "55% 62%" },
     { event: "Design Spin-Off by Sections", title: "The role of design leadership in driving growth", format: "Panel", year: "2024", img: "design-spinoff" },
     { event: "Untitled Designers' Conference", title: "Branding with authenticity amid content noise", format: "Keynote", year: "2024", img: "untitled-designers" },
     { event: "Design Matters '23", title: "Creativity for social change", format: "Talk", year: "2023", img: "design-matters" },
