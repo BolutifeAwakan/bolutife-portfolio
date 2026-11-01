@@ -1142,7 +1142,6 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
 .ed-logo { display: block; height: clamp(20px, 1.7vw, 28px); width: min(100%, calc(var(--ar, 4) * clamp(20px, 1.7vw, 28px))); background: currentColor; -webkit-mask: center left / contain no-repeat; mask: center left / contain no-repeat; }
 .ed-rows--press .ed-row__k { padding-top: 0.2em; }
 @media (max-width: 800px) { .ed-logo { height: 22px; width: min(60%, calc(var(--ar, 4) * 22px)); margin-bottom: 6px; } }
-.ed-talks--scroll.is-looping { scroll-snap-type: none; }
 
 /* Thoughts: Speaking as a framed photo with the words beside it, not over it */
 .ed-speak__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: end; padding: 0 var(--g); }
@@ -1151,3 +1150,4 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
 .ed-speak__text { display: grid; gap: 28px; padding-bottom: 4px; }
 .ed-speak__lead { max-width: 30ch; font: 500 var(--t-lead)/1.35 var(--display); font-stretch: 92%; }
 @media (max-width: 800px) { .ed-speak__grid { grid-template-columns: 1fr; } }
+.ed-speak__cta { margin: -8px 0 clamp(32px, 4vw, 56px); }
