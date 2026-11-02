@@ -1253,7 +1253,7 @@ a.ed-air__a:hover .ed-air__play { transform: scale(1.08); }
 .ed-intro__pin { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: var(--row-cols); column-gap: var(--rg); align-items: center; }
 .ed-intro--story .ed-intro__text { grid-column: 1 / 3; }
 .ed-intro--story .ed-w { transition: color 0.35s, opacity 0.35s; }
-.ed-intro--story.is-live .ed-w { opacity: 0.22; }
+.ed-intro--story.is-live .ed-w { opacity: 0.42; }
 .ed-intro--story.is-live .ed-w.is-lit { opacity: 1; }
 .ed-intro--story .ed-chip { transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.1, 1), box-shadow 0.3s; }
 .ed-intro--story .ed-chip.is-on { transform: rotate(0) scale(1.18); box-shadow: 0 0 0 2px var(--gold); }
@@ -1316,3 +1316,12 @@ html[data-theme="light"] .ed-badge__card { box-shadow: 0 40px 70px -24px rgba(0,
 @keyframes reel { 0% { opacity: 0; transform: scale(1.06); } 6%, 25% { opacity: 1; } 31%, 100% { opacity: 0; transform: scale(1); } }
 .ed-prac__f > img { display: block; width: 100%; height: 100%; object-fit: cover; }
 @media (prefers-reduced-motion: reduce) { .ed-prac__reel img { animation: none; } .ed-prac__reel img:first-child { opacity: 1; } }
+
+/* Keep the pinned intro inside the screen, clear of the header, at any window height */
+.ed-intro__pin { padding: clamp(84px, 11svh, 120px) 0 clamp(24px, 4svh, 48px); box-sizing: border-box; }
+.ed-intro--story .ed-intro__p { font-size: min(var(--t-statement), 6.2svh); }
+@media (max-width: 1100px) { .ed-intro__pin { padding: 0; } .ed-intro--story .ed-intro__p { font-size: clamp(30px, 9vw, 44px); } }
+.ed-intro__pin { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); }
+.ed-intro--story .ed-intro__text { grid-column: 1; min-width: 0; }
+.ed-intro__stage { grid-column: 2; width: min(100%, calc(72svh * 0.8)); max-height: none; aspect-ratio: 4 / 5; }
+.ed-intro--story .ed-intro__p { max-width: 22ch; }
