@@ -723,4 +723,18 @@
       card.style.setProperty("--my", `${Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100)).toFixed(1)}%`);
     }, { passive: true });
   }
+
+  // Analytics: every link marked data-track is also counted as a named event (Book a call,
+  // Invite me to speak, venture and book clicks, downloads...), with what was clicked.
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("[data-track]");
+    if (!a || typeof window.va !== "function") return;
+    window.va("event", { name: a.dataset.track, data: { target: a.dataset.trackTarget || "", page: location.pathname } });
+  });
+  document.addEventListener("submit", (e) => {
+    const f = e.target;
+    if (typeof window.va !== "function" || !f.matches("form")) return;
+    const kind = f.matches("[data-lead]") ? "cv_request" : f.closest(".ed-signup, [data-signup]") ? "signup" : f.getAttribute("action") && f.getAttribute("action").includes("contact") ? "contact_submit" : "form_submit";
+    window.va("event", { name: kind, data: { page: location.pathname } });
+  });
 })();

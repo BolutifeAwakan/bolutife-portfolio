@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!assets/|api/|favicon\\.ico|apple-touch-icon\\.png|robots\\.txt).*)",
+      "source": "/((?!assets/|api/|_vercel/|favicon\\.ico|apple-touch-icon\\.png|robots\\.txt).*)",
       "destination": "/api/render?__path=/$1"
     }
   ],
