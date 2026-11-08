@@ -431,7 +431,7 @@
     });
   });
   // Leaving the desk or opening another interest stops the music.
-  document.querySelectorAll(".ed-dp__close, .ed-tags--live [data-interest], .ed-desk__p").forEach((el) => el.addEventListener("click", () => { if (!el.closest(".ed-dp--playlist")) stop(); }));
+  document.querySelectorAll(".ed-dp__close, .ed-tags--live [data-interest], .ed-desk__p, .ed-obj__b").forEach((el) => el.addEventListener("click", () => { if (!el.closest(".ed-dp--playlist")) stop(); }));
 
   // About: the badge drops in on a spring, swings on its long strap, and settles.
   // Time-based, so it is equally smooth at 60Hz and 120Hz; the pointer can nudge it afterwards.
@@ -736,5 +736,28 @@
     if (typeof window.va !== "function" || !f.matches("form")) return;
     const kind = f.matches("[data-lead]") ? "cv_request" : f.closest(".ed-signup, [data-signup]") ? "signup" : f.getAttribute("action") && f.getAttribute("action").includes("contact") ? "contact_submit" : "form_submit";
     window.va("event", { name: kind, data: { page: location.pathname } });
+  });
+
+  // On the side: choose an object on the ledge to open its world in the drawer below.
+  document.querySelectorAll("[data-ledge]").forEach((sec) => {
+    const btns = [...sec.querySelectorAll(".ed-obj__b")];
+    const panels = [...sec.querySelectorAll(".ed-drawer .ed-dp")];
+    const drawer = sec.querySelector(".ed-drawer");
+    let open = null;
+    const set = (key) => {
+      open = key && key !== open ? key : null;
+      btns.forEach((b) => b.setAttribute("aria-expanded", String(b.dataset.interest === open)));
+      panels.forEach((p) => (p.hidden = p.dataset.for !== open));
+      sec.classList.toggle("is-open", !!open);
+      if (open) {
+        track("side_open", open);
+        const p = panels.find((x) => !x.hidden);
+        const r = p && p.getBoundingClientRect();
+        if (r && r.top > innerHeight * 0.75) scrollBy({ top: r.top - innerHeight * 0.35, behavior: still ? "auto" : "smooth" });
+      }
+    };
+    btns.forEach((b) => b.addEventListener("click", () => set(b.dataset.interest)));
+    sec.querySelectorAll(".ed-dp__close").forEach((b) => b.addEventListener("click", () => { const k = open; set(null); const ob = btns.find((x) => x.dataset.interest === k); if (ob) ob.focus(); }));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) set(null); });
   });
 })();
