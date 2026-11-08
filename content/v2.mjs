@@ -110,6 +110,8 @@ export default {
       line: "Creating better access to education, mentorship, and career opportunities for women in design and technology.",
       body: "Lilac Africa gives women in design and technology a path into opportunity, a community to learn with, and mentorship.",
       offers: [],
+      // What it gives, in the words of `body` above (shown on the home page).
+      does: ["A path into opportunity", "A community to learn with", "Mentorship"],
       // From Lilac Africa's own site.
       image: { src: "/assets/talks/lilac-session-full.webp", alt: "A Lilac Africa session: a full room of women facing a panel of speakers", pos: "50% 55%" },
       url: "https://www.lilacafrica.com/",

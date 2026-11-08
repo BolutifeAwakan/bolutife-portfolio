@@ -431,7 +431,7 @@
     });
   });
   // Leaving the desk or opening another interest stops the music.
-  document.querySelectorAll(".ed-dp__close, .ed-tags--live [data-interest], .ed-desk__p, .ed-obj__b").forEach((el) => el.addEventListener("click", () => { if (!el.closest(".ed-dp--playlist")) stop(); }));
+  document.querySelectorAll(".ed-dp__close, .ed-tags--live [data-interest], .ed-desk__p, .ed-obj__b, .ed-om__b").forEach((el) => el.addEventListener("click", () => { if (!el.closest(".ed-dp--playlist")) stop(); }));
 
   // About: the badge drops in on a spring, swings on its long strap, and settles.
   // Time-based, so it is equally smooth at 60Hz and 120Hz; the pointer can nudge it afterwards.
@@ -757,6 +757,43 @@
       }
     };
     btns.forEach((b) => b.addEventListener("click", () => set(b.dataset.interest)));
+    sec.querySelectorAll(".ed-dp__close").forEach((b) => b.addEventListener("click", () => { const k = open; set(null); const ob = btns.find((x) => x.dataset.interest === k); if (ob) ob.focus(); }));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) set(null); });
+  });
+
+  // On the side (list): pointing at an interest brings its picture and wash forward; choosing it
+  // opens its world below.
+  document.querySelectorAll("[data-offmenu]").forEach((sec) => {
+    const btns = [...sec.querySelectorAll(".ed-om__b")];
+    const shots = [...sec.querySelectorAll(".ed-om__shot")];
+    const washes = [...sec.querySelectorAll(".ed-om__wash")];
+    const panels = [...sec.querySelectorAll(".ed-drawer .ed-dp")];
+    let hot = 0, open = null;
+    const show = (i) => {
+      if (i === hot) return;
+      shots.forEach((s, k) => { s.classList.toggle("was-on", k === hot); s.classList.toggle("is-on", k === i); });
+      washes.forEach((w, k) => w.classList.toggle("is-on", k === i));
+      btns.forEach((b, k) => b.classList.toggle("is-hot", k === i));
+      hot = i;
+    };
+    const set = (key) => {
+      open = key && key !== open ? key : null;
+      btns.forEach((b) => b.setAttribute("aria-expanded", String(b.dataset.interest === open)));
+      panels.forEach((p) => (p.hidden = p.dataset.for !== open));
+      if (open) {
+        track("side_open", open);
+        const p = panels.find((x) => !x.hidden), r = p && p.getBoundingClientRect();
+        if (r && r.top > innerHeight * 0.75) scrollBy({ top: r.top - innerHeight * 0.3, behavior: still ? "auto" : "smooth" });
+      }
+    };
+    btns.forEach((b, i) => {
+      b.addEventListener("pointerenter", () => { if (fine) show(i); });
+      b.addEventListener("focus", () => show(i));
+      b.addEventListener("click", () => { show(i); set(b.dataset.interest); });
+    });
+    sec.querySelector(".ed-om__list").addEventListener("pointerleave", () => {
+      if (open) show(btns.findIndex((b) => b.dataset.interest === open));
+    });
     sec.querySelectorAll(".ed-dp__close").forEach((b) => b.addEventListener("click", () => { const k = open; set(null); const ob = btns.find((x) => x.dataset.interest === k); if (ob) ob.focus(); }));
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) set(null); });
   });
