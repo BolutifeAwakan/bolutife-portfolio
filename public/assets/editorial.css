@@ -1,3 +1,9 @@
+/* Fonts are served from the site itself, so the type never depends on Google Fonts being reachable */
+@font-face { font-family: "Archivo"; font-style: normal; font-display: swap; font-weight: 100 900; font-stretch: 62% 125%; src: url("/assets/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations"), url("/assets/fonts/archivo-latin-wdth-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Archivo"; font-style: normal; font-display: swap; font-weight: 100 900; font-stretch: 62% 125%; src: url("/assets/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations"), url("/assets/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Archivo"; font-style: italic; font-display: swap; font-weight: 100 900; font-stretch: 62% 125%; src: url("/assets/fonts/archivo-latin-wdth-italic.woff2") format("woff2-variations"), url("/assets/fonts/archivo-latin-wdth-italic.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "Ms Madi"; font-style: normal; font-display: swap; font-weight: 400; src: url("/assets/fonts/ms-madi-latin-400-normal.woff2") format("woff2"); }
+
 /* Direction B — The Personal Editorial, Mason Wong as the reference.
    Night is sampled from the studio portraits so the dark shots melt into
    the page. One family, Archivo, from its narrowest display cut to text
@@ -1419,3 +1425,8 @@ html[data-theme="light"] .ed-badge__card { box-shadow: 0 40px 70px -24px rgba(0,
 @media (prefers-reduced-motion: reduce) { .ed-obj__thing, .ed-obj__disc { transition: none; } .ed-obj__b[aria-expanded="true"] .ed-obj__disc { animation: none; } }
 html[data-theme="light"] .ed-obj__thing > span { box-shadow: 0 22px 40px -18px rgba(0, 0, 0, 0.35); }
 @media (min-width: 801px) and (max-width: 1100px) { .ed-ledge { justify-content: flex-start; gap: 32px; } }
+
+/* Home intro: the statement takes more of the width, the picture sits fully inside the page */
+.ed-intro__pin { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(32px, 5vw, 96px); }
+.ed-intro--story .ed-intro__p { max-width: none; font-size: min(clamp(30px, 4.6vw, 80px), 6.6svh); }
+.ed-intro__stage { justify-self: end; width: min(100%, calc(70svh * 0.8)); max-width: none; margin-left: 0; }
