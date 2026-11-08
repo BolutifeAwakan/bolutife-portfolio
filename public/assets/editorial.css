@@ -1343,10 +1343,10 @@ html[data-theme="light"] .ed-badge__card { box-shadow: 0 40px 70px -24px rgba(0,
 /* ---------- On the side: objects on a ledge ---------- */
 .ed-side--ledge { display: block; padding: var(--sec) 0 clamp(60px, 8vw, 120px); }
 .ed-side--ledge::after { display: none; }
-.ed-side__top { display: grid; grid-template-columns: var(--row-cols); column-gap: var(--rg); align-items: end; padding: 0 var(--g); --hs: clamp(64px, 10vw, 170px); }
-.ed-side__top .ed-side__h { grid-column: 1 / 3; }
+.ed-side__top { display: grid; grid-template-columns: var(--row-cols); column-gap: var(--rg); align-items: start; padding: 0 var(--g); --hs: clamp(64px, 10vw, 170px); }
+.ed-side__top .ed-side__h { grid-column: 1 / -1; }
 .ed-side__top .ed-side__h .ed-fit { font-size: var(--hs); }
-.ed-side__aside { grid-column: 3 / -1; padding-bottom: 0.6em; }
+.ed-side__aside { grid-column: 3 / -1; margin-top: clamp(28px, 3vw, 44px); }
 .ed-side__top .ed-side__line { margin: 0 0 18px; max-width: 40ch; font: 500 var(--t-body)/1.5 var(--display); font-stretch: 100%; color: var(--ash); }
 
 .ed-ledge { --ledge: clamp(200px, 17vw, 290px); position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(18px, 2vw, 40px); margin-top: clamp(56px, 6vw, 96px); padding: 0 var(--g) 0; overflow-x: auto; overflow-y: visible; scrollbar-width: none; }
